@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class FiresaleappConfig(AppConfig):
+class ItemsConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'firesaleapp'
+    name = 'Items'
