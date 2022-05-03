@@ -10,5 +10,12 @@
       <jdbc-url>jdbc:postgresql://34.89.42.213:5432/fire-sale-db</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
+    <data-source source="LOCAL" name="fire-sale-db@34.89.42.213" uuid="0aeb1651-2a3c-478f-b709-5ab7ef1bcb03">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://34.89.42.213:5432/fire-sale-db</jdbc-url>
+      <working-dir>$ProjectFileDir$</working-dir>
+    </data-source>
   </component>
 </project>
