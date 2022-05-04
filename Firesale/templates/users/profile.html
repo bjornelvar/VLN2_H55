@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block content %}
+    <h1>Profile</h1>
+    <form class="form form-horizontal" method="post">
+    {% csrf_token %}
+    {{ form }}
+
+    <input type="submit" class="btn btn-bio" value="Update">
+
+    </form>
+     <form method="post" enctype="multipart/form-data">
+     {% csrf_token %}
+         <input type="hidden" name="name" value="image">
+     {{ form1 }}
+     <input type="submit" class="btn btn-upload" value="Upload">
+     </form>
+{% endblock %}

@@ -21,7 +21,7 @@ class Items(models.Model):
     name = models.CharField(max_length=255)
     condition = models.CharField(max_length=255)
     description = models.CharField(max_length=255, blank=True)
-    image = models.ImageField(upload_to='item_pics/', default='no-image-default.png')
+    image = models.ImageField(upload_to='images/', default='no-image-default.png')
     listdate = models.DateField(auto_now_add=True)
     price = models.FloatField()
     seller = models.ForeignKey(Profiles, on_delete=models.CASCADE)
