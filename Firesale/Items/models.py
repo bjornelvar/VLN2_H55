@@ -17,10 +17,13 @@ class SubCategories(models.Model):
 class Items(models.Model):
     subcategory = models.ForeignKey(SubCategories, on_delete=models.CASCADE)
     name = models.CharField(max_length=255)
-    image = models.ImageField()
     condition = models.CharField(max_length=255)
     description = models.CharField(max_length=255, blank=True)
+    image = models.ImageField(upload_to='item_pics/', default='no-image-default.png')
     listdate = models.DateField(auto_now_add=True)
     price = models.FloatField()
     seller = models.ForeignKey(Profiles, on_delete=models.CASCADE)
     sold = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.name

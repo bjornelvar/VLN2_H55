@@ -1,13 +1,12 @@
+from django.contrib.auth.models import User
 from django.db import models
+
 
 
 # Create your models here.
 
 class Profiles(models.Model):
-    name = models.CharField(max_length=255)
-    email = models.EmailField(max_length=254)
-    passwordhash = models.CharField(max_length=500)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     bio = models.CharField(max_length=255, blank=True)
-    rating = models.FloatField()
-    online = models.BooleanField(default=False)
-    image = models.ImageField(default=None)
+    image = models.ImageField(upload_to='profile_pics/', default='blank-profile-picture.png')
+    rating = models.FloatField(null=True)
