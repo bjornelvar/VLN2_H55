@@ -17,7 +17,9 @@ def create_listing(request):
     if request.method == 'POST':
         form = CreateListingForm(request.POST)
         if form.is_valid():
-            form.save()
+            item = form.save(commit=False)
+            item.seller_id = request.user.id
+            item.save()
             return redirect('items-index')
 
     else:
@@ -25,3 +27,7 @@ def create_listing(request):
     return render(request, 'items/create_listing.html', {
         'form': form
     })
+
+
+def get_user_id(request):
+    return request.user.id
