@@ -7,4 +7,4 @@ from items.models import Items
 # @login_required(login_url="/%2Fuserslogin")
 def index(response):
     context = {'items': Items.objects.all().order_by('name')}
-    return render(response, 'items/index.html')
+    return render(response,   'items/index.html', context)
