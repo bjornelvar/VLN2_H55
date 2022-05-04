@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block content %}
+
+       <h4>{{ item.name }}</h4>
+       <p>{{ item.description }}</p>
+       <p>{{ item.price }}</p>
+       <p>{{ item.subcategory }}</p>
+       <p>{{ item.location }}</p>
+       <p>{{ item.seller }}</p>
+       <img class="item-img" src="{{ item.image.url }}" width="120"/>
+
+{% endblock %}

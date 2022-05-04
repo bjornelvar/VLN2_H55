@@ -8,12 +8,18 @@ class CreateListingForm(ModelForm):
 
     class Meta:
         model = Items
-        exclude = ['id']
+        CONDITION_CHOICES = [('Like New', 'Like New'), ('Very Good', 'Very Good'),
+                             ('Good', 'Good'), ('Fair', 'Fair'), ('Poor', 'Poor')]
+        CATEGORY_CHOICES = [('Books', 'Books'), ('Transportation', 'Transportation'),
+                            ('Electronics', 'Electronics'), ('Clothing', 'Clothing'), ('Furniture', 'Furniture'),
+                            ('Sports', 'Sports'), ('Home', 'Home'), ('Other', 'Other')]
+        exclude = ['id', 'seller', 'sold']
         widgets = {
             'name': widgets.TextInput(attrs={'class': 'form-control'}),
-            'condition': widgets.Select(attrs={'class': 'form-control'}),
+            'condition': widgets.Select(choices=CONDITION_CHOICES, attrs={'class': 'form-control'}),
             'description': widgets.Textarea(attrs={'class': 'form-control'}),
-            'category': widgets.Select(attrs={'class': 'form-control'}),
+            'category': widgets.Select(choices=CATEGORY_CHOICES, attrs={'class': 'form-control'}),
+            # 'subcategory': widgets.Select(attrs={'class': 'form-control'}),
             'price': widgets.NumberInput(attrs={'class': 'form-control'}),
             'image': widgets.FileInput(attrs={'class': 'form-control'}),
         }
