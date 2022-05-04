@@ -23,3 +23,6 @@ class Items(models.Model):
     price = models.FloatField()
     seller = models.ForeignKey(Profiles, on_delete=models.CASCADE)
     sold = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.name
