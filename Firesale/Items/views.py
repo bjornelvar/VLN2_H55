@@ -1,5 +1,5 @@
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from items.forms.new_listing_form import CreateListingForm
 from items.models import Items
 
@@ -15,7 +15,11 @@ def index(response):
 
 def create_listing(request):
     if request.method == 'POST':
-        print(1)
+        form = CreateListingForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('items-index')
+
     else:
         form = CreateListingForm()
     return render(request, 'items/create_listing.html', {
