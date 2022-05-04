@@ -4488,7 +4488,7 @@ sequence|table|16867|16868|1
     </table>
     <table id="302" parent="271" name="users_profiles">
       <ObjectId>16811</ObjectId>
-      <StateNumber>32250</StateNumber>
+      <StateNumber>34703</StateNumber>
       <AccessMethodId>2</AccessMethodId>
       <OwnerName>fire-sale-db-user</OwnerName>
     </table>
@@ -5760,41 +5760,46 @@ model</ColNames>
       <StateNumber>30771</StateNumber>
       <TypeId>20</TypeId>
     </column>
-    <column id="458" parent="302" name="name">
-      <DataType>varchar(255)|0s</DataType>
-      <NotNull>1</NotNull>
-      <Position>2</Position>
-      <StateNumber>30771</StateNumber>
-      <TypeId>1043</TypeId>
-    </column>
-    <column id="459" parent="302" name="bio">
+    <column id="458" parent="302" name="bio">
       <DataType>varchar(255)|0s</DataType>
       <NotNull>1</NotNull>
       <Position>5</Position>
       <StateNumber>30771</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="460" parent="302" name="rating">
+    <column id="459" parent="302" name="rating">
       <DataType>double precision|0s</DataType>
-      <NotNull>1</NotNull>
       <Position>6</Position>
-      <StateNumber>30771</StateNumber>
+      <StateNumber>34703</StateNumber>
       <TypeId>701</TypeId>
     </column>
-    <column id="461" parent="302" name="online">
-      <DataType>boolean|0s</DataType>
-      <NotNull>1</NotNull>
-      <Position>7</Position>
-      <StateNumber>30771</StateNumber>
-      <TypeId>16</TypeId>
-    </column>
-    <column id="462" parent="302" name="image">
+    <column id="460" parent="302" name="image">
       <DataType>varchar(100)|0s</DataType>
       <NotNull>1</NotNull>
       <Position>9</Position>
       <StateNumber>32250</StateNumber>
       <TypeId>1043</TypeId>
     </column>
+    <column id="461" parent="302" name="user_id">
+      <DataType>integer|0s</DataType>
+      <NotNull>1</NotNull>
+      <Position>10</Position>
+      <StateNumber>34713</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <foreign-key id="462" parent="302" name="users_profiles_user_id_dcd8fa39_fk_auth_user_id">
+      <ColNames>user_id</ColNames>
+      <Deferrable>1</Deferrable>
+      <InitiallyDeferred>1</InitiallyDeferred>
+      <ObjectId>16942</ObjectId>
+      <RefColNames>id</RefColNames>
+      <RefColPositions>1</RefColPositions>
+      <RefKeyName>auth_user_pkey</RefKeyName>
+      <StateNumber>34713</StateNumber>
+      <RefTableId>16706</RefTableId>
+      <RefTableName>auth_user</RefTableName>
+      <RefTableKind>table</RefTableKind>
+    </foreign-key>
     <index id="463" parent="302" name="users_profiles_pkey">
       <ColNames>id</ColNames>
       <NameSurrogate>1</NameSurrogate>
@@ -5804,13 +5809,28 @@ model</ColNames>
       <Unique>1</Unique>
       <AccessMethodId>403</AccessMethodId>
     </index>
-    <key id="464" parent="302" name="users_profiles_pkey">
+    <index id="464" parent="302" name="users_profiles_user_id_key">
+      <ColNames>user_id</ColNames>
+      <NameSurrogate>1</NameSurrogate>
+      <ObjectId>16935</ObjectId>
+      <StateNumber>34703</StateNumber>
+      <Unique>1</Unique>
+      <AccessMethodId>403</AccessMethodId>
+    </index>
+    <key id="465" parent="302" name="users_profiles_pkey">
       <ColNames>id</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>16818</ObjectId>
       <Primary>1</Primary>
       <StateNumber>30771</StateNumber>
       <UnderlyingIndexId>16817</UnderlyingIndexId>
+    </key>
+    <key id="466" parent="302" name="users_profiles_user_id_key">
+      <ColNames>user_id</ColNames>
+      <NameSurrogate>1</NameSurrogate>
+      <ObjectId>16936</ObjectId>
+      <StateNumber>34703</StateNumber>
+      <UnderlyingIndexId>16935</UnderlyingIndexId>
     </key>
   </database-model>
 </dataSource>
