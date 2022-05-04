@@ -10,4 +10,6 @@ class Profiles(models.Model):
     bio = models.CharField(max_length=255, blank=True)
     image = models.ImageField(upload_to='profile_pics/', default='blank-profile-picture.png')
     rating = models.FloatField(null=True)
+    def __str__(self):
+        return self.user.username
 

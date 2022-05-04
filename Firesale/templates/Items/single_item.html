@@ -1,11 +1,8 @@
 <div class="well item">
-    <a href="#">
+    <a href="/items/{{ item.id }}">
        <img class="item-img" src="{{ item.image.url }}" width="120"/>
        <h4>{{ item.name }}</h4>
-       <p>{{ item.description }}</p>
        <p>{{ item.price }}</p>
-       <p>{{ item.subcategory }}</p>
-       <p>{{ item.location }}</p>
        <p>{{ item.seller }}</p>
     </a>
 </div>

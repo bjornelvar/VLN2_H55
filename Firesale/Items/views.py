@@ -1,5 +1,5 @@
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from items.forms.new_listing_form import CreateListingForm
 from items.models import Items
 
@@ -29,5 +29,7 @@ def create_listing(request):
     })
 
 
-def get_user_id(request):
-    return request.user.id
+def get_item_by_id(request,id):
+    return render(request, 'items/item_details.html', {
+        'item': get_object_or_404(Items, pk=id)
+    })
