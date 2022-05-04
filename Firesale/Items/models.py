@@ -6,6 +6,7 @@ from users.models import Profiles
 
 class Categories(models.Model):
     name = models.CharField(max_length=50)
+    categoryid = models.AutoField(primary_key=True)
 
 
 class SubCategories(models.Model):
