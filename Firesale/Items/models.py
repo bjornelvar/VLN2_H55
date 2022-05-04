@@ -6,7 +6,9 @@ from users.models import Profiles
 
 class Categories(models.Model):
     name = models.CharField(max_length=50)
-    categoryid = models.AutoField(primary_key=True)
+
+    def __str__(self):
+        return self.name
 
     def __str__(self):
         return self.name
@@ -21,7 +23,7 @@ class SubCategories(models.Model):
 
 
 class Items(models.Model):
-    subcategory = models.ForeignKey(SubCategories, on_delete=models.CASCADE)
+    category = models.ForeignKey(Categories, on_delete=models.CASCADE)
     name = models.CharField(max_length=255)
     condition = models.CharField(max_length=255)
     description = models.CharField(max_length=255, blank=True)
