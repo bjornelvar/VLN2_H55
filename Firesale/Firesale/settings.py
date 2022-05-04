@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'items.apps.ItemsConfig',
     'home.apps.HomeConfig',
     'users.apps.UsersConfig',
+    'bids.apps.BidsConfig',
 ]
 
 MIDDLEWARE = [
