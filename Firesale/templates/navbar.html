@@ -1,19 +1,22 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
+
   <div class="container-fluid">
     <a class="navbar-brand" href="/">Fire Sale</a>
-          <a class="nav-link active" aria-current="page" href="{% url 'items-index' %}">Items</a>
+      <a class="nav-link active" aria-current="page" href="{% url 'items-index' %}">Items</a>
 
 
-          {% if user.is_authenticated %}
-              <a class="nav-link active" aria-current="page" href="{% url 'my-listings' %}">My Listings</a>
-              <a class="nav-link active" aria-current="page" href="{% url 'create_listing' %}">Create Listing</a>
-            <a class="nav-link active" aria-current="page" href="{% url 'logout' %}">Logout</a>
-              <a class="nav-link active" aria-current="page" href="{% url 'profile' %}">Profile<img src="{{ user.profiles.image.url }}" width="30px" height="30px"></a>
-          {% else %}
-              <a class="nav-link active" aria-current="page" href="{% url 'register' %}">Register</a>
-              <a class="nav-link active" aria-current="page" href="{% url 'login' %}">Login</a>
-          {% endif %}
-    </div>
+    {% if user.is_authenticated %}
+        <a class="nav-link active" aria-current="page" href="{% url 'my-listings' %}">My Listings</a>
+        <a class="nav-link active" aria-current="page" href="{% url 'create_listing' %}">Create Listing</a>
+        <a class="nav-link active" aria-current="page" href="{% url 'profile' %}">Profile<img src="{{ user.profiles.image.url }}" width="30px" height="30px"></a>
+        <a class="nav-link active" aria-current="page" href="{% url 'logout' %}">Logout</a>
+
+    {% else %}
+        <a class="nav-link active" aria-current="page" href="{% url 'register' %}">Register</a>
+        <a class="nav-link active" aria-current="page" href="{% url 'login' %}">Login</a>
+    {% endif %}
+  </div>
+
 </nav>
 
 

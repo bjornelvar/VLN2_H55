@@ -13,6 +13,7 @@
       <div class="card-body">
         <h5 class="card-title">{{ item.name }}</h5>
         <p class="card-text">$ {{ item.price }}</p>
+        <p class="card-text">Listed {{ item.listdate | timesince }} ago</p>
       </div>
     </div>
 </a>
