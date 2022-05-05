@@ -1,12 +1,14 @@
 {% extends 'base.html' %}
 {% block content %}
 
-       <h4>{{ item.name }}</h4>
-       <p>{{ item.description }}</p>
-       <p>{{ item.price }}</p>
-       <p>{{ item.subcategory }}</p>
-       <p>{{ item.location }}</p>
-       <p>{{ item.seller }}</p>
-       <img class="item-img" src="{{ item.image.url }}" width="120"/>
+    <h4>{{ item.name }}</h4>
+    <p>{{ item.description }}</p>
+    <p>{{ item.price }}</p>
+    <p>{{ item.subcategory }}</p>
+    <p>{{ item.location }}</p>
+    <p>{{ item.seller }}</p>
+    <img class="item-img" src="{{ item.image.url }}" width="120"/>
+    <input type="text" placeholder="Bid must be more than {{ item.price }}">    {# Engin virkni hér 5. maí #}
+    <input type="submit" class="btn btn-primary" value="Submit bid">            {# Engin virkni hér 5. maí #}
 
 {% endblock %}

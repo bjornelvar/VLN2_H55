@@ -3,7 +3,7 @@
     <h1>Register</h1>
     <form class="form form-horizontal" method="post">
         {% csrf_token %}
-        {{ form }}
+        {{ form }} {# Sækir í users>forms>profile_forms.py #}
         <input type="submit" class="btn btn-primary" value="Sign up">
     </form>
 {% endblock %}

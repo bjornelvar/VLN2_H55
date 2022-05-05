@@ -3,7 +3,6 @@ from django.contrib.auth.forms import UserCreationForm
 from users.models import Profiles
 from users.forms.profile_forms import *
 
-# Create your views here.
 
 def register(request):
     if request.method == 'POST':
@@ -14,6 +13,7 @@ def register(request):
     return render(request, 'users/register.html', {
         'form': UserCreationForm()
     })
+
 
 def profile(request):
     profile = Profiles.objects.filter(user=request.user).first()
@@ -30,6 +30,6 @@ def profile(request):
             profile.save()
 
     return render(request, 'users/profile.html', {
-        'form': ProfileForm(instance=profile),
-        'form1': UploadImage(instance=profile),
+        'form': ProfileForm(instance=profile),      # ProfileForm fallið er í users>forms>profile_forms.py
+        'form1': UploadImage(instance=profile),     # UploadImage fallið er í users>forms>profile_forms.py
     })
