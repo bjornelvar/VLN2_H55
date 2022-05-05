@@ -6,7 +6,7 @@ a{
 .items {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: flex-start;
     margin: 0 -1rem;
     gap: 2vw;
 }
@@ -18,7 +18,7 @@ a{
 .single-item{
     /*width: calc(25% - 3rem);*/
     margin: 0 0rem;
-    padding: 1rem;
+    padding: 0rem;
     box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
     border-radius: 0.5rem;
     background: #fff;
