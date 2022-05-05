@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
 from users.models import Profiles
@@ -15,7 +16,7 @@ def register(request):
         'form': UserCreationForm()
     })
 
-
+@login_required
 def my_listings(response):
     context = {'items': Items.objects.filter(seller_id=response.user.id).order_by('name')}
     return render(response,   'users/my_listings.html', context)

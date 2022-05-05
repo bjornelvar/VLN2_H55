@@ -1,8 +1,19 @@
-<div class="well item">
-    <a href="/items/{{ item.id }}">
-       <img class="item-img" src="{{ item.image.url }}" width="120"/>
-       <h4>{{ item.name }}</h4>
-       <p>{{ item.price }}</p>
-       <p>{{ item.seller }}</p>
-    </a>
-</div>
+{#<div class="single-item">#}
+{#    <a href="/items/{{ item.id }}">#}
+{#       <img class="item-img" src="{{ item.image.url }}" width="120"/>#}
+{#       <h4>{{ item.name }}</h4>#}
+{#       <p>{{ item.price }}</p>#}
+{#       <p>{{ item.seller }}</p>#}
+{#    </a>#}
+{#</div>#}
+
+<a href="/items/{{ item.id }}">
+    <div class="card" style="width: 18rem;">
+      <img class="card-img-top" src="{{ item.image.url }}" alt="Product image">
+      <div class="card-body">
+        <h5 class="card-title">{{ item.name }}</h5>
+        <p class="card-text">{{ item.price }}</p>
+        <a href="#" class="btn btn-primary">More Details</a>
+      </div>
+    </div>
+</a>

@@ -1,9 +1,13 @@
 {% extends 'base.html' %}
 {% block content %}
     <h1>Login</h1>
-    <form class="form form-horizontal" method="post">
+    <form class="loginform" method="post">
         {% csrf_token %}
         {{ form }}
         <input type="submit" class="btn btn-primary" value="Login">
     </form>
+    <div class="noaccount">
+        <h4>Don't have an account?</h4>
+        <a class="btn btn-primary" href="{% url 'register' %}"> Register</a>
+    </div>
 {% endblock %}

@@ -2,7 +2,10 @@
   <div class="container-fluid">
     <a class="navbar-brand" href="/">Fire Sale</a>
           <a class="nav-link active" aria-current="page" href="{% url 'items-index' %}">Items</a>
+
+
           {% if user.is_authenticated %}
+              <a class="nav-link active" aria-current="page" href="{% url 'my-listings' %}">My Listings</a>
             <a class="nav-link active" aria-current="page" href="{% url 'logout' %}">Logout</a>
               <a class="nav-link active" aria-current="page" href="{% url 'profile' %}">Profile<img src="{{ user.profiles.image.url }}" width="30px" height="30px"></a>
           {% else %}
