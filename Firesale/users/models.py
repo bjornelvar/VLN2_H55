@@ -11,4 +11,4 @@ class Profiles(models.Model):
     rating = models.FloatField(null=True)
 
     def __str__(self):
-        return self.bio
+        return self.user.username

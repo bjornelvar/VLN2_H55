@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
 from users.models import Profiles
 from users.forms.profile_forms import *
+from items.models import Items
 
 
 def register(request):
@@ -13,6 +14,11 @@ def register(request):
     return render(request, 'users/register.html', {
         'form': UserCreationForm()
     })
+
+
+def my_listings(response):
+    context = {'items': Items.objects.filter(seller_id=response.user.id).order_by('name')}
+    return render(response,   'users/my_listings.html', context)
 
 
 def profile(request):
