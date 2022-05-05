@@ -6,6 +6,7 @@
 
           {% if user.is_authenticated %}
               <a class="nav-link active" aria-current="page" href="{% url 'my-listings' %}">My Listings</a>
+              <a class="nav-link active" aria-current="page" href="{% url 'create_listing' %}">Create Listing</a>
             <a class="nav-link active" aria-current="page" href="{% url 'logout' %}">Logout</a>
               <a class="nav-link active" aria-current="page" href="{% url 'profile' %}">Profile<img src="{{ user.profiles.image.url }}" width="30px" height="30px"></a>
           {% else %}
