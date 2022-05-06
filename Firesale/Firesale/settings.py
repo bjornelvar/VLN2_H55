@@ -139,4 +139,4 @@ LOGIN_REDIRECT_URL = '/users/profile'
 
 
 MEDIA_ROOT = BASE_DIR / 'static/images'
-MEDIA_URL = '/images/'
+# MEDIA_URL = '/images/'
