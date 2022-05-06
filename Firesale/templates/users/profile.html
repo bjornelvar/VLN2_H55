@@ -8,6 +8,8 @@
     <input type="submit" class="btn btn-bio" value="Update">
 
     </form>
+    <p>Current profile picture:</p>
+    <img src="{{ user.profiles.image.url }}" style="max-width: 100px; height: auto">
      <form method="post" enctype="multipart/form-data">
      {% csrf_token %}
          <input type="hidden" name="name" value="image">
