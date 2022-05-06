@@ -29,7 +29,7 @@ def profile(request):
         form = ProfileForm(instance=profile, data=request.POST)
 
         if 'image' == btn:
-            form = UploadImage(instance=profile, data=request.FILES)
+            form = UploadImage(request.POST, request.FILES, instance=profile)
 
         if form.is_valid():
             profile = form.save(commit=False)

@@ -138,5 +138,5 @@ LOGIN_URL = '/users/login'
 LOGIN_REDIRECT_URL = '/users/profile'
 
 
-MEDIA_ROOT = BASE_DIR / 'static/images'
-MEDIA_URL = '/images/'
+MEDIA_ROOT = BASE_DIR / 'media'
+MEDIA_URL = '/media/'
