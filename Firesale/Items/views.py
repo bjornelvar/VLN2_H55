@@ -10,13 +10,13 @@ from items.models import Categories
 
 
 def index(response):
-    context = {'items': Items.objects.all().order_by('name')}
+    context = {'items': Items.objects.all().order_by('name'), 'categories': Categories.objects.all().order_by('name') }
     return render(response,   'items/index.html', context)
 
 
-def get_category_list(response):
-    context = {'categories': Categories.objects.all().order_by('name')}
-    return render(response,   'items/category_list.html', context)
+# def get_category_list(response):
+#     context = {'categories': Categories.objects.all().order_by('name')}
+#     return render(response,   'items/category_list.html', context)
 
 
 # def get_items_in_category(response):
