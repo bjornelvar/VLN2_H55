@@ -1,9 +1,35 @@
+{#{% extends 'base.html' %}#}
+{#{% block content %}#}
+{#    <h1>Register</h1>#}
+{#    <form class="form form-horizontal" method="post">#}
+{#        {% csrf_token %}#}
+{#        {{ form }} {# Sækir í users>forms>profile_forms.py#}
+{#        <input type="submit" class="btn btn-primary" value="Sign up">#}
+{#    </form>#}
+{#{% endblock %}#}
+
 {% extends 'base.html' %}
 {% block content %}
-    <h1>Register</h1>
-    <form class="form form-horizontal" method="post">
-        {% csrf_token %}
-        {{ form }} {# Sækir í users>forms>profile_forms.py #}
-        <input type="submit" class="btn btn-primary" value="Sign up">
-    </form>
+<main>
+    <section class="section">
+        <section class="container">
+            <div class="row">
+                <div class="col l12 s12">
+                    <div class="card">
+                        <div class="card-content">
+                            <form class="form form-horizontal" method="post">
+                                <h1>Registration page</h1>
+                                {% csrf_token %}
+                                {{ form.as_p }}
+                                <div class="center">
+                                    <input type="submit" class="btn btn-primary" value="Sign up">
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </section>
+</main>
 {% endblock %}
