@@ -26,7 +26,7 @@ def get_category_list(response):
 
 def create_listing(request):
     if request.method == 'POST':
-        form = CreateListingForm(request.POST)
+        form = CreateListingForm(request.POST, request.FILES)
         if form.is_valid():
             item = form.save(commit=False)
             item.seller_id = request.user.id
