@@ -4,6 +4,7 @@ from items.models import Items
 
 
 class CreateListingForm(ModelForm):
+    # image = forms.CharField(required=True, widget=forms.TextInput(attrs={'class': 'form-control'}))
 
     class Meta:
         model = Items

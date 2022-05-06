@@ -1,11 +1,14 @@
 {% extends 'base.html' %}
 {% block content %}
-    <div class="category_list">
-            {% include 'items/category_list.html' with item=item %}
-    <h1>All items</h1>
-    <div class="items">
-        {% for item in items %}
-            {% include 'items/single_item.html' with item=item %}
-        {% endfor %}
+    <div class="items-container">
+        <div class="category_list">
+                {% include 'items/category_list.html' with item=item %}
+        </div>
+        <h1>All items</h1>
+        <div class="items">
+            {% for item in items %}
+                {% include 'items/single_item.html' with item=item %}
+            {% endfor %}
+        </div>
     </div>
 {% endblock %}
