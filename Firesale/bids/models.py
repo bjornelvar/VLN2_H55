@@ -8,7 +8,7 @@ from items.models import Items
 class Bids(models.Model):
     bidder = models.ForeignKey(Profiles, on_delete=models.CASCADE)
     item = models.ForeignKey(Items, on_delete=models.CASCADE)
-    biddate = models.DateField(auto_now=True)
+    biddate = models.DateTimeField(auto_now=True)
     bidamount = models.FloatField()
 
     class Meta:
@@ -18,6 +18,6 @@ class Bids(models.Model):
 class Accepts(models.Model):
     bid = models.OneToOneField(Bids, on_delete=models.CASCADE)
     seller = models.OneToOneField(Profiles, on_delete=models.CASCADE)
-    acceptdate = models.DateField(auto_now_add=True)
+    acceptdate = models.DateTimeField(auto_now_add=True)
     rating = models.FloatField()
 

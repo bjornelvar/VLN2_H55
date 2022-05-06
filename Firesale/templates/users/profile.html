@@ -5,7 +5,7 @@
     {% csrf_token %}
     {{ form }}
 
-    <input type="submit" class="btn btn-bio" value="Update">
+    <input type="submit" class="btn btn-bio" value="Update" style="background: dodgerblue; color: white; margin-top: 10px;">
 
     </form>
     <p>Current profile picture:</p>
@@ -14,6 +14,6 @@
      {% csrf_token %}
          <input type="hidden" name="name" value="image">
      {{ form1 }}
-     <input type="submit" class="btn btn-upload" value="Upload">
+     <input type="submit" class="btn btn-upload" value="Upload" style="background: dodgerblue; color: white; margin-top: 10px;">
      </form>
 {% endblock %}
