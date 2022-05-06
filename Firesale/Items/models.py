@@ -10,9 +10,6 @@ class Categories(models.Model):
     def __str__(self):
         return self.name
 
-    def __str__(self):
-        return self.name
-
 
 class SubCategories(models.Model):
     category = models.ForeignKey(Categories, on_delete=models.CASCADE)
