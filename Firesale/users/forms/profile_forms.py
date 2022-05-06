@@ -30,3 +30,6 @@ class UploadImage(ModelForm):
     class Meta:
         model = Profiles
         exclude = ['id', 'rating', 'user', 'bio']
+        widgets = {
+            'image': widgets.FileInput(attrs={'class': 'form-control'})
+        }
