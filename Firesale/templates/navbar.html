@@ -5,7 +5,7 @@
         <a class="btn btn-primary ms-auto" role="button" href="{% url 'items-index' %}" style="margin: 11px;background: var(--bs-orange);">All Items</a>
 {% if user.is_authenticated %}
         <a class="btn btn-primary ms-auto" role="button" href="{% url 'create_listing' %}" style="margin: 11px;background: var(--bs-green);">Sell Items</a>
-        <input type="search" style="border-style: solid;height: 38px;margin: 6px;width: 247px;">    {# SEARCH BAR #}
+        <input type="search" placeholder="Search here..." style="border-style: solid;height: 38px;margin: 6px;width: 247px;">    {# SEARCH BAR #}
         <button class="btn btn-primary" type="button" style="margin: -2px;">Search</button>         {# SEARCH BUTTON #}
     <div class="collapse navbar-collapse" id="navcol-1"></div>
         <a class="btn btn-primary ms-auto" role="button" href="#" style="margin: 11px;background: var(--bs-red);">My Bids</a>
