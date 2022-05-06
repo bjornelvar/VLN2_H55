@@ -19,9 +19,9 @@ def get_category_list(response):
     return render(response,   'items/category_list.html', context)
 
 
-def get_items_in_category(response):
-    context = {'items_category': Items.objects.filter(category=self.category).order_by('name')}
-    return render(response,   'items/index.html', context)
+# def get_items_in_category(response):
+#     context = {'items_category': Items.objects.filter(category=self.category).order_by('name')}
+#     return render(response,   'items/index.html', context)
 
 
 def create_listing(request):
