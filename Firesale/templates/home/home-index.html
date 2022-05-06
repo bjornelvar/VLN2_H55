@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="/static/css/bootstrap.min.css">
     <header class="text-center text-white masthead" style="background:url('/static/images/bg_fire_white.jpg')no-repeat center center;background-size:cover;">
         <div class="overlay"></div>
-        <div class="container" href="{% url 'items-index' %}">
+        <div class="container">
             <div class="row">
                 <div class="col-xl-9 mx-auto position-relative">
                     <h1 class="mb-5">Looking for anything in particular?</h1>
@@ -32,18 +32,24 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-4 offset-xxl-1">
+                    <a class="create-listing" href="{% url 'create_listing' %}">
                     <div class="mx-auto features-icons-item mb-5 mb-lg-0 mb-lg-3">
-                        <div class="d-flex features-icons-icon"><i class="la la-money m-auto text-primary" data-bss-hover-animate="pulse"></i></div>
+{#                        <div class="d-flex features-icons-icon"><i class="la la-money m-auto text-primary" data-bss-hover-animate="pulse"></i></div>#}
+                        <img src="/static/images/money-bill-wave-solid.svg" class="img-fluid" alt="">
                         <h3>Create a Listing</h3>
                         <p class="lead mb-0">Selling your stuff is just one click away!</p>
                     </div>
+                    </a>
                 </div>
                 <div class="col-lg-4 col-xxl-4 offset-xxl-2">
+                    <a class="view-items" href="{% url 'items-index' %}">
                     <div class="mx-auto features-icons-item mb-5 mb-lg-0 mb-lg-3">
-                        <div class="d-flex features-icons-icon"><i class="fa fa-shopping-bag m-auto text-primary" data-bss-hover-animate="pulse"></i></div>
+{#                        <div class="d-flex features-icons-icon"><i class="fa fa-shopping-bag m-auto text-primary" data-bss-hover-animate="pulse"></i></div>#}
+                        <img src="/static/images/shopping-bag-solid.svg" class="img-fluid" alt="">
                         <h3>Browse Items</h3>
                         <p class="lead mb-0">Have a look through all our items here</p>
                     </div>
+                    </a>
                 </div>
             </div>
         </div>
