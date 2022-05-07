@@ -1,3 +1,5 @@
+from decimal import Decimal
+from django.core.validators import MinValueValidator
 from django.db import models
 from users.models import Profiles
 
@@ -27,6 +29,11 @@ class Items(models.Model):
     image = models.ImageField(upload_to='images/', default='images/no-image-default.png')
     listdate = models.DateTimeField(auto_now_add=True)
     price = models.FloatField()
+    # price = models.DecimalField(
+    #     max_digits=15,
+    #     decimal_places=1,
+    #     validators=[MinValueValidator(Decimal('0.1'))]
+    # ) # Nota þetta!! Þetta checkar hvort að talan sé yfir 0.1
     seller = models.ForeignKey(Profiles, on_delete=models.CASCADE)
     sold = models.BooleanField(default=False)
 
