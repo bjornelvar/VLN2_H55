@@ -1,9 +1,9 @@
 {% block content %}
-    <h1>Categories</h1>
-    <ul>
+    <h1 class="category_header">Categories</h1>
+    <div class="category_list">
     {% for category in categories %}
-        <li>{{ category.name }}</li>
+        <a class="category_name">{{ category.name }}</a><br>
     {% endfor %}
-    </ul>
+    </div>
 
 {% endblock %}

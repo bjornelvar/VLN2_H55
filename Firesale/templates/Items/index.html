@@ -1,10 +1,10 @@
 {% extends 'base.html' %}
 {% block content %}
-    <div class="items-container">
+    <h1>All items</h1>
+    <div class="items_container">
         <div class="category_list">
                 {% include 'items/category_list.html' with item=item %}
         </div>
-        <h1>All items</h1>
         <div class="items">
             {% for item in items %}
                 {% include 'items/single_item.html' with item=item %}
