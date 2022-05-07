@@ -35,8 +35,12 @@ def profile(request):
             profile = form.save(commit=False)
             profile.user = request.user
             profile.save()
+            return redirect('profile')
 
-    return render(request, 'users/profile.html', {
+    return render(request, 'users/profile_edit.html', {
         'form': ProfileForm(instance=profile),      # ProfileForm fallið er í users>forms>profile_forms.py
         'form1': UploadImage(instance=profile),     # UploadImage fallið er í users>forms>profile_forms.py
     })
+
+def show_profile(request):
+    return render(request, 'users/profile.html')

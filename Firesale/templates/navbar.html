@@ -8,10 +8,22 @@
         <input type="search" placeholder="Search here..." style="border-style: solid;height: 38px;margin: 6px;width: 247px;">    {# SEARCH BAR #}
         <button class="btn btn-primary" type="button" style="margin: -2px;">Search</button>         {# SEARCH BUTTON #}
     <div class="collapse navbar-collapse" id="navcol-1"></div>
-        <a class="btn btn-primary ms-auto" role="button" href="#" style="margin: 11px;background: var(--bs-red);">My Bids</a>
+        <!--<a class="btn btn-primary ms-auto" role="button" href="#" style="margin: 11px;background: var(--bs-red);">My Bids</a>
         <a class="btn btn-primary ms-auto" role="button" href="{% url 'my-listings' %}" style="margin: 11px;background: var(--bs-green);">My Listings</a>
-        <a class="btn btn-primary ms-auto" role="button" href="{% url 'profile' %}" style="margin: 11px;">Profile<img src="{{ user.profiles.image.url }}" style="max-width: 30px; max-height: 30px"></a>
-        <a class="btn btn-primary ms-auto" role="button" href="{% url 'logout' %}" style="margin: 11px;">Logout</a>
+        <a class="btn btn-primary ms-auto" role="button" href="{% url 'profile' %}" style="margin: 11px;">Profile<img src="{{ user.profiles.image.url }}" style="max-width: 30px; max-height: 30px"></a>-->
+        <li class="nav-item dropdown" style="list-style-type: none;">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <img src="{{ user.profiles.image.url }}" style="max-width: 43px; max-height: 43px; padding: 2px; background: dodgerblue; border-radius: 6px;">
+              {{ user }}
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <li><a class="dropdown-item" href="{% url 'profile' %}">Profile</a></li>
+            <li><a class="dropdown-item" href="{% url 'my-listings' %}">My Listings</a></li>
+            <li><a class="dropdown-item" href="#">My Bids</a></li>
+            <li><a class="dropdown-item" href="{% url 'logout' %}">Logout</a></li>
+          </ul>
+        </li>
+        <!--<a class="btn btn-primary ms-auto" role="button" href="{% url 'logout' %}" style="margin: 11px;">Logout</a>-->
     </div>
 </nav>
 {% else %}
