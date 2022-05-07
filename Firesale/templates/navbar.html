@@ -9,7 +9,7 @@
         <form class="d-flex" method=POST action="{% url 'search-items' %}">
         {% csrf_token %}
         <input class ="form-control me-2" type="search" placeholder="Search for an item..." name="search_term" style="border-style: solid;height: 38px;margin: 6px;width: 247px;">    {# SEARCH BAR #}
-        <button class="btn btn-primary" type="submit" style="margin: -2px;">Search</button>         {# SEARCH BUTTON #}
+        <button class="btn btn-primary" type="submit" style="margin-top: 6px;height: 38px;">Search</button>         {# SEARCH BUTTON #}
         </form>    {# SEARCH BUTTON #}
 
     <div class="collapse navbar-collapse" id="navcol-1"></div>
@@ -35,8 +35,8 @@
     <div class="collapse navbar-collapse" id="navcol-1"></div>
         <form class="d-flex" method=POST action="{% url 'search-items' %}">
         {% csrf_token %}
-        <input type="search" style="border-style: solid;height: 38px;margin: 6px;width: 247px;">    {#  SEARCH BAR #}
-        <button class="btn btn-primary" type="submit" style="margin: -2px;">Search</button>         {# SEARCH BUTTON #}
+        <input type="search" placeholder="Search for an item..." style="border-style: solid;height: 38px;margin: 6px;width: 247px;">    {#  SEARCH BAR #}
+        <button class="btn btn-primary" type="submit" style="margin-top: 6px; margin-right: 485px; height: 38px;">Search</button>         {# SEARCH BUTTON #}
         </form>
         <a class="btn btn-primary ms-auto" role="button" href="{% url 'login' %}" style="margin: 11px;">Login</a>
         <a class="btn btn-primary ms-auto" role="button" href="{% url 'register' %}" style="margin: 11px;">Register</a>
