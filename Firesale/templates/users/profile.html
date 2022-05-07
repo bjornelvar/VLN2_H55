@@ -1,8 +1,8 @@
 {% extends 'base.html' %}
 {% block content %}
     <h1>Profile</h1>
-    <img src="{{ user.profiles.image.url }}" alt="Could not get picture">
-    <p>{{ user }}</p>
-    <p>{{ user.profiles.bio }}</p>
+    <img src="{{ user.profiles.image.url }}" style="width: 400px" alt="Could not get picture">
+    <p> <b>Username:</b>&nbsp;&nbsp;&nbsp;&nbsp;{{ user }}</p> {# Bullið þarna er bara tab whitespace #}
+    <p> <b>Bio:</b>&nbsp;&nbsp;&nbsp;&nbsp;{{ user.profiles.bio }}</p> {# Bullið þarna er bara tab whitespace #}
     <a href="{% url 'profile-edit' %}" class="btn btn-primary">Edit Profile</a>
 {% endblock %}
