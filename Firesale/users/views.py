@@ -18,7 +18,7 @@ from items.models import Items
 
 def register(request):
     if request.method == 'POST':
-        form = CustomRegisterForm(request.POST)
+        form = CustomRegisterForm(request.POST) # Sækir í users>forms>profile_forms.py
         if form.is_valid():
             form.save()
             return redirect('login')
