@@ -1,0 +1,9 @@
+
+*** FIRE SALE TO-DO ***
+-----------------------
+
+* Láta nýjan user fá default mynd og addast í profiles töfluna um leið og hann er registered. [ ]
+
+* Auto login eftir register. [ ]
+
+* Láta price ekki geta verið negative. [ ]

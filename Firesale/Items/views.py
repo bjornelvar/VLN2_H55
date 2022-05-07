@@ -22,14 +22,9 @@ def search_items(request):
         return render(request, 'items/search_items.html', {})
 
 
-# def get_category_list(response):
-#     context = {'categories': Categories.objects.all().order_by('name')}
-#     return render(response,   'items/category_list.html', context)
-
-
-# def get_items_in_category(response):
-#     context = {'items_category': Items.objects.filter(category=self.category).order_by('name')}
-#     return render(response,   'items/index.html', context)
+def get_items_by_category(response, id):
+    context = {'items': Items.objects.filter(category_id=id).order_by('name'), 'categories': Categories.objects.all().order_by('name') }
+    return render(response,   'items/index.html', context)
 
 
 def create_listing(request):
