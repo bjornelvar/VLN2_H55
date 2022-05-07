@@ -3,7 +3,7 @@
     <h1>All items</h1>
     <div class="items_container">
         <div class="category_list">
-                {% include 'items/category_list.html' with item=item %}
+                {% include 'items/category_list.html' with category=category %}
         </div>
         <div class="items">
             {% for item in items %}
