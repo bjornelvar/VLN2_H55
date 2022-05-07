@@ -6,15 +6,28 @@ from users.forms.profile_forms import *
 from items.models import Items
 
 
+# def register(request):
+#     if request.method == 'POST':
+#         form = UserCreationForm(data=request.POST)
+#         if form.is_valid():
+#             form.save()
+#             return redirect('login')
+#     return render(request, 'users/register.html', {
+#         'form': UserCreationForm()
+#     })
+
 def register(request):
     if request.method == 'POST':
-        form = UserCreationForm(data=request.POST)
+        form = CustomRegisterForm(request.POST)
         if form.is_valid():
             form.save()
             return redirect('login')
-    return render(request, 'users/register.html', {
-        'form': UserCreationForm()
-    })
+    else:
+        form = CustomRegisterForm()
+
+    context = {'form': form}
+
+    return render(request, 'users/register.html', context)
 
 @login_required
 def my_listings(response):
