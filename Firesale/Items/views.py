@@ -14,6 +14,14 @@ def index(response):
     return render(response,   'items/index.html', context)
 
 
+def search_items(request):
+    if request.method == 'POST':
+        search_term = request.POST['search_term']
+        return render(request, 'items/search_items.html', {'search_term': search_term, 'items': Items.objects.filter(name__icontains=search_term)})
+    else:
+        return render(request, 'items/search_items.html', {})
+
+
 # def get_category_list(response):
 #     context = {'categories': Categories.objects.all().order_by('name')}
 #     return render(response,   'items/category_list.html', context)

@@ -6,4 +6,5 @@ urlpatterns = [
     # path('', views.get_category_list, name='category-list'),
     path('create_listing/', views.create_listing, name='create_listing'),
     path('<int:id>', views.get_item_by_id, name='items-details'),
+    path('search/', views.search_items, name='search-items'),
 ]
