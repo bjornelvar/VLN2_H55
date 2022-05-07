@@ -23,7 +23,7 @@ def search_items(request):
 
 
 def get_items_by_category(response, id):
-    context = {'items': Items.objects.filter(category_id=id).order_by('name'), 'categories': Categories.objects.all().order_by('name') }
+    context = {'items': Items.objects.filter(category_id=id).order_by('name'), 'categories': Categories.objects.all().order_by('name'), 'current_category': id }
     return render(response,   'items/index.html', context)
 
 
