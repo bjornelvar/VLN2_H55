@@ -10,7 +10,7 @@
                     {% endfor %}
                     {%  for similar_item in items %}
 {#                        if the name is less than 10 characters apart and the item is not the same item and not in the same category and not the same item#}
-                        {% if item.name|string_distance:similar_item.name < 10 and similar_item.id != item.id and similar_item.category.id != item.category.id %} #
+                        {% if item.name|string_distance:similar_item.name < 10 and similar_item.id != item.id and similar_item.category.id != item.category.id %} 
                             {% include 'items/single_item.html' with item=similar_item %}
                         {% endif %}
                     {% endfor %}
