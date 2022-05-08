@@ -1,0 +1,14 @@
+{% block content %}
+    <h2>Similar Items</h2>
+        <div class="similar_items_container">
+            {% for category in categories %}
+                {%  if item.category.id == category.id %}
+                    {%  for similar_item in items %}
+                        {% if similar_item.category.id == category.id and similar_item.id != item.id %}
+                            {% include 'items/single_item.html' with item=similar_item %}
+                        {% endif %}
+                    {% endfor %}
+                {%  endif %}
+            {% endfor %}
+        </div>
+{% endblock %}

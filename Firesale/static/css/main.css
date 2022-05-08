@@ -55,6 +55,15 @@ a{
     color:black;
 }
 
+/*SIMILAR ITEMS CSS ----------------------------------------------------------*/
+.similar_items_container{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    margin: 0 3rem;
+    gap: 2vw;
+}
+
 /*CATEGORY CSS ------------------------------------------------------------*/
 
 .category_name{

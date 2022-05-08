@@ -46,6 +46,6 @@ def create_listing(request):
 
 
 def get_item_by_id(request,id):
-    return render(request, 'items/item_details.html', {
-        'item': get_object_or_404(Items, pk=id)
-    })
+    context = {'item': get_object_or_404(Items, pk=id), 'categories': Categories.objects.all().order_by('name'),
+               'items': Items.objects.all().order_by('name')}
+    return render(request, 'items/item_details.html', context)
