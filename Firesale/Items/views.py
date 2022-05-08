@@ -1,9 +1,10 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
 from items.forms.new_listing_form import CreateListingForm
+from bids.forms.bids_forms import CreateBidsForm
+from bids.models import Bids
 from items.models import Items
 from items.models import Categories
-from users.models import Profiles
 
 
 # Create your views here.
@@ -11,15 +12,14 @@ from users.models import Profiles
 
 
 def index(response):
-    context = {'items': Items.objects.all().order_by('name'), 'categories': Categories.objects.all().order_by('name')}
+    context = {'items': Items.objects.all().order_by('name'), 'categories': Categories.objects.all().order_by('name') }
     return render(response,   'items/index.html', context)
 
 
 def search_items(request):
     if request.method == 'POST':
         search_term = request.POST['search_term']
-        return render(request, 'items/search_items.html', {'search_term': search_term, 'items': Items.objects.filter(name__icontains=search_term),
-                                                           'categories': Categories.objects.all().order_by('name')})
+        return render(request, 'items/search_items.html', {'search_term': search_term, 'items': Items.objects.filter(name__icontains=search_term)})
     else:
         return render(request, 'items/search_items.html', {})
 
@@ -46,6 +46,17 @@ def create_listing(request):
 
 
 def get_item_by_id(request,id):
-    context = {'item': get_object_or_404(Items, pk=id), 'categories': Categories.objects.all().order_by('name'),
-               'items': Items.objects.all().order_by('name')}
+    item = get_object_or_404(Items, pk=id)
+    context = {'item': item, 'categories': Categories.objects.all().order_by('name'),
+               'items': Items.objects.all().order_by('name'), 'form': CreateBidsForm()}
+    if request.method == 'POST':
+        form = CreateBidsForm(request.POST)
+        if form.is_valid():
+            if int(request.POST.get('bidamount')) >= item.price:
+                bid = form.save(commit=False)
+                bid.bidder_id = request.user.id
+                bid.item_id = id
+                bid.save()
+
+
     return render(request, 'items/item_details.html', context)
