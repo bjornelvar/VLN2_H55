@@ -1,6 +1,15 @@
 {% extends 'base.html' %}
 {% block content %}
-    <h1>All items</h1>
+    {% if request.get_full_path == "/items/" %}
+        <h1>All items</h1>
+    {% else %}
+        {% for category in categories %}
+            {%  if category.id == current_category %}
+                <h1>{{ category.name }}</h1>
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+{#        {% endfor %}#}
     <div class="items_container">
         <div class="category_list">
                 {% include 'items/category_list.html' with category=category %}
