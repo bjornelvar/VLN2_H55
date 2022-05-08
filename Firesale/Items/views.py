@@ -52,7 +52,7 @@ def get_item_by_id(request,id):
     if request.method == 'POST':
         form = CreateBidsForm(request.POST)
         if form.is_valid():
-            if int(request.POST.get('bidamount')) >= item.price:
+            if int(request.POST.get('bidamount')) >= item.price and item.seller_id != request.user.id:
                 bid = form.save(commit=False)
                 bid.bidder_id = request.user.id
                 bid.item_id = id
