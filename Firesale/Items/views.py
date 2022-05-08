@@ -3,6 +3,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from items.forms.new_listing_form import CreateListingForm
 from items.models import Items
 from items.models import Categories
+from users.models import Profiles
 
 
 # Create your views here.
@@ -10,14 +11,16 @@ from items.models import Categories
 
 
 def index(response):
-    context = {'items': Items.objects.all().order_by('name'), 'categories': Categories.objects.all().order_by('name') }
+    context = {'items': Items.objects.all().order_by('name'), 'categories': Categories.objects.all().order_by('name'),
+               'profiles': Profiles.objects.all().order_by('user__username')}
     return render(response,   'items/index.html', context)
 
 
 def search_items(request):
     if request.method == 'POST':
         search_term = request.POST['search_term']
-        return render(request, 'items/search_items.html', {'search_term': search_term, 'items': Items.objects.filter(name__icontains=search_term)})
+        return render(request, 'items/search_items.html', {'search_term': search_term, 'items': Items.objects.filter(name__icontains=search_term),
+                                                           'categories': Categories.objects.all().order_by('name')})
     else:
         return render(request, 'items/search_items.html', {})
 
