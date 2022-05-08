@@ -11,8 +11,7 @@ from users.models import Profiles
 
 
 def index(response):
-    context = {'items': Items.objects.all().order_by('name'), 'categories': Categories.objects.all().order_by('name'),
-               'profiles': Profiles.objects.all().order_by('user__username')}
+    context = {'items': Items.objects.all().order_by('name'), 'categories': Categories.objects.all().order_by('name')}
     return render(response,   'items/index.html', context)
 
 

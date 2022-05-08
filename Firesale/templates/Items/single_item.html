@@ -14,14 +14,7 @@
         <h5 class="card-title">{{ item.name }}</h5>
         <p class="card-text">$ {{ item.price }}</p>
         <p class="card-text">Listed {{ item.listdate | timesince }} ago</p>
-          <p class="card-text"> Sold by: {{ item.seller }}
-            {% for profile in profiles %}
-                {% if item.seller_id == profile.user_id %}
-                    {{ profile.rating }}★
-                {% endif %}
-            {% endfor %}
-          </p>
-
+          <p class="card-text"> Sold by: {{ item.seller }} {{ item.seller.rating }}★</p>
       </div>
     </div>
 </a>
