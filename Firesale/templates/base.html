@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="{% static 'css/line-awesome.min.css' %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
 </head>
-<body>
+<body style="min-height: 100vh; display: flex; flex-direction: column;">
     {% include 'navbar.html' %} {# Sækir navbar.html í templates möppunni #}
     <div class="container">
         {% block content %}

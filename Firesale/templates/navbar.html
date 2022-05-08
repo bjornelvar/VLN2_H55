@@ -19,7 +19,7 @@
         <li class="nav-item dropdown" style="list-style-type: none;">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             <img src="{{ user.profiles.image.url }}" style="max-width: 43px; max-height: 43px; padding: 2px; background: dodgerblue; border-radius: 6px;">
-              {{ user.username }} ({{ user.profiles.rating }})
+              {{ user.username }} ({{ user.profiles.rating }}★)
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
             <li><a class="dropdown-item" href="{% url 'profile' %}">Profile</a></li>
