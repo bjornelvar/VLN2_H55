@@ -49,7 +49,7 @@ def create_listing(request):
 def get_item_by_id(request,id):
     item = get_object_or_404(Items, pk=id)
     all_items = Items.objects.all()
-    similar_items = get_items_with_similar_names(item, all_items)
+    similar_items = get_similar_items(item, all_items)
     context = {'item': item, 'categories': Categories.objects.all().order_by('name'),
                'items': similar_items, 'form': CreateBidsForm()}
 
@@ -64,28 +64,30 @@ def get_item_by_id(request,id):
     return render(request, 'items/item_details.html', context)
 
 
-def get_items_with_similar_names(main_item, all_items):
+def get_similar_items(main_item, all_items):
     items = []
     for item in all_items:
         if len(items) == 3:
             return items
-        elif get_string_distance(main_item.name, item.name) < 10 and item.category_id == main_item.category_id and item.id != main_item.id:
-            items.insert(0, item)
-
-        elif get_string_distance(main_item.name, item.name) < 10 and item.id != main_item.id and item.category_id != main_item.category_id:
-            items.append(item)
-
+        if get_string_distance(main_item.name, item.name) < 6 and item.id != main_item.id and item not in items:
+            if item.category_id == main_item.category_id:
+                items.insert(0, item)
+            else:
+                items.append(item)
     for item in all_items:
         if len(items) == 3:
             return items
-        if item.category_id == main_item.category_id and item.id != main_item.id:
+        if item.category_id == main_item.category_id and item.id != main_item.id and item not in items:
             items.append(item)
+    print(items)
     return items
 
 
 def get_string_distance(string1, string2):
-    string1_lower = string1.lower()
-    string2_lower = string2.lower()
+    string1_clean = string1.replace(" ", "").replace("-", "")
+    string2_clean = string2.replace(" ", "").replace("-", "")
+    string1_lower = string1_clean.lower()
+    string2_lower = string2_clean.lower()
     return Levenshtein.distance(string1_lower, string2_lower)
 
 
