@@ -4,6 +4,7 @@ from django.contrib.auth.forms import UserCreationForm
 from users.models import Profiles
 from users.forms.profile_forms import *
 from items.models import Items
+from bids.models import Bids
 
 
 # def register(request):
@@ -31,8 +32,13 @@ def register(request):
 
 @login_required
 def my_listings(response):
-    context = {'items': Items.objects.filter(seller_id=response.user.id).order_by('name')}
+    context = {'items': Items.objects.filter(seller_id=response.user.id).order_by('listdate')}
     return render(response,   'users/my_listings.html', context)
+
+@login_required
+def my_bids(response):
+    context = {'items': Items.objects.filter(bids__bidder=response.user.id).order_by('bids__biddate')}
+    return render(response,   'users/my_bids.html', context)
 
 
 def profile(request):
