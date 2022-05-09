@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'home.apps.HomeConfig',
     'users.apps.UsersConfig',
     'bids.apps.BidsConfig',
+    'checkout.apps.CheckoutConfig',
 ]
 
 MIDDLEWARE = [

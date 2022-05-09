@@ -5,10 +5,7 @@ from django import forms
 from django.contrib.auth.models import User
 
 
-
-# Ætla fá þetta til að virka
 class CustomRegisterForm(UserCreationForm):
-
     email = forms.EmailField()
 
     class Meta:

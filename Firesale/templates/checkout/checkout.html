@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block content %}
+    {% if user.is_authenticated %}
+    <form class="form form-horizontal" enctype='multipart/form-data' action="{%  url 'checkout' %}" method="post">
+        {%  csrf_token %}
+        <h2>Shipping Information</h2>
+        {{ shipping_form.as_p }}
+        <h2>Billing Information</h2>
+        {{ billing_form.as_p }}
+        <h2>Payment Information</h2>
+        {{ payment_form.as_p }}
+        <input type="submit" value="Create" class="btn btn-primary pull-right" style="clear:both; margin: 10px 0" />
+    </form>
+    {% else %}
+    <h1>You must be logged in to create a listing.</h1>
+    {% endif %}
+{% endblock %}
