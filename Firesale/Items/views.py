@@ -1,4 +1,5 @@
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 from django.shortcuts import render, redirect, get_object_or_404
 from items.forms.new_listing_form import CreateListingForm
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
@@ -124,7 +125,11 @@ def get_item_by_id(request, id):
             new_bid = form.save(commit=False)
             new_bid.bidder_id = request.user.id
             new_bid.item_id = id
+            messages.success(request, "Bid placed successfully")
             new_bid.save()
+
+        else:
+            messages.error(request, "Bid not placed")
     return render(request, 'items/item_details.html', context)
 
 
