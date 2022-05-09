@@ -32,12 +32,12 @@ def register(request):
 
 @login_required
 def my_listings(response):
-    context = {'items': Items.objects.filter(seller_id=response.user.id).order_by('listdate')}
+    context = {'items': Items.objects.filter(seller_id=response.user.id).order_by('listdate')} # Reverse order líka?
     return render(response,   'users/my_listings.html', context)
 
 @login_required
 def my_bids(response):
-    context = {'items': Items.objects.filter(bids__bidder=response.user.id).order_by('bids__biddate')}
+    context = {'items': Items.objects.filter(bids__bidder=response.user.id).order_by('bids__biddate')} # Reverse order líka?
     return render(response,   'users/my_bids.html', context)
 
 
