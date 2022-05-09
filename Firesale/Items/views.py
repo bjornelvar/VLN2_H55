@@ -124,7 +124,7 @@ def get_item_by_id(request, id):
                 new_bid = form.save(commit=False)
                 new_bid.bidder_id = request.user.id
                 new_bid.item_id = id
-                new_bid.save() # Get ekki biddað tvisvar með sama account
+                new_bid.save()
     return render(request, 'items/item_details.html', context)
 
 
