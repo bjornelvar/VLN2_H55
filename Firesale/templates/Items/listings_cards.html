@@ -1,3 +1,4 @@
+<button class="btn btn-primary" href="#" style="margin-bottom: -69px; margin-top: 10px; background: var(--bs-green)"><b>ACCEPT BID</b></button> {# SETJA FUNCTIONALITY #}
 <a class = "single-item" href="/items/{{ item.id }}">
     <div class="card" style="width: 70rem; height: 28rem">
       <img class="item-preview-image" src="{{ item.image.url }}" width="120" height="200" alt="Product image">
@@ -6,7 +7,6 @@
         <p class="card-text">SETJA HIGHEST OFFER HÉR $ {{ item.price }}</p>
         <p class="card-text">Listed {{ item.listdate | timesince }} ago</p>
 {#          <p class="card-text"> Sold by: {{ item.seller }} ({{ item.seller.rating }}★)</p>#}
-          <button class="btn btn-primary">Accept Offer</button> {# SETJA FUNCTIONALITY #}
       </div>
     </div>
 </a>
