@@ -1,0 +1,12 @@
+<a class = "single-item" href="/items/{{ item.id }}">
+    <div class="card" style="width: 70rem; height: 28rem">
+      <img class="item-preview-image" src="{{ item.image.url }}" width="120" height="200" alt="Product image">
+      <div class="card-body">
+        <h5 class="card-title">{{ item.name }}</h5>
+        <p class="card-text">SETJA HIGHEST OFFER HÉR $ {{ item.price }}</p>
+        <p class="card-text">Listed {{ item.listdate | timesince }} ago</p>
+{#          <p class="card-text"> Sold by: {{ item.seller }} ({{ item.seller.rating }}★)</p>#}
+          <button class="btn btn-primary">Accept Offer</button> {# SETJA FUNCTIONALITY #}
+      </div>
+    </div>
+</a>
