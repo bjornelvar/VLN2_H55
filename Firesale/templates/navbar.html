@@ -7,21 +7,20 @@
         <a class="btn btn-primary ms-auto" role="button" href="{% url 'create_listing' %}" style="margin: 11px;background: var(--bs-green);">Sell Items</a>
 
 
-
-        <div class="d-flex" id="search_form" method=>
-{#            {% csrf_token %}#}
-            <div class="search_bar_container">
-                <select class="form-control" id="category-select" name="category-select">
-                    <option value="">All Categories</option>
-                    {% for category in categories %}
-                        <option value={{ category.id }}>{{ category.name }}</option>
-                    {% endfor %}
-                </select>
+        <div class="search_bar_container">
+            <div class="d-flex" id="search_form">
+    {#            {% csrf_token %}#}
+                    <select class="form-control m-auto" id="category-select" name="category-select">
+                        <option value="">All Categories</option>
+                        {% for category in categories %}
+                            <option value={{ category.id }}>{{ category.name }}</option>
+                        {% endfor %}
+                    </select>
+                <input class ="form-control me-2" type="search" id="search_term" placeholder="Search for an item..." name="search_term"
+                       style="border-style: solid;height: 38px;margin: 6px;width: 247px;">    {# SEARCH BAR #}
+                <a class="btn btn-primary" href="" id="search_button" style="margin-top: 6px;height: 38px;">Search</a>
             </div>
-            <input class ="form-control me-2" type="search" id="search_term" placeholder="Search for an item..." name="search_term"
-                   style="border-style: solid;height: 38px;margin: 6px;width: 247px;">    {# SEARCH BAR #}
-            <a class="btn btn-primary" href="" id="search_button" style="margin-top: 6px;height: 38px;">Search</a>
-            </div>
+        </div>
  {# SEARCH BUTTON #}
 
 
@@ -44,6 +43,7 @@
         </li>
         <!--<a class="btn btn-primary ms-auto" role="button" href="{% url 'logout' %}" style="margin: 11px;">Logout</a>-->
     </div>
+
 {% else %}
     <div class="collapse navbar-collapse" id="navcol-1"></div>
         <form class="d-flex" method=POST action="{% url 'search-items' %}">
@@ -53,9 +53,8 @@
         </form>
         <a class="btn btn-primary ms-auto" role="button" href="{% url 'login' %}" style="margin: 11px;">Login</a>
         <a class="btn btn-primary ms-auto" role="button" href="{% url 'register' %}" style="margin: 11px;">Register</a>
-{% endif %}
+    {% endif %}
 </nav>
-
 
 
 

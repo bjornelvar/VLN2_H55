@@ -4,6 +4,9 @@ a{
 }
 
 
+.container{
+    background:blue;
+}
 /*PROFILE CSS -------------------------------------------------------------*/
 
 .btn-bio {
@@ -16,14 +19,19 @@ a{
     width: 100%;
     height: 100%;
     display: flex;
+    flex-wrap: wrap;
     flex-direction: row;
+    justify-content: space-around;
+    margin: 0 auto;
 }
 
 .items {
+    width: 75%;
+    height: 100%;
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-start;
-    margin: 0 3rem;
+    margin: 0 auto;
     gap: 2vw;
 
 }
@@ -85,20 +93,26 @@ a{
 {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
-    width: 100%;
-    height: 100%;
-    padding: 0 2rem;
+    /*width: 100%;*/
+    /*height: 100%;*/
+    /*padding: 0 2rem;*/
+    padding-left:25px;
+    padding-right:25px;
+    margin: 0 auto;
     background: #F5FAFA;
     border-radius: 0.5rem;
     box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease-in-out;
 }
 
-/*PAGES CSS ------------------------------------------------------------*!*/
-.pages{
+.category-selector {
+    display: flex;
+}
+    /*PAGES CSS ------------------------------------------------------------*!*/
 
+.pages{
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -106,7 +120,6 @@ a{
     margin-top: 2rem;
     margin-bottom: 2rem;
     width: 33%;
-    background: #F5FAFA;
     border-radius: 0.5rem;
     /*box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);*/
     transition: all 0.3s ease-in-out;
@@ -119,4 +132,8 @@ a{
     border-radius: 0.5rem;
     cursor: pointer;
     transition: all 0.3s ease-in-out;
+}
+
+.test{
+background-color: red;
 }
