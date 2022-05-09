@@ -1,6 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
 from items.forms.new_listing_form import CreateListingForm
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from bids.forms.bids_forms import CreateBidsForm
 from bids.models import Bids
 from items.models import Items
@@ -12,26 +13,51 @@ import Levenshtein
 # @login_required(login_url="/%2Fuserslogin")
 
 
-def index(response):
-    context = {'items': Items.objects.all().order_by('name'), 'categories': Categories.objects.all().order_by('name') }
-    return render(response,   'items/index.html', context)
+def index(request):
+    items = Items.objects.all().order_by('name')
+    paginator = Paginator(items,9)
+    page_num = request.GET.get('page', 1)
+    try:
+        page = paginator.get_page(page_num)
+    except EmptyPage or PageNotAnInteger:
+        page = paginator.page(1)
+    context = {'items': page, 'categories': Categories.objects.all().order_by('name') }
+    return render(request,   'items/index.html', context)
 
 
 def search_items(request):
     if request.method == 'POST':
-        category = request.POST['category']
+
+        category_id = request.POST['category']
         search_term = request.POST['search_term']
-        if category == '':
-            return render(request, 'items/search_items.html', {'search_term': search_term, 'items': Items.objects.filter(name__icontains=search_term)})
+
+        if category_id == '':
+            items = Items.objects.filter(name__icontains=search_term)
         else:
-            return render(request, 'items/search_items.html', {'search_term': search_term, 'items': Items.objects.filter(name__icontains=search_term, category_id=category)})
+            items = Items.objects.filter(name__icontains=search_term, category_id=category_id)
+            current_category_name = Categories.objects.get(id=category_id)
+
+        paginator = Paginator(items, 9)
+        page_num = request.GET.get('page', 1)
+        page = paginator.get_page(page_num)
+        context = {'search_term': search_term, 'items': page, 'current_category': category_id,
+                   'categories': Categories.objects.all().order_by('name'), 'current_category_name': current_category_name}
+        return render(request, 'items/search_items.html', context)
+
     else:
         return render(request, 'items/search_items.html', {})
 
 
-def get_items_by_category(response, id):
-    context = {'items': Items.objects.filter(category_id=id).order_by('name'), 'categories': Categories.objects.all().order_by('name'), 'current_category': id }
-    return render(response,   'items/index.html', context)
+def get_items_by_category(request, id):
+    items = Items.objects.filter(category_id=id).order_by('name')
+    paginator = Paginator(items,9)
+    page_num = request.GET.get('page', 1)
+    try:
+        page = paginator.get_page(page_num)
+    except EmptyPage or PageNotAnInteger:
+        page = paginator.page(1)
+    context = {'items': page, 'categories': Categories.objects.all().order_by('name'), 'current_category': id }
+    return render(request,   'items/index-by-category.html', context)
 
 
 def create_listing(request):
