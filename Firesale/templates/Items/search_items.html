@@ -1,10 +1,18 @@
 {% extends 'base.html' %}
 {% block content %}
+    <p> {{ query }}</p>
     {% if search_term %}
+
+        {% if current_category_name != '' %}
     <h2> Showing results for "{{ search_term }}" in category {{ current_category_name }}</h2>
-        {% else %}
+            {% else %}
+    <h2> Showing results for "{{ search_term }}"</h2>
+            {% endif %}
+
+    {% else %}
         <h2> No search term entered. Showing all items. </h2>
     {% endif %}
+
     <div class="items_container">
         <div class="category_list">
                 {% include 'items/category_list.html' with item=item %}
@@ -22,12 +30,13 @@
 
 
     <div class="pages">
+    {% if current_category_name == '' %}
         <nav aria-label="Page navigation example">
           <ul class="pagination justify-content-center">
 
               {% if items.has_previous %}
                     <li class="page-item">
-                      <a class="page-link" href="{% url 'items-index' %}search/?page={{ items.previous_page_number }}">Previous</a>
+                      <a class="page-link" href="{% url 'items-index' %}search/?search_val={{ search_val }}&page={{ items.previous_page_number }}">Previous</a>
                     </li>
               {%  else %}
                   <li class="page-item disabled">
@@ -37,15 +46,15 @@
 
               {% for page in items.paginator.page_range %}
                   {% if page == items.number %}
-                     <li class="page-item active"><a class="page-link" href="{% url 'items-index' %}search/?page={{ page }}">{{ page }}</a></li>
+                     <li class="page-item active"><a class="page-link" href="{% url 'items-index' %}search/?search_val={{ search_val }}&page={{ page }}">{{ page }}</a></li>
                   {% else %}
-                     <li class="page-item"><a class="page-link" href="{% url 'items-index' %}search/?page={{ page }}">{{ page }}</a></li>
+                     <li class="page-item"><a class="page-link" href="{% url 'items-index' %}search/?search_val={{ search_val }}&page={{ page }}">{{ page }}</a></li>
                   {% endif %}
               {% endfor %}
 
               {% if items.has_next %}
                     <li class="page-item">
-                        <a class="page-link" href="{% url 'items-index' %}search/?page={{ items.next_page_number }}">Next</a>
+                        <a class="page-link" href="{% url 'items-index' %}search/?search_val={{ search_val }}&page={{ items.next_page_number }}">Next</a>
                     </li>
                       {% else %}
                           <li class="page-item disabled">
@@ -53,6 +62,41 @@
                       {% endif %}
                   </ul>
         </nav>
+    {% endif %}
+    {% if current_category_name != '' %}
+            <nav aria-label="Page navigation example">
+          <ul class="pagination justify-content-center">
+
+              {% if items.has_previous %}
+                    <li class="page-item">
+                      <a class="page-link" href="{% url 'items-index' %}search/?search_val={{ search_val }}&page={{ items.previous_page_number }}">Previous</a>
+                    </li>
+              {%  else %}
+                  <li class="page-item disabled">
+                      <a class="page-link" href="#" tabindex="-1">Previous</a>
+                    </li>
+              {% endif %}
+
+              {% for page in items.paginator.page_range %}
+                  {% if page == items.number %}
+                     <li class="page-item active"><a class="page-link" href="{% url 'items-index' %}search/?search_val={{ search_val }}&page={{ page }}&category={{ current_category_name }}">{{ page }}</a></li>
+                  {% else %}
+                     <li class="page-item"><a class="page-link" href="{% url 'items-index' %}search/?search_val={{ search_val }}&page={{ page }}&category={{ current_category }}">{{ page }}</a></li>
+                  {% endif %}
+              {% endfor %}
+
+              {% if items.has_next %}
+                    <li class="page-item">
+                        <a class="page-link" href="{% url 'items-index' %}search/?search_val={{ search_val }}&page={{ items.next_page_number }}&category={{ current_category }}">Next</a>
+                    </li>
+                      {% else %}
+                          <li class="page-item disabled">
+                              <a class="page-link" href="#">Next</a>
+                      {% endif %}
+                  </ul>
+        </nav>
+    {% endif %}
+
             <div>
                 <p>Showing {{ items.start_index }}-{{ items.end_index }} items of {{ items.paginator.count }}</p>
             </div>

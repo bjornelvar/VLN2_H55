@@ -7,6 +7,7 @@ from bids.models import Bids
 from items.models import Items
 from items.models import Categories
 import Levenshtein
+from django.http import HttpResponse
 
 
 # Create your views here.
@@ -26,26 +27,28 @@ def index(request):
 
 
 def search_items(request):
-    if request.method == 'POST':
+    if "search_val" in request.GET:
+        search_val = request.GET["search_val"]
+        search_term = search_val.replace("%20", " ")
+        items = Items.objects.filter(name__icontains=search_term)
+        current_category_name = ''
+        category_id = ''
+    if "category" in request.GET:
+        category_id = request.GET["category"]
+        items = items.filter(category_id=category_id)
+        current_category_name = Categories.objects.get(id=category_id).name
+    #
+    # else:
+    #     items = Items.objects.filter(name__icontains=search_term).order_by('name')
+    #     current_category_name = ''
 
-        category_id = request.POST['category']
-        search_term = request.POST['search_term']
+    paginator = Paginator(items, 1)
+    page_num = request.GET.get('page', 1)
+    page = paginator.get_page(page_num)
+    context = {'search_val': search_val, 'search_term': search_term, 'items': page,
+               'categories': Categories.objects.all().order_by('name'), 'current_category':category_id, 'current_category_name': current_category_name}
+    return render(request, 'items/search_items.html', context)
 
-        if category_id == '':
-            items = Items.objects.filter(name__icontains=search_term)
-        else:
-            items = Items.objects.filter(name__icontains=search_term, category_id=category_id)
-            current_category_name = Categories.objects.get(id=category_id)
-
-        paginator = Paginator(items, 9)
-        page_num = request.GET.get('page', 1)
-        page = paginator.get_page(page_num)
-        context = {'search_term': search_term, 'items': page, 'current_category': category_id,
-                   'categories': Categories.objects.all().order_by('name'), 'current_category_name': current_category_name}
-        return render(request, 'items/search_items.html', context)
-
-    else:
-        return render(request, 'items/search_items.html', {})
 
 
 def get_items_by_category(request, id):
