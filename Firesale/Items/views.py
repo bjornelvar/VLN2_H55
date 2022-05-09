@@ -6,6 +6,7 @@ from bids.forms.bids_forms import CreateBidsForm
 from bids.models import Bids
 from items.models import Items
 from items.models import Categories
+from django.db.models import Max
 import Levenshtein
 from django.http import HttpResponse
 
@@ -61,8 +62,31 @@ def get_items_by_category(request, id):
     return render(request,   'items/index-by-category.html', context)
 
 
-def get_items_by_order(request, param):
-    pass
+def get_items_by_order(request, order_val):
+    items = Items.objects
+    if order_val == 'name':
+        items = items.order_by(order_val)
+
+    elif order_val == 'category':
+        items = items.order_by(order_val)
+
+    elif order_val == 'price20desc':
+        items = items.order_by('-price')
+
+    elif order_val == 'price20asc':
+        items = items.order_by('price')
+
+    paginator = Paginator(items, 9)
+    page_num = request.GET.get('page', 1)
+    try:
+        page = paginator.get_page(page_num)
+    except EmptyPage or PageNotAnInteger:
+        page = paginator.page(1)
+    context = {'items': page, 'categories': Categories.objects.all().order_by('name')}
+    return render(request, 'items/index.html', context)
+
+
+
 
 
 def create_listing(request):
@@ -84,18 +108,23 @@ def create_listing(request):
 def get_item_by_id(request, id):
     item = get_object_or_404(Items, pk=id)
     all_items = Items.objects.all()
+    all_bids = Bids.objects.all()
     similar_items = get_similar_items(item, all_items)
     context = {'item': item, 'categories': Categories.objects.all().order_by('name'),
                'items': similar_items, 'form': CreateBidsForm()}
 
     if request.method == 'POST':
         form = CreateBidsForm(request.POST) # Patch?
+        for bid in all_bids:
+            if bid.item_id == id and bid.bidder_id == request.user.id: # Cecks if bid with user id and item id already exists
+                form = CreateBidsForm(request.POST, instance=bid) # If exists adds an instance to the form
+
         if form.is_valid():
             if float(request.POST.get('bidamount')) >= item.price and item.seller_id != request.user.id: # Float? Comparea max bid líka.
-                bid = form.save(commit=False)
-                bid.bidder_id = request.user.id
-                bid.item_id = id
-                bid.save() # Get ekki biddað tvisvar með sama account
+                new_bid = form.save(commit=False)
+                new_bid.bidder_id = request.user.id
+                new_bid.item_id = id
+                new_bid.save() # Get ekki biddað tvisvar með sama account
     return render(request, 'items/item_details.html', context)
 
 

@@ -1,9 +1,9 @@
 {% extends 'base.html' %}
 {% block content %}
+    <div>
     {% if request.get_full_path == "/items/" %}
         <h1>All items</h1>
     {% else %}
-        <div>
         {% for category in categories %}
             {%  if category.id == current_category %}
                 <h1>{{ category.name }}</h1>

@@ -1,0 +1,15 @@
+{% block content %}
+
+    <div class="dropdown">
+      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+        Order by:
+      </button>
+      <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+        <li><a class="dropdown-item" href="/items/order=name">Name</a></li>
+        <li><a class="dropdown-item" href="/items/order=category">category</a></li>
+        <li><a class="dropdown-item" href="/items/order=price20asc">Price: From lowest</a></li>
+        <li><a class="dropdown-item" href="/items/order=price20desc">Price: From highest</a></li>
+      </ul>
+    </div>
+
+{% endblock %}
