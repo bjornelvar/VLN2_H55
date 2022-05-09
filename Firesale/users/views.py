@@ -33,7 +33,7 @@ def register(request):
 
 @login_required
 def my_listings(response):
-    context = {'items': Items.objects.filter(seller_id=response.user.id).order_by('listdate')} # Reverse order líka?
+    context = {'items': Items.objects.filter(seller_id=response.user.id).order_by('listdate').annotate(max_offer = Max('bids__bidamount'))} # Reverse order líka?
     return render(response,   'users/my_listings.html', context)
 
 @login_required
