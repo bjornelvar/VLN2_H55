@@ -11,7 +11,6 @@
         {% endfor %}
     {% endif %}
     </div>
-{#        {% endfor %}#}
     <div class="items_container">
         <div class="category_list">
                 {% include 'items/category_list.html' with category=category %}
@@ -23,20 +22,6 @@
         </div>
     </div>
 
-{#    <div class="pages">#}
-{#    <div>#}
-{#    <p>#}
-{#        {% if items.has_previous %}#}
-{#            <a class="page_link" href="{% url 'items-index' %}?page={{ items.previous_page_number }}"><</a>#}
-{#        {% endif %}#}
-{#        Page {{ items.number }} / {{ items.paginator.num_pages }}#}
-{#        {% if items.has_next %}#}
-{#            <a class="page_link" href="{% url 'items-index' %}?page={{ items.next_page_number }}">></a>#}
-{#        {% endif %}#}
-{#    </p>#}
-{#    </div>#}
-{#        <p>Showing {{ items.start_index }}-{{ items.end_index }} items of {{ items.paginator.count }}</p>#}
-{#    </div>#}
 <div class="pages">
 <nav aria-label="Page navigation example">
   <ul class="pagination justify-content-center">
@@ -69,7 +54,7 @@
               {% endif %}
           </ul>
 </nav>
-    <div>
+    <div class="test">
         <p>Showing {{ items.start_index }}-{{ items.end_index }} items of {{ items.paginator.count }}</p>
     </div>
 </div>
