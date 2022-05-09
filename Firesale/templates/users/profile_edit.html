@@ -1,9 +1,17 @@
 {% extends 'base.html' %}
 {% block content %}
     <h1>Edit Profile</h1>
+{#    <form class="form form-horizontal" method="post">#}
+{#    {% csrf_token %}#}
+{#    {{ edituserform }}#}
+{##}
+{#    <input type="submit" class="btn btn-bio" value="Update" style="background: #007bff; color: white; margin-top: 10px;">#}
+{##}
+{#    </form>#}
     <form class="form form-horizontal" method="post">
     {% csrf_token %}
-    {{ form }}
+    {{ edituserform }}
+    {{ bioform }}
 
     <input type="submit" class="btn btn-bio" value="Update" style="background: #007bff; color: white; margin-top: 10px;">
 
@@ -13,7 +21,7 @@
      <form method="post" enctype="multipart/form-data">
      {% csrf_token %}
          <input type="hidden" name="name" value="image">
-     {{ form1 }}
+     {{ imageform }}
      <input type="submit" class="btn btn-upload" value="Upload" style="background: #007bff; color: white; margin-top: 10px;">
      </form>
 {% endblock %}

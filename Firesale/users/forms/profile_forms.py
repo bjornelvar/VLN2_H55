@@ -16,12 +16,21 @@ class CustomRegisterForm(UserCreationForm):
         fields = ['username', 'email', 'password1', 'password2']
 
 
+class EditUserForm(ModelForm):
+    class Meta:
+        model = User
+        exclude = exclude = ['password', 'is_superuser', 'is_staff', 'is_active', 'date_joined', 'last_login', 'first_name', 'last_name', 'email']
+        widgets = {
+            'username': widgets.TextInput(attrs={'class': 'form-control'})
+        } # implementa þetta einhvern veginn
+
+
 class ProfileForm(ModelForm):
     class Meta:
         model = Profiles
-        exclude = ['id', 'rating', 'user', 'image']
+        exclude = ['id', 'rating', 'image', 'user']
         widgets = {
-            'bio': widgets.Textarea(attrs={'class': 'form-control'}),
+            'bio': widgets.Textarea(attrs={'class': 'form-control'})
         }
 
 

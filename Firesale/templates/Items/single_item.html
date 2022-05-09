@@ -14,7 +14,7 @@
         <h5 class="card-title">{{ item.name }}</h5>
         <p class="card-text">$ {{ item.price }}</p>
         <p class="card-text">Listed {{ item.listdate | timesince }} ago</p>
-          <p class="card-text"> Sold by: {{ item.seller }} {{ item.seller.rating }}★</p>
+          <p class="card-text"> Sold by: {{ item.seller }} ({{ item.seller.rating }}★)</p>
       </div>
     </div>
 </a>
