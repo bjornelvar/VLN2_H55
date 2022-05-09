@@ -14,11 +14,12 @@ class CustomRegisterForm(UserCreationForm):
     class Meta:
         model = User
         fields = ['username', 'email', 'password1', 'password2']
+        
 
 class EditUserForm(ModelForm):
     class Meta:
         model = User
-        exclude = exclude = ['user_permissions', 'groups', 'password', 'is_superuser', 'is_staff', 'is_active', 'date_joined', 'last_login', 'first_name', 'last_name', 'email']
+        exclude = ['user_permissions', 'groups', 'password', 'is_superuser', 'is_staff', 'is_active', 'date_joined', 'last_login', 'first_name', 'last_name', 'email']
         widgets = {
             'username': widgets.TextInput(attrs={'class': 'form-control'})
         }
