@@ -37,22 +37,29 @@ def my_listings(response):
 
 def profile(request):
     profile = Profiles.objects.filter(user=request.user).first()
+    user = User.objects.filter(id=request.user.id).first()
     if request.method == 'POST':
         btn = request.POST.get('name')
-        form = ProfileForm(instance=profile, data=request.POST)
+        form1 = ProfileForm(instance=profile, data=request.POST)
+        form2 = EditUserForm(instance=user, data=request.POST)
 
         if 'image' == btn:
             form = UploadImage(request.POST, request.FILES, instance=profile)
 
-        if form.is_valid():
-            profile = form.save(commit=False)
+        if form1.is_valid():
+            profile = form1.save(commit=False)
             profile.user = request.user
             profile.save()
+
+        if form2.is_valid():
+            user = form2.save(commit=False)
+            user.save()
             return redirect('profile')
 
     return render(request, 'users/profile_edit.html', {
-        'form': ProfileForm(instance=profile),      # ProfileForm fallið er í users>forms>profile_forms.py
-        'form1': UploadImage(instance=profile),     # UploadImage fallið er í users>forms>profile_forms.py
+        'bioform': ProfileForm(instance=profile),      # ProfileForm fallið er í users>forms>profile_forms.py
+        'imageform': UploadImage(instance=profile),     # UploadImage fallið er í users>forms>profile_forms.py
+        'edituserform': EditUserForm(instance=user),
     })
 
 def show_profile(request):

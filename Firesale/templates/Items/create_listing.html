@@ -1,9 +1,13 @@
 
 {% extends "base.html" %}
 {% block content %}
+    {% if user.is_authenticated %}
     <form class="form form-horizontal" enctype='multipart/form-data' action="{%  url 'create_listing' %}" method="post">
         {%  csrf_token %}
         {{ form }}
         <input type="submit" value="Create" class="btn btn-primary pull-right" style="clear:both; margin: 10px 0" />
     </form>
+    {% else %}
+    <h1>You must be logged in to create a listing.</h1>
+    {% endif %}
 {% endblock %}

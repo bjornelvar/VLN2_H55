@@ -54,13 +54,13 @@ def get_item_by_id(request,id):
                'items': similar_items, 'form': CreateBidsForm()}
 
     if request.method == 'POST':
-        form = CreateBidsForm(request.POST)
+        form = CreateBidsForm(request.POST) # Patch?
         if form.is_valid():
-            if int(request.POST.get('bidamount')) >= item.price and item.seller_id != request.user.id:
+            if int(request.POST.get('bidamount')) >= item.price and item.seller_id != request.user.id: # Float? Comparea max bid líka.
                 bid = form.save(commit=False)
                 bid.bidder_id = request.user.id
                 bid.item_id = id
-                bid.save()
+                bid.save() # Get ekki biddað tvisvar með sama account
     return render(request, 'items/item_details.html', context)
 
 
