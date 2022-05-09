@@ -5,6 +5,7 @@ from users.models import Profiles
 from users.forms.profile_forms import *
 from items.models import Items
 from bids.models import Bids
+from django.db.models import Max
 
 
 # def register(request):
@@ -37,7 +38,7 @@ def my_listings(response):
 
 @login_required
 def my_bids(response):
-    context = {'items': Items.objects.filter(bids__bidder=response.user.id).order_by('bids__biddate')} # Reverse order líka?
+    context = {'items': Items.objects.filter(bids__bidder=response.user.id).order_by('bids__biddate').annotate(max_bid = Max('bids__bidamount'))} # Reverse order líka?
     return render(response,   'users/my_bids.html', context)
 
 

@@ -2,11 +2,11 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
 from items.forms.new_listing_form import CreateListingForm
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.core.exceptions import ObjectDoesNotExist
 from bids.forms.bids_forms import CreateBidsForm
 from bids.models import Bids
 from items.models import Items
 from items.models import Categories
-from django.db.models import Max
 import Levenshtein
 from django.http import HttpResponse
 
@@ -114,17 +114,17 @@ def get_item_by_id(request, id):
                'items': similar_items, 'form': CreateBidsForm()}
 
     if request.method == 'POST':
-        form = CreateBidsForm(request.POST) # Patch?
-        for bid in all_bids:
-            if bid.item_id == id and bid.bidder_id == request.user.id: # Cecks if bid with user id and item id already exists
-                form = CreateBidsForm(request.POST, instance=bid) # If exists adds an instance to the form
+        try:
+            bid = all_bids.get(item_id=id, bidder_id=request.user.id)
+            form = CreateBidsForm(request.POST, instance=bid) # If exists adds an instance to the form
+        except ObjectDoesNotExist:
+            form = CreateBidsForm(request.POST)
 
-        if form.is_valid():
-            if float(request.POST.get('bidamount')) >= item.price and item.seller_id != request.user.id: # Float? Comparea max bid líka.
-                new_bid = form.save(commit=False)
-                new_bid.bidder_id = request.user.id
-                new_bid.item_id = id
-                new_bid.save()
+        if form.is_valid() and float(request.POST.get('bidamount')) >= item.price and item.seller_id != request.user.id: # Float? Comparea max bid líka.
+            new_bid = form.save(commit=False)
+            new_bid.bidder_id = request.user.id
+            new_bid.item_id = id
+            new_bid.save()
     return render(request, 'items/item_details.html', context)
 
 
