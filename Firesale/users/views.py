@@ -42,7 +42,7 @@ def my_bids(response):
                'max_bids': Bids.objects.all().values('item_id').annotate(max_offer = Max('bidamount'))} # Reverse order líka?
     return render(response,   'users/my_bids.html', context)
 
-
+@login_required
 def profile(request):
     profile = Profiles.objects.filter(user=request.user).first()
     user = User.objects.filter(id=request.user.id).first()

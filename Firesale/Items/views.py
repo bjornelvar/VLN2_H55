@@ -8,6 +8,7 @@ from bids.forms.bids_forms import CreateBidsForm
 from bids.models import Bids
 from items.models import Items
 from items.models import Categories
+from django.db.models import Max
 import Levenshtein
 from django.http import HttpResponse
 
@@ -17,7 +18,7 @@ from django.http import HttpResponse
 
 
 def index(request):
-    items = Items.objects.all().order_by('name')
+    items = Items.objects.all().order_by('name').annotate(max_offer = Max('bids__bidamount'))
     paginator = Paginator(items,9)
     page_num = request.GET.get('page', 1)
     try:
@@ -52,7 +53,7 @@ def search_items(request):
 
 
 def get_items_by_category(request, id):
-    items = Items.objects.filter(category_id=id).order_by('name')
+    items = Items.objects.filter(category_id=id).order_by('name').annotate(max_offer = Max('bids__bidamount'))
     paginator = Paginator(items,9)
     page_num = request.GET.get('page', 1)
     try:
@@ -112,7 +113,7 @@ def get_item_by_id(request, id):
     all_bids = Bids.objects.all()
     similar_items = get_similar_items(item, all_items)
     context = {'item': item, 'categories': Categories.objects.all().order_by('name'),
-               'items': similar_items, 'form': CreateBidsForm()}
+               'items': similar_items, 'form': CreateBidsForm(), 'max_bid': Bids.objects.filter(item_id=item.id).latest('bidamount')}
 
     if request.method == 'POST':
         try:
