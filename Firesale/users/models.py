@@ -6,7 +6,7 @@ from django.db import models
 
 class Profiles(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
-    bio = models.CharField(max_length=255, blank=True)
+    bio = models.CharField(max_length=255, blank=True, null=True)
     image = models.ImageField(upload_to='images/', default='images/blank-profile-picture.png')
     rating = models.FloatField(null=True)
 
