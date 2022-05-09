@@ -19,8 +19,12 @@ def index(response):
 
 def search_items(request):
     if request.method == 'POST':
+        category = request.POST['category']
         search_term = request.POST['search_term']
-        return render(request, 'items/search_items.html', {'search_term': search_term, 'items': Items.objects.filter(name__icontains=search_term)})
+        if category == '':
+            return render(request, 'items/search_items.html', {'search_term': search_term, 'items': Items.objects.filter(name__icontains=search_term)})
+        else:
+            return render(request, 'items/search_items.html', {'search_term': search_term, 'items': Items.objects.filter(name__icontains=search_term, category_id=category)})
     else:
         return render(request, 'items/search_items.html', {})
 
@@ -46,7 +50,7 @@ def create_listing(request):
     })
 
 
-def get_item_by_id(request,id):
+def get_item_by_id(request, id):
     item = get_object_or_404(Items, pk=id)
     all_items = Items.objects.all()
     similar_items = get_similar_items(item, all_items)
@@ -69,7 +73,7 @@ def get_similar_items(main_item, all_items):
     for item in all_items:
         if len(items) == 3:
             return items
-        if get_string_distance(main_item.name, item.name) < 6 and item.id != main_item.id and item not in items:
+        if get_string_distance(main_item.name, item.name) < 8 and item.id != main_item.id and item not in items:
             if item.category_id == main_item.category_id:
                 items.insert(0, item)
             else:
@@ -79,7 +83,6 @@ def get_similar_items(main_item, all_items):
             return items
         if item.category_id == main_item.category_id and item.id != main_item.id and item not in items:
             items.append(item)
-    print(items)
     return items
 
 
@@ -88,6 +91,7 @@ def get_string_distance(string1, string2):
     string2_clean = string2.replace(" ", "").replace("-", "")
     string1_lower = string1_clean.lower()
     string2_lower = string2_clean.lower()
+    # noinspection PyUnresolvedReferences
     return Levenshtein.distance(string1_lower, string2_lower)
 
 

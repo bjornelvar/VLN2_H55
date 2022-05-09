@@ -5187,27 +5187,19 @@ permission_id</ColNames>
       <Unique>1</Unique>
       <AccessMethodId>403</AccessMethodId>
     </index>
-    <index id="387" parent="293" name="bids_bids_bidder_id_item_id_5f0110da_uniq">
-      <ColNames>bidder_id
-item_id</ColNames>
-      <ObjectId>16878</ObjectId>
-      <StateNumber>71676</StateNumber>
-      <Unique>1</Unique>
-      <AccessMethodId>403</AccessMethodId>
-    </index>
-    <index id="388" parent="293" name="bids_bids_bidder_id_fa27d160">
+    <index id="387" parent="293" name="bids_bids_bidder_id_fa27d160">
       <ColNames>bidder_id</ColNames>
       <ObjectId>16890</ObjectId>
       <StateNumber>71676</StateNumber>
       <AccessMethodId>403</AccessMethodId>
     </index>
-    <index id="389" parent="293" name="bids_bids_item_id_9457dbda">
+    <index id="388" parent="293" name="bids_bids_item_id_9457dbda">
       <ColNames>item_id</ColNames>
       <ObjectId>16891</ObjectId>
       <StateNumber>71676</StateNumber>
       <AccessMethodId>403</AccessMethodId>
     </index>
-    <key id="390" parent="293" name="bids_bids_pkey">
+    <key id="389" parent="293" name="bids_bids_pkey">
       <ColNames>id</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>16866</ObjectId>
@@ -5215,20 +5207,13 @@ item_id</ColNames>
       <StateNumber>30775</StateNumber>
       <UnderlyingIndexId>16865</UnderlyingIndexId>
     </key>
-    <key id="391" parent="293" name="bids_bids_bidder_id_item_id_5f0110da_uniq">
-      <ColNames>bidder_id
-item_id</ColNames>
-      <ObjectId>16879</ObjectId>
-      <StateNumber>30775</StateNumber>
-      <UnderlyingIndexId>16878</UnderlyingIndexId>
-    </key>
-    <check id="392" parent="294" name="django_admin_log_action_flag_check">
+    <check id="390" parent="294" name="django_admin_log_action_flag_check">
       <ColNames>action_flag</ColNames>
       <ObjectId>16785</ObjectId>
       <Predicate>action_flag &gt;= 0</Predicate>
       <StateNumber>30755</StateNumber>
     </check>
-    <column id="393" parent="294" name="id">
+    <column id="391" parent="294" name="id">
       <DataType>integer|0s</DataType>
       <DefaultExpression>nextval(&apos;django_admin_log_id_seq&apos;::regclass)</DefaultExpression>
       <NotNull>1</NotNull>
@@ -5236,54 +5221,54 @@ item_id</ColNames>
       <StateNumber>30755</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <column id="394" parent="294" name="action_time">
+    <column id="392" parent="294" name="action_time">
       <DataType>timestamp with time zone|0s</DataType>
       <NotNull>1</NotNull>
       <Position>2</Position>
       <StateNumber>30755</StateNumber>
       <TypeId>1184</TypeId>
     </column>
-    <column id="395" parent="294" name="object_id">
+    <column id="393" parent="294" name="object_id">
       <DataType>text|0s</DataType>
       <Position>3</Position>
       <StateNumber>30755</StateNumber>
       <TypeId>25</TypeId>
     </column>
-    <column id="396" parent="294" name="object_repr">
+    <column id="394" parent="294" name="object_repr">
       <DataType>varchar(200)|0s</DataType>
       <NotNull>1</NotNull>
       <Position>4</Position>
       <StateNumber>30755</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="397" parent="294" name="action_flag">
+    <column id="395" parent="294" name="action_flag">
       <DataType>smallint|0s</DataType>
       <NotNull>1</NotNull>
       <Position>5</Position>
       <StateNumber>30755</StateNumber>
       <TypeId>21</TypeId>
     </column>
-    <column id="398" parent="294" name="change_message">
+    <column id="396" parent="294" name="change_message">
       <DataType>text|0s</DataType>
       <NotNull>1</NotNull>
       <Position>6</Position>
       <StateNumber>30755</StateNumber>
       <TypeId>25</TypeId>
     </column>
-    <column id="399" parent="294" name="content_type_id">
+    <column id="397" parent="294" name="content_type_id">
       <DataType>integer|0s</DataType>
       <Position>7</Position>
       <StateNumber>30755</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <column id="400" parent="294" name="user_id">
+    <column id="398" parent="294" name="user_id">
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
       <Position>8</Position>
       <StateNumber>30755</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <foreign-key id="401" parent="294" name="django_admin_log_content_type_id_c4bce8eb_fk_django_co">
+    <foreign-key id="399" parent="294" name="django_admin_log_content_type_id_c4bce8eb_fk_django_co">
       <ColNames>content_type_id</ColNames>
       <Deferrable>1</Deferrable>
       <InitiallyDeferred>1</InitiallyDeferred>
@@ -5296,7 +5281,7 @@ item_id</ColNames>
       <RefTableName>django_content_type</RefTableName>
       <RefTableKind>table</RefTableKind>
     </foreign-key>
-    <foreign-key id="402" parent="294" name="django_admin_log_user_id_c564eba6_fk_auth_user_id">
+    <foreign-key id="400" parent="294" name="django_admin_log_user_id_c564eba6_fk_auth_user_id">
       <ColNames>user_id</ColNames>
       <Deferrable>1</Deferrable>
       <InitiallyDeferred>1</InitiallyDeferred>
@@ -5309,7 +5294,7 @@ item_id</ColNames>
       <RefTableName>auth_user</RefTableName>
       <RefTableKind>table</RefTableKind>
     </foreign-key>
-    <index id="403" parent="294" name="django_admin_log_pkey">
+    <index id="401" parent="294" name="django_admin_log_pkey">
       <ColNames>id</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>16788</ObjectId>
@@ -5318,19 +5303,19 @@ item_id</ColNames>
       <Unique>1</Unique>
       <AccessMethodId>403</AccessMethodId>
     </index>
-    <index id="404" parent="294" name="django_admin_log_content_type_id_c4bce8eb">
+    <index id="402" parent="294" name="django_admin_log_content_type_id_c4bce8eb">
       <ColNames>content_type_id</ColNames>
       <ObjectId>16800</ObjectId>
       <StateNumber>30755</StateNumber>
       <AccessMethodId>403</AccessMethodId>
     </index>
-    <index id="405" parent="294" name="django_admin_log_user_id_c564eba6">
+    <index id="403" parent="294" name="django_admin_log_user_id_c564eba6">
       <ColNames>user_id</ColNames>
       <ObjectId>16801</ObjectId>
       <StateNumber>30755</StateNumber>
       <AccessMethodId>403</AccessMethodId>
     </index>
-    <key id="406" parent="294" name="django_admin_log_pkey">
+    <key id="404" parent="294" name="django_admin_log_pkey">
       <ColNames>id</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>16789</ObjectId>
@@ -5338,7 +5323,7 @@ item_id</ColNames>
       <StateNumber>30755</StateNumber>
       <UnderlyingIndexId>16788</UnderlyingIndexId>
     </key>
-    <column id="407" parent="295" name="id">
+    <column id="405" parent="295" name="id">
       <DataType>integer|0s</DataType>
       <DefaultExpression>nextval(&apos;django_content_type_id_seq&apos;::regclass)</DefaultExpression>
       <NotNull>1</NotNull>
@@ -5346,21 +5331,21 @@ item_id</ColNames>
       <StateNumber>30751</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <column id="408" parent="295" name="app_label">
+    <column id="406" parent="295" name="app_label">
       <DataType>varchar(100)|0s</DataType>
       <NotNull>1</NotNull>
       <Position>3</Position>
       <StateNumber>30751</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="409" parent="295" name="model">
+    <column id="407" parent="295" name="model">
       <DataType>varchar(100)|0s</DataType>
       <NotNull>1</NotNull>
       <Position>4</Position>
       <StateNumber>30751</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <index id="410" parent="295" name="django_content_type_pkey">
+    <index id="408" parent="295" name="django_content_type_pkey">
       <ColNames>id</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>16678</ObjectId>
@@ -5369,7 +5354,7 @@ item_id</ColNames>
       <Unique>1</Unique>
       <AccessMethodId>403</AccessMethodId>
     </index>
-    <index id="411" parent="295" name="django_content_type_app_label_model_76bd3d3b_uniq">
+    <index id="409" parent="295" name="django_content_type_app_label_model_76bd3d3b_uniq">
       <ColNames>app_label
 model</ColNames>
       <ObjectId>16680</ObjectId>
@@ -5383,7 +5368,7 @@ default</CollationNames>
       <CollationParentNames>pg_catalog
 pg_catalog</CollationParentNames>
     </index>
-    <key id="412" parent="295" name="django_content_type_pkey">
+    <key id="410" parent="295" name="django_content_type_pkey">
       <ColNames>id</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>16679</ObjectId>
@@ -5391,14 +5376,14 @@ pg_catalog</CollationParentNames>
       <StateNumber>30751</StateNumber>
       <UnderlyingIndexId>16678</UnderlyingIndexId>
     </key>
-    <key id="413" parent="295" name="django_content_type_app_label_model_76bd3d3b_uniq">
+    <key id="411" parent="295" name="django_content_type_app_label_model_76bd3d3b_uniq">
       <ColNames>app_label
 model</ColNames>
       <ObjectId>16681</ObjectId>
       <StateNumber>30751</StateNumber>
       <UnderlyingIndexId>16680</UnderlyingIndexId>
     </key>
-    <column id="414" parent="296" name="id">
+    <column id="412" parent="296" name="id">
       <DataType>bigint|0s</DataType>
       <DefaultExpression>nextval(&apos;django_migrations_id_seq&apos;::regclass)</DefaultExpression>
       <NotNull>1</NotNull>
@@ -5406,28 +5391,28 @@ model</ColNames>
       <StateNumber>30750</StateNumber>
       <TypeId>20</TypeId>
     </column>
-    <column id="415" parent="296" name="app">
+    <column id="413" parent="296" name="app">
       <DataType>varchar(255)|0s</DataType>
       <NotNull>1</NotNull>
       <Position>2</Position>
       <StateNumber>30750</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="416" parent="296" name="name">
+    <column id="414" parent="296" name="name">
       <DataType>varchar(255)|0s</DataType>
       <NotNull>1</NotNull>
       <Position>3</Position>
       <StateNumber>30750</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="417" parent="296" name="applied">
+    <column id="415" parent="296" name="applied">
       <DataType>timestamp with time zone|0s</DataType>
       <NotNull>1</NotNull>
       <Position>4</Position>
       <StateNumber>30750</StateNumber>
       <TypeId>1184</TypeId>
     </column>
-    <index id="418" parent="296" name="django_migrations_pkey">
+    <index id="416" parent="296" name="django_migrations_pkey">
       <ColNames>id</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>16671</ObjectId>
@@ -5436,7 +5421,7 @@ model</ColNames>
       <Unique>1</Unique>
       <AccessMethodId>403</AccessMethodId>
     </index>
-    <key id="419" parent="296" name="django_migrations_pkey">
+    <key id="417" parent="296" name="django_migrations_pkey">
       <ColNames>id</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>16672</ObjectId>
@@ -5444,28 +5429,28 @@ model</ColNames>
       <StateNumber>30750</StateNumber>
       <UnderlyingIndexId>16671</UnderlyingIndexId>
     </key>
-    <column id="420" parent="297" name="session_key">
+    <column id="418" parent="297" name="session_key">
       <DataType>varchar(40)|0s</DataType>
       <NotNull>1</NotNull>
       <Position>1</Position>
       <StateNumber>30777</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="421" parent="297" name="session_data">
+    <column id="419" parent="297" name="session_data">
       <DataType>text|0s</DataType>
       <NotNull>1</NotNull>
       <Position>2</Position>
       <StateNumber>30777</StateNumber>
       <TypeId>25</TypeId>
     </column>
-    <column id="422" parent="297" name="expire_date">
+    <column id="420" parent="297" name="expire_date">
       <DataType>timestamp with time zone|0s</DataType>
       <NotNull>1</NotNull>
       <Position>3</Position>
       <StateNumber>30777</StateNumber>
       <TypeId>1184</TypeId>
     </column>
-    <index id="423" parent="297" name="django_session_pkey">
+    <index id="421" parent="297" name="django_session_pkey">
       <ColNames>session_key</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>16907</ObjectId>
@@ -5477,7 +5462,7 @@ model</ColNames>
       <CollationIds>100</CollationIds>
       <CollationParentNames>pg_catalog</CollationParentNames>
     </index>
-    <index id="424" parent="297" name="django_session_session_key_c0390e0f_like">
+    <index id="422" parent="297" name="django_session_session_key_c0390e0f_like">
       <ColNames>session_key</ColNames>
       <ObjectId>16909</ObjectId>
       <StateNumber>30777</StateNumber>
@@ -5489,13 +5474,13 @@ model</ColNames>
       <CollationIds>100</CollationIds>
       <CollationParentNames>pg_catalog</CollationParentNames>
     </index>
-    <index id="425" parent="297" name="django_session_expire_date_a5c62663">
+    <index id="423" parent="297" name="django_session_expire_date_a5c62663">
       <ColNames>expire_date</ColNames>
       <ObjectId>16910</ObjectId>
       <StateNumber>30777</StateNumber>
       <AccessMethodId>403</AccessMethodId>
     </index>
-    <key id="426" parent="297" name="django_session_pkey">
+    <key id="424" parent="297" name="django_session_pkey">
       <ColNames>session_key</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>16908</ObjectId>
@@ -5503,7 +5488,7 @@ model</ColNames>
       <StateNumber>30777</StateNumber>
       <UnderlyingIndexId>16907</UnderlyingIndexId>
     </key>
-    <column id="427" parent="298" name="id">
+    <column id="425" parent="298" name="id">
       <DataType>bigint|0s</DataType>
       <DefaultExpression>nextval(&apos;items_categories_id_seq&apos;::regclass)</DefaultExpression>
       <NotNull>1</NotNull>
@@ -5511,14 +5496,14 @@ model</ColNames>
       <StateNumber>30773</StateNumber>
       <TypeId>20</TypeId>
     </column>
-    <column id="428" parent="298" name="name">
+    <column id="426" parent="298" name="name">
       <DataType>varchar(50)|0s</DataType>
       <NotNull>1</NotNull>
       <Position>2</Position>
       <StateNumber>30773</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <index id="429" parent="298" name="items_categories_pkey">
+    <index id="427" parent="298" name="items_categories_pkey">
       <ColNames>id</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>16824</ObjectId>
@@ -5527,7 +5512,7 @@ model</ColNames>
       <Unique>1</Unique>
       <AccessMethodId>403</AccessMethodId>
     </index>
-    <key id="430" parent="298" name="items_categories_pkey">
+    <key id="428" parent="298" name="items_categories_pkey">
       <ColNames>id</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>16825</ObjectId>
@@ -5535,7 +5520,7 @@ model</ColNames>
       <StateNumber>30773</StateNumber>
       <UnderlyingIndexId>16824</UnderlyingIndexId>
     </key>
-    <column id="431" parent="299" name="id">
+    <column id="429" parent="299" name="id">
       <DataType>bigint|0s</DataType>
       <DefaultExpression>nextval(&apos;items_items_id_seq&apos;::regclass)</DefaultExpression>
       <NotNull>1</NotNull>
@@ -5543,70 +5528,70 @@ model</ColNames>
       <StateNumber>30773</StateNumber>
       <TypeId>20</TypeId>
     </column>
-    <column id="432" parent="299" name="name">
+    <column id="430" parent="299" name="name">
       <DataType>varchar(255)|0s</DataType>
       <NotNull>1</NotNull>
       <Position>2</Position>
       <StateNumber>30773</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="433" parent="299" name="condition">
+    <column id="431" parent="299" name="condition">
       <DataType>varchar(255)|0s</DataType>
       <NotNull>1</NotNull>
       <Position>4</Position>
       <StateNumber>30773</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="434" parent="299" name="description">
+    <column id="432" parent="299" name="description">
       <DataType>varchar(255)|0s</DataType>
       <NotNull>1</NotNull>
       <Position>5</Position>
       <StateNumber>30773</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="435" parent="299" name="listdate">
+    <column id="433" parent="299" name="listdate">
       <DataType>timestamp with time zone|0s</DataType>
       <NotNull>1</NotNull>
       <Position>6</Position>
       <StateNumber>70583</StateNumber>
       <TypeId>1184</TypeId>
     </column>
-    <column id="436" parent="299" name="price">
+    <column id="434" parent="299" name="price">
       <DataType>double precision|0s</DataType>
       <NotNull>1</NotNull>
       <Position>7</Position>
       <StateNumber>30773</StateNumber>
       <TypeId>701</TypeId>
     </column>
-    <column id="437" parent="299" name="seller_id">
+    <column id="435" parent="299" name="seller_id">
       <DataType>bigint|0s</DataType>
       <NotNull>1</NotNull>
       <Position>8</Position>
       <StateNumber>30773</StateNumber>
       <TypeId>20</TypeId>
     </column>
-    <column id="438" parent="299" name="sold">
+    <column id="436" parent="299" name="sold">
       <DataType>boolean|0s</DataType>
       <NotNull>1</NotNull>
       <Position>10</Position>
       <StateNumber>70583</StateNumber>
       <TypeId>16</TypeId>
     </column>
-    <column id="439" parent="299" name="image">
+    <column id="437" parent="299" name="image">
       <DataType>varchar(100)|0s</DataType>
       <NotNull>1</NotNull>
       <Position>11</Position>
       <StateNumber>70583</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="440" parent="299" name="category_id">
+    <column id="438" parent="299" name="category_id">
       <DataType>bigint|0s</DataType>
       <NotNull>1</NotNull>
       <Position>12</Position>
       <StateNumber>36797</StateNumber>
       <TypeId>20</TypeId>
     </column>
-    <foreign-key id="441" parent="299" name="items_items_category_id_d446b960_fk_items_categories_id">
+    <foreign-key id="439" parent="299" name="items_items_category_id_d446b960_fk_items_categories_id">
       <ColNames>category_id</ColNames>
       <Deferrable>1</Deferrable>
       <InitiallyDeferred>1</InitiallyDeferred>
@@ -5619,7 +5604,7 @@ model</ColNames>
       <RefTableName>items_categories</RefTableName>
       <RefTableKind>table</RefTableKind>
     </foreign-key>
-    <index id="442" parent="299" name="items_items_pkey">
+    <index id="440" parent="299" name="items_items_pkey">
       <ColNames>id</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>16840</ObjectId>
@@ -5628,19 +5613,19 @@ model</ColNames>
       <Unique>1</Unique>
       <AccessMethodId>403</AccessMethodId>
     </index>
-    <index id="443" parent="299" name="items_items_seller_id_8605fdde">
+    <index id="441" parent="299" name="items_items_seller_id_8605fdde">
       <ColNames>seller_id</ColNames>
       <ObjectId>16858</ObjectId>
       <StateNumber>70583</StateNumber>
       <AccessMethodId>403</AccessMethodId>
     </index>
-    <index id="444" parent="299" name="items_items_category_id_d446b960">
+    <index id="442" parent="299" name="items_items_category_id_d446b960">
       <ColNames>category_id</ColNames>
       <ObjectId>16952</ObjectId>
       <StateNumber>70583</StateNumber>
       <AccessMethodId>403</AccessMethodId>
     </index>
-    <key id="445" parent="299" name="items_items_pkey">
+    <key id="443" parent="299" name="items_items_pkey">
       <ColNames>id</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>16841</ObjectId>
@@ -5648,7 +5633,7 @@ model</ColNames>
       <StateNumber>30773</StateNumber>
       <UnderlyingIndexId>16840</UnderlyingIndexId>
     </key>
-    <column id="446" parent="300" name="id">
+    <column id="444" parent="300" name="id">
       <DataType>bigint|0s</DataType>
       <DefaultExpression>nextval(&apos;items_subcategories_id_seq&apos;::regclass)</DefaultExpression>
       <NotNull>1</NotNull>
@@ -5656,21 +5641,21 @@ model</ColNames>
       <StateNumber>30773</StateNumber>
       <TypeId>20</TypeId>
     </column>
-    <column id="447" parent="300" name="name">
+    <column id="445" parent="300" name="name">
       <DataType>varchar(50)|0s</DataType>
       <NotNull>1</NotNull>
       <Position>2</Position>
       <StateNumber>30773</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="448" parent="300" name="category_id">
+    <column id="446" parent="300" name="category_id">
       <DataType>bigint|0s</DataType>
       <NotNull>1</NotNull>
       <Position>3</Position>
       <StateNumber>30773</StateNumber>
       <TypeId>20</TypeId>
     </column>
-    <foreign-key id="449" parent="300" name="items_subcategories_category_id_cf730953_fk_items_categories_id">
+    <foreign-key id="447" parent="300" name="items_subcategories_category_id_cf730953_fk_items_categories_id">
       <ColNames>category_id</ColNames>
       <Deferrable>1</Deferrable>
       <InitiallyDeferred>1</InitiallyDeferred>
@@ -5683,7 +5668,7 @@ model</ColNames>
       <RefTableName>items_categories</RefTableName>
       <RefTableKind>table</RefTableKind>
     </foreign-key>
-    <index id="450" parent="300" name="items_subcategories_pkey">
+    <index id="448" parent="300" name="items_subcategories_pkey">
       <ColNames>id</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>16831</ObjectId>
@@ -5692,13 +5677,13 @@ model</ColNames>
       <Unique>1</Unique>
       <AccessMethodId>403</AccessMethodId>
     </index>
-    <index id="451" parent="300" name="items_subcategories_category_id_cf730953">
+    <index id="449" parent="300" name="items_subcategories_category_id_cf730953">
       <ColNames>category_id</ColNames>
       <ObjectId>16847</ObjectId>
       <StateNumber>30773</StateNumber>
       <AccessMethodId>403</AccessMethodId>
     </index>
-    <key id="452" parent="300" name="items_subcategories_pkey">
+    <key id="450" parent="300" name="items_subcategories_pkey">
       <ColNames>id</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>16832</ObjectId>
@@ -5706,34 +5691,34 @@ model</ColNames>
       <StateNumber>30773</StateNumber>
       <UnderlyingIndexId>16831</UnderlyingIndexId>
     </key>
-    <column id="453" parent="301" name="bio">
+    <column id="451" parent="301" name="bio">
       <DataType>varchar(255)|0s</DataType>
       <NotNull>1</NotNull>
       <Position>5</Position>
       <StateNumber>30771</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="454" parent="301" name="rating">
+    <column id="452" parent="301" name="rating">
       <DataType>double precision|0s</DataType>
       <Position>6</Position>
       <StateNumber>34703</StateNumber>
       <TypeId>701</TypeId>
     </column>
-    <column id="455" parent="301" name="image">
+    <column id="453" parent="301" name="image">
       <DataType>varchar(100)|0s</DataType>
       <NotNull>1</NotNull>
       <Position>9</Position>
       <StateNumber>32250</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="456" parent="301" name="user_id">
+    <column id="454" parent="301" name="user_id">
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
       <Position>10</Position>
       <StateNumber>34713</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <foreign-key id="457" parent="301" name="users_profiles_user_id_dcd8fa39_fk_auth_user_id">
+    <foreign-key id="455" parent="301" name="users_profiles_user_id_dcd8fa39_fk_auth_user_id">
       <ColNames>user_id</ColNames>
       <Deferrable>1</Deferrable>
       <InitiallyDeferred>1</InitiallyDeferred>
@@ -5746,7 +5731,7 @@ model</ColNames>
       <RefTableName>auth_user</RefTableName>
       <RefTableKind>table</RefTableKind>
     </foreign-key>
-    <index id="458" parent="301" name="users_profiles_user_id_dcd8fa39_pk">
+    <index id="456" parent="301" name="users_profiles_user_id_dcd8fa39_pk">
       <ColNames>user_id</ColNames>
       <ObjectId>16979</ObjectId>
       <Primary>1</Primary>
@@ -5754,7 +5739,7 @@ model</ColNames>
       <Unique>1</Unique>
       <AccessMethodId>403</AccessMethodId>
     </index>
-    <key id="459" parent="301" name="users_profiles_user_id_dcd8fa39_pk">
+    <key id="457" parent="301" name="users_profiles_user_id_dcd8fa39_pk">
       <ColNames>user_id</ColNames>
       <ObjectId>16980</ObjectId>
       <Primary>1</Primary>

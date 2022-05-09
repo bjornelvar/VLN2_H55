@@ -68,6 +68,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'Firesale.context_processors.get_categories'
             ],
             # 'libraries': {
             #     'custom_templatetag': 'items.templatetags.string_distance',
