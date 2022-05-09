@@ -86,7 +86,7 @@ def get_item_by_id(request, id):
     if request.method == 'POST':
         form = CreateBidsForm(request.POST) # Patch?
         if form.is_valid():
-            if int(request.POST.get('bidamount')) >= item.price and item.seller_id != request.user.id: # Float? Comparea max bid líka.
+            if float(request.POST.get('bidamount')) >= item.price and item.seller_id != request.user.id: # Float? Comparea max bid líka.
                 bid = form.save(commit=False)
                 bid.bidder_id = request.user.id
                 bid.item_id = id
