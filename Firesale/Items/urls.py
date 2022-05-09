@@ -9,4 +9,5 @@ urlpatterns = [
     path('search/', views.search_items, name='search-items'),
     # path('search/?P=<search_term>/', views.search_items, name='search-items'),
     path('category/<int:id>', views.get_items_by_category, name='category-items'),
+    path('<str:order_val>', views.get_items_by_order, name='order')
 ]

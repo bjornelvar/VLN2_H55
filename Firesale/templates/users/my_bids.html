@@ -1,9 +1,9 @@
 {% extends 'base.html' %}
 {% block content %}
-    <h1>My Listings</h1>
+    <h1>My Bids</h1>
     <div class="items">
         {% for item in items %}
-            {% include 'items/listings_cards.html' with item=item %}
+            {% include 'items/bids_cards.html' with item=item %}
         {% endfor %}
     </div>
 {% endblock %}

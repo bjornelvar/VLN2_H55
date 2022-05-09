@@ -62,6 +62,8 @@ def get_items_by_category(request, id):
     context = {'items': page, 'categories': Categories.objects.all().order_by('name'), 'current_category': id }
     return render(request,   'items/index-by-category.html', context)
 
+def get_items_by_order(request, param):
+    pass
 
 def create_listing(request):
     if request.method == 'POST':
@@ -89,7 +91,7 @@ def get_item_by_id(request, id):
     if request.method == 'POST':
         form = CreateBidsForm(request.POST) # Patch?
         if form.is_valid():
-            if int(request.POST.get('bidamount')) >= item.price and item.seller_id != request.user.id: # Float? Comparea max bid líka.
+            if float(request.POST.get('bidamount')) >= item.price and item.seller_id != request.user.id: # Float? Comparea max bid líka.
                 bid = form.save(commit=False)
                 bid.bidder_id = request.user.id
                 bid.item_id = id
