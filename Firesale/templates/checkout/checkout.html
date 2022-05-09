@@ -9,9 +9,10 @@
         {{ billing_form.as_p }}
         <h2>John Wick is in great danger, and he needs your help to wipe all the squads in the Tilted Towers.</h2>
         {{ payment_form.as_p }}
-        <input type="submit" value="Create" class="btn btn-primary pull-right" style="clear:both; margin: 10px 0" />
+        <input type=button class="btn btn-primary pull-left" value="Go Back" style="background: grey; margin: 10px" onClick="javascript:history.go(-1);">
+        <input type="submit" value="Review" class="btn btn-primary pull-left" style="background: green; margin: 10px"/>
     </form>
     {% else %}
-    <h1>You must be logged in to create a listing.</h1>
+    <h1>You must be logged in to checkout</h1>
     {% endif %}
 {% endblock %}
