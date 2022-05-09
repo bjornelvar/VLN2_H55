@@ -63,13 +63,14 @@
                   </ul>
         </nav>
     {% endif %}
+
     {% if current_category_name != '' %}
             <nav aria-label="Page navigation example">
           <ul class="pagination justify-content-center">
 
               {% if items.has_previous %}
                     <li class="page-item">
-                      <a class="page-link" href="{% url 'items-index' %}search/?search_val={{ search_val }}&page={{ items.previous_page_number }}">Previous</a>
+                      <a class="page-link" href="{% url 'items-index' %}search/?search_val={{ search_val }}&category={{ current_category }}&page={{ items.previous_page_number }}">Previous</a>
                     </li>
               {%  else %}
                   <li class="page-item disabled">
@@ -79,15 +80,15 @@
 
               {% for page in items.paginator.page_range %}
                   {% if page == items.number %}
-                     <li class="page-item active"><a class="page-link" href="{% url 'items-index' %}search/?search_val={{ search_val }}&page={{ page }}&category={{ current_category_name }}">{{ page }}</a></li>
+                     <li class="page-item active"><a class="page-link" href="{% url 'items-index' %}search/?search_val={{ search_val }}&category={{ current_category_name }}&page={{ page }}"></a></li>
                   {% else %}
-                     <li class="page-item"><a class="page-link" href="{% url 'items-index' %}search/?search_val={{ search_val }}&page={{ page }}&category={{ current_category }}">{{ page }}</a></li>
+                     <li class="page-item"><a class="page-link" href="{% url 'items-index' %}search/?search_val={{ search_val }}&category={{ current_category }}&page={{ page }}"></a></li>
                   {% endif %}
               {% endfor %}
 
               {% if items.has_next %}
                     <li class="page-item">
-                        <a class="page-link" href="{% url 'items-index' %}search/?search_val={{ search_val }}&page={{ items.next_page_number }}&category={{ current_category }}">Next</a>
+                        <a class="page-link" href="{% url 'items-index' %}search/?search_val={{ search_val }}&category={{ current_category }}&page={{ items.next_page_number }}">Next</a>
                     </li>
                       {% else %}
                           <li class="page-item disabled">

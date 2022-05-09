@@ -27,20 +27,18 @@ def index(request):
 
 
 def search_items(request):
+
     if "search_val" in request.GET:
         search_val = request.GET["search_val"]
         search_term = search_val.replace("%20", " ")
         items = Items.objects.filter(name__icontains=search_term)
         current_category_name = ''
         category_id = ''
+
     if "category" in request.GET:
         category_id = request.GET["category"]
         items = items.filter(category_id=category_id)
         current_category_name = Categories.objects.get(id=category_id).name
-    #
-    # else:
-    #     items = Items.objects.filter(name__icontains=search_term).order_by('name')
-    #     current_category_name = ''
 
     paginator = Paginator(items, 1)
     page_num = request.GET.get('page', 1)
@@ -62,8 +60,10 @@ def get_items_by_category(request, id):
     context = {'items': page, 'categories': Categories.objects.all().order_by('name'), 'current_category': id }
     return render(request,   'items/index-by-category.html', context)
 
+
 def get_items_by_order(request, param):
     pass
+
 
 def create_listing(request):
     if request.method == 'POST':
