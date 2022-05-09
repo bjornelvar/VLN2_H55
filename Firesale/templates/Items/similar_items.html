@@ -2,33 +2,10 @@
 {% block content %}
     <h2>Similar Items</h2>
         <div class="similar_items_container">
-{#                    {%  for similar_item in items %}#}
-{#                        if the name is less than 10 characters apart and is in the same category and the item is not the same item#}
-{#                        {% if item.name|string_distance:similar_item.name < 10 and similar_item.id != item.id and similar_item.category.id == item.category.id %}#}
-{#                            {% include 'items/single_item.html' with item=similar_item %}#}
-{#                        {% endif %}#}
-{##}
-{#                    {% endfor %}#}
-{#        <p>{{ forloop.counter }}</p>#}
-{#                    {%  for similar_item in items %}#}
-{#                        if the name is less than 10 characters apart and the item is not the same item and not in the same category and not the same item#}
-{#                        {% if item.name|string_distance:similar_item.name < 10 and similar_item.id != item.id and similar_item.category.id != item.category.id %}#}
-{#                            {% include 'items/single_item.html' with item=similar_item %}#}
-{#                        {% endif %}#}
-{#                    {% endfor %}#}
-{#        <p>{{ forloop.counter }}</p>#}
-{#                    {%  for similar_item in items %}#}
-{#                        If the item is in the same category and not the same item#}
-{#                        {% if similar_item.category.id == item.category.id and similar_item.id != item.id%}#}
-{#                            {% include 'items/single_item.html' with item=similar_item %}#}
-{#                            <p>{{ forloop.counter }}</p>#}
-{#                        {% endif %}#}
-{#                    {% endfor %}#}
-{#        <p>{{ forloop.counter }}</p>#}
+
                     {%  for similar_item in items %}
                     {% include 'items/single_item.html' with item=similar_item %}
                     {% endfor %}
-
 
         </div>
 {% endblock %}

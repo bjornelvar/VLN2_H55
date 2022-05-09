@@ -17,8 +17,6 @@ a{
     height: 100%;
     display: flex;
     flex-direction: row;
-
-    justify-content: space-between;
 }
 
 .items {
@@ -81,3 +79,19 @@ a{
 
 }
 
+/*NAVBAR CSS --------------------------------------------------------------*/
+
+.search_bar_container
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    padding: 0 2rem;
+    background: #F5FAFA;
+    border-radius: 0.5rem;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease-in-out;
+}

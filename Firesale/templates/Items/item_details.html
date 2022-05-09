@@ -7,6 +7,7 @@
     <p>{{ item.location }}</p>
     <p><b>Seller:</b> {{ item.seller }} ({{ item.seller.rating }}★)</p>
     <img class="item-img" src="{{ item.image.url }}" style="width: 333px"/>
+
     <form class="form form-horizontal" method="post">
         {%  csrf_token %}
         {{ form }}
