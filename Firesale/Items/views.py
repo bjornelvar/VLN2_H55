@@ -59,6 +59,8 @@ def get_items_by_category(request, id):
     context = {'items': page, 'categories': Categories.objects.all().order_by('name'), 'current_category': id }
     return render(request,   'items/index-by-category.html', context)
 
+def get_items_by_order(request, param):
+    pass
 
 def create_listing(request):
     if request.method == 'POST':

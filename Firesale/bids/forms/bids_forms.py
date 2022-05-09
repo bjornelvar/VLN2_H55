@@ -5,4 +5,4 @@ class CreateBidsForm(ModelForm):
 
     class Meta:
         model = Bids
-        exclude = ['id', 'bidder', 'item', 'biddate']
+        exclude = ['id', 'bidder', 'item', 'biddate', 'is_accepted']
