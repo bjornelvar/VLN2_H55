@@ -3,7 +3,12 @@
       <img class="item-preview-image" src="{{ item.image.url }}" width="120" height="300" alt="Product image">
       <div class="card-body">
         <h5 class="card-title">{{ item.name }}</h5>
-        <p class="card-text">Highest current offer ${{ item.max_bid }}</p>
+            {% for max_bid in max_bids %}
+            {% if max_bid.item_id == item.id %}
+        <p class="card-text">Highest current offer ${{ max_bid.max_offer }}</p>
+            {% endif %}
+            {% endfor %}
+        <p class="card-text">Your current offer ${{ item.your_offer }}</p>
         <p class="card-text">Listed {{ item.listdate | timesince }} ago</p>
           <p class="card-text"> Sold by: {{ item.seller }} ({{ item.seller.rating }}★)</p>
           <button class="btn btn-primary">Bid Again</button>
