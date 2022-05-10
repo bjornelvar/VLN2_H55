@@ -73,6 +73,16 @@ a{
     color:black;
 }
 
+.carousel {
+    max-width: 40em;
+    height: auto;
+}
+
+.carousel img {
+    max-width: 40em;
+    max-height: 35em;
+}
+
 /*SIMILAR ITEMS CSS ----------------------------------------------------------*/
 .similar_items_container{
     display: flex;

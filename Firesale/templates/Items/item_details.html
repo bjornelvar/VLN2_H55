@@ -2,6 +2,38 @@
 {% block content %}
 
     <h2>{{ item.name }}</h2>
+    <div id="itemImageCarousel" class="carousel carousel-dark slide">
+  <div class="carousel-indicators">
+      {% for img in item.itemimages_set.all %}
+          {% if forloop.first %}
+        <button type="button" data-bs-target="#itemImageCarousel" data-bs-slide-to="{{ forloop.counter0 }}" class="active" aria-current="true" aria-label="Slide {{ forloop.counter }}"></button>
+          {% else %}
+            <button type="button" data-bs-target="#itemImageCarousel" data-bs-slide-to="{{ forloop.counter0 }}" aria-label="Slide {{ forloop.counter }}"></button>
+          {% endif %}
+      {% endfor %}
+  </div>
+  <div class="carousel-inner">
+      {% for img in item.itemimages_set.all %}
+          {% if forloop.first %}
+    <div class="carousel-item active">
+      <img src="{{ img.image.url }}" class="d-block w-100" alt="No image found">
+    </div>
+          {% else %}
+    <div class="carousel-item">
+      <img src="{{ img.image.url }}" class="d-block w-100" alt="No image found">
+    </div>
+      {% endif %}
+      {% endfor %}
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#itemImageCarousel" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#itemImageCarousel" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
     <p><b>Description:</b> {{ item.description }}</p>
     <p><b>Price:</b> ${{ item.price }}</p>
     {% if max_bid %}
@@ -11,9 +43,6 @@
     {% endif %}
     <p>{{ item.location }}</p>
     <p><b>Seller:</b> {{ item.seller }} ({{ item.seller.rating }}★)</p>
-    {% with item.itemimages_set.all|first as img %}
-        <img class="item-img" src="{{ img.image.url }}" style="width: 333px"/>
-    {% endwith %}
     {% include 'messages.html' %}
     <form class="form form-horizontal" method="post">
         {% csrf_token %}
