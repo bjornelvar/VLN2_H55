@@ -1,8 +1,53 @@
 {% extends 'base.html' %}
 {% block content %}
-    <h1>Profile</h1>
-    <img src="{{ user.profiles.image.url }}" style="width: 400px" alt="Could not get picture">
-    <p> <b>Username:</b>&nbsp;&nbsp;&nbsp;&nbsp;{{ user }}</p> {# Bullið þarna er bara tab whitespace #}
-    <p> <b>Bio:</b>&nbsp;&nbsp;&nbsp;&nbsp;{{ user.profiles.bio }}</p> {# Bullið þarna er bara tab whitespace #}
-    <a href="{% url 'profile-edit' %}" class="btn btn-primary">Edit Profile</a>
+    <section class="vh-400" style="background-color: #f4f5f7;">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col col-lg-6 mb-5 mb-lg-0">
+        <div class="card mb-5" style="border-radius: .5rem;">
+          <div class="row g-0">
+            <div class="col-md-4 gradient-custom text-center text-white"
+              style="border-top-left-radius: .5rem; border-bottom-left-radius: .5rem;">
+              <img src="{{ user.profiles.image.url }}"
+                alt="Avatar" class="img-fluid my-5" style="width: 150px;" />
+                <div class="user-name-and-rating" style="margin-top:-2rem;">
+                  <h5>{{  user }}</h5>
+                  <p>{{ user.profiles.rating }} ★</p>
+            </div>
+            </div>
+            <div class="col-md-8">
+              <div class="card-body p-4">
+                <h6>Bio</h6>
+                <hr class="mt-0 mb-4">
+                <div class="row pt-1">
+                                          <p>{{ user.profiles.bio }}</p> {# Bullið þarna er bara tab whitespace #}
+                </div>
+                <div class="edit-profile-button_container">
+                    <a href="{% url 'profile-edit' %}" class="btn btn-primary">Edit Profile</a>
+                </div>
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>
+{#<div class="container">#}
+{#    <div class="profile-container">#}
+{#        <div class="profile-header">#}
+{#            <h1>Profile</h1>#}
+{#        </div>#}
+{#        <div class="profile-body">#}
+{#            <div class#}
+{#            <img src="{{ user.profiles.image.url }}" style="width: 400px" alt="Your profile picture">#}
+{#            <p> <b>Username:</b>&nbsp;&nbsp;&nbsp;&nbsp;{{ user }}</p> {# Bullið þarna er bara tab whitespace #}
+{#            <p> <b>Bio:</b>&nbsp;&nbsp;&nbsp;&nbsp;{{ user.profiles.bio }}</p> {# Bullið þarna er bara tab whitespace #}
+{#            <a href="{% url 'profile-edit' %}" class="btn btn-primary">Edit Profile</a>#}
+{#        </div>#}
+{#    </div>#}
+{#</div>#}
 {% endblock %}
