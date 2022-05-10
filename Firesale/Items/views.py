@@ -61,7 +61,7 @@ def search_items(request):
     #     current_category_name = ''
     #     category_id = ''
 
-    paginator = Paginator(items, 1)
+    paginator = Paginator(items, 9)
     page_num = request.GET.get('page', 1)
     page = paginator.get_page(page_num)
     context = {'search_val': search_val, 'search_term': search_term, 'items': page,
