@@ -1,4 +1,7 @@
-
+<form class="form form-horizontal" method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+        </form>
 <div class = "single-item_listings" href="/items/{{ item.id }}" style="width: 70rem; height: 15rem">
     <a class = "single-item_listings_image" href="/items/{{ item.id }}" style="width: 15rem; height: 15rem">
         {% with item.itemimages_set.all|first as img %}
@@ -10,7 +13,7 @@
         <p class="card-text">Highest current offer ${{ item.max_offer }}</p>
         <p class="card-text">Listed {{ item.listdate | timesince }} ago</p>
       </a>
-    <a class="accept-button" href="create_listing.html">
+    <a class="accept-button" href="{% url 'create_listing' %}">
         <button class="btn btn-primary" href="{% url 'create_listing' %}" style="background-color: #3eb058; border: none; font-size: xx-large"><b>ACCEPT BID</b></button> {# SETJA FUNCTIONALITY #}
     </a>
 </div>
