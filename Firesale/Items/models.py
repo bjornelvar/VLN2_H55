@@ -26,7 +26,6 @@ class Items(models.Model):
     name = models.CharField(max_length=255)
     condition = models.CharField(max_length=255)
     description = models.CharField(max_length=255, blank=True)
-    image = models.ImageField(upload_to='images/', default='images/no-image-default.png')
     listdate = models.DateTimeField(auto_now_add=True)
     # price = models.FloatField()
     price = models.DecimalField(
@@ -39,3 +38,7 @@ class Items(models.Model):
 
     def __str__(self):
         return self.name
+
+class ItemImages(models.Model):
+    item = models.ForeignKey(Items, on_delete=models.CASCADE)
+    image = models.ImageField(upload_to='images/', default='images/no-image-default.png')

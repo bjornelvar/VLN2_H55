@@ -87,28 +87,28 @@ def get_items_by_category(request, id):
     return render(request,   'items/index-by-category.html', context)
 
 
-def get_items_by_order(request, order_val):
-    items = Items.objects
-    if order_val == 'name':
-        items = items.order_by(order_val)
-
-    elif order_val == 'category':
-        items = items.order_by(order_val)
-
-    elif order_val == 'price20desc':
-        items = items.order_by('-price')
-
-    elif order_val == 'price20asc':
-        items = items.order_by('price')
-
-    paginator = Paginator(items, 9)
-    page_num = request.GET.get('page', 1)
-    try:
-        page = paginator.get_page(page_num)
-    except EmptyPage or PageNotAnInteger:
-        page = paginator.page(1)
-    context = {'items': page, 'categories': Categories.objects.all().order_by('name')}
-    return render(request, 'items/index.html', context)
+# def get_items_by_order(request, order_val):
+#     items = Items.objects
+#     if order_val == 'name':
+#         items = items.order_by(order_val)
+#
+#     elif order_val == 'category':
+#         items = items.order_by(order_val)
+#
+#     elif order_val == 'price20desc':
+#         items = items.order_by('-price')
+#
+#     elif order_val == 'price20asc':
+#         items = items.order_by('price')
+#
+#     paginator = Paginator(items, 9)
+#     page_num = request.GET.get('page', 1)
+#     try:
+#         page = paginator.get_page(page_num)
+#     except EmptyPage or PageNotAnInteger:
+#         page = paginator.page(1)
+#     context = {'items': page, 'categories': Categories.objects.all().order_by('name')}
+#     return render(request, 'items/index.html', context)
 
 
 
