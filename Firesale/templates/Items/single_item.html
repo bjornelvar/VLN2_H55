@@ -8,10 +8,10 @@
 {#</div>#}
 
 <a class = "single-item" href="/items/{{ item.id }}">
-    <div class="card" style="width: 18rem;">
-        <p class="card-text" style="margin-left: 5px"><b>{{ item.category }}</b></p>
+    <div class="card" style="width: 18rem; height:20rem; line-height:0.7rem;">
+        <p class="single-item_category_name">{{ item.category }}</p>
     {% with item.itemimages_set.all|first as img %}
-      <img class="item-preview-image" src="{{ img.image.url }}" width="120" height="200" alt="Product image">
+      <img class="item-preview-image" src="{{ img.image.url }}" width="120" height="100" alt="Product image" style="max-height:100px;">
     {% endwith %}
       <div class="card-body">
         <h5 class="card-title">{{ item.name }}</h5>

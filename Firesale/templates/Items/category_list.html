@@ -1,8 +1,9 @@
 {% block content %}
 {#    <h1 class="category_header">Categories</h1>#}
     <div class="category_list">
+
     {% for category in categories %}
-        <a class="category_name" href="/items/category/{{ category.id }}">{{ category.name }}</a><br>
+        <a class="list-group-item list-group-item-action" href="/items/category/{{ category.id }}">{{ category.name }}</a><br>
     {% endfor %}
     </div>
 

@@ -1,12 +1,13 @@
 {% extends 'base.html' %}
 {% block content %}
-    <div>
+    <div class="items_header">
         <h1>All items</h1>
+        {% include 'items/order_by_list.html' %}
     </div>
 {#        {% endfor %}#}
-    {% include 'items/order_by_list.html' %}
+
     <div class="items_container">
-        <div class="category_list">
+        <div class="category_container">
                 {% include 'items/category_list.html' with category=category %}
         </div>
         <div class="items">

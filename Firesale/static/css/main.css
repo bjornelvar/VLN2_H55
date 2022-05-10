@@ -12,6 +12,14 @@ a{
 
 /*ITEMS CSS --------------------------------------------------------------*/
 
+.items_header{
+    display:flex;
+    justify-content: space-between;
+    margin-top: 2em;
+
+
+}
+
 .items_container{
     width: 100%;
     height: 100%;
@@ -46,6 +54,13 @@ a{
     transition: all 0.3s ease-in-out;
 }
 
+.single-item_category_name{
+    margin: 1px;
+    color:#A9A9A9;
+    padding:0.5rem;
+
+}
+
 .item-preview-image {
   object-fit: scale-down;
   width: 200px;
@@ -69,6 +84,15 @@ a{
 
 /*CATEGORY CSS ------------------------------------------------------------*/
 
+.category_list{
+    margin-top:15px;
+    background-color: #F8F8F8;
+    border: 1px solid #E5E5E5;
+    padding: 1rem;
+
+}
+
+
 .category_name{
     font-size: 1.5rem;
 
@@ -81,6 +105,7 @@ a{
     border-radius: 0.5rem;
     cursor: pointer;
     transition: all 0.3s ease-in-out;
+
 
 }
 
