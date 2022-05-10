@@ -1,6 +1,6 @@
 from django.forms import ModelForm, widgets
 from django import forms
-from items.models import Items
+from items.models import Items, ItemImages
 
 
 class CreateListingForm(ModelForm):
@@ -20,6 +20,18 @@ class CreateListingForm(ModelForm):
             'description': widgets.Textarea(attrs={'class': 'form-control'}),
             'category': widgets.Select(choices=CATEGORY_CHOICES, attrs={'class': 'form-control'}),
             # 'subcategory': widgets.Select(attrs={'class': 'form-control'}),
-            'image': widgets.FileInput(attrs={'class': 'form-control'}),
+            #'image': widgets.FileInput(attrs={'class': 'form-control'}),
             'price': widgets.NumberInput(attrs={'class': 'form-control'}),
+        }
+
+class CreateListingFormImages(ModelForm):
+
+    class Meta:
+        model = ItemImages
+        exclude = ['id', 'item']
+        labels = {
+            'image': "Attach images"
+        }
+        widgets = {
+            'image': widgets.FileInput(attrs={'class': 'form-control', 'multiple': True})
         }

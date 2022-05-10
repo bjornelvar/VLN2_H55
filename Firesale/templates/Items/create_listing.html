@@ -5,6 +5,7 @@
     <form class="form form-horizontal" enctype='multipart/form-data' action="{%  url 'create_listing' %}" method="post">
         {%  csrf_token %}
         {{ form }}
+        {{ form_images }}
         <input type="submit" value="Create" class="btn btn-primary pull-right" style="clear:both; margin: 10px 0" />
     </form>
     {% else %}

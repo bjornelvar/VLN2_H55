@@ -1,12 +1,12 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.shortcuts import render, redirect, get_object_or_404
-from items.forms.new_listing_form import CreateListingForm
+from items.forms.new_listing_form import CreateListingForm, CreateListingFormImages
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.core.exceptions import ObjectDoesNotExist
 from bids.forms.bids_forms import CreateBidsForm
 from bids.models import Bids
-from items.models import Items
+from items.models import Items, ItemImages
 from items.models import Categories
 from django.db.models import Max
 import Levenshtein
@@ -116,17 +116,25 @@ def get_items_by_category(request, id):
 
 def create_listing(request):
     if request.method == 'POST':
-        form = CreateListingForm(request.POST, request.FILES)
+        form = CreateListingForm(request.POST)
         if form.is_valid():
             item = form.save(commit=False)
             item.seller_id = request.user.id
-            item.save()
-            return redirect('items-index')
+            form_images = CreateListingFormImages(request.POST, request.FILES)
+
+            if form_images.is_valid():
+                item.save()
+                for image in request.FILES.getlist('image'):
+                    ItemImages.objects.create(image=image, item_id=item.id)
+
+                return redirect('items-index')
 
     else:
         form = CreateListingForm()
+        form_images = CreateListingFormImages()
     return render(request, 'items/create_listing.html', {
-        'form': form
+        'form': form,
+        'form_images': form_images
     })
 
 
