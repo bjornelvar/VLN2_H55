@@ -84,8 +84,6 @@ a{
     color:black;
 }
 
-/*DETAILS CSS --------------------------------------------------------------*!*/
-
 .item-details_container{
     margin: 0 auto;
     width: 100%;
@@ -96,7 +94,15 @@ a{
     justify-content: space-around;
 }
 
+.carousel {
+    max-width: 40em;
+    height: auto;
+}
 
+.carousel img {
+    max-width: 40em;
+    max-height: 35em;
+}
 
 /*SIMILAR ITEMS CSS ----------------------------------------------------------*/
 .similar_items_container{
