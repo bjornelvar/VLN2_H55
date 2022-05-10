@@ -4,7 +4,11 @@
     <h2>{{ item.name }}</h2>
     <p><b>Description:</b> {{ item.description }}</p>
     <p><b>Price:</b> ${{ item.price }}</p>
+    {% if max_bid %}
     <p><b>Highest current offer:</b> ${{ max_bid.bidamount }}</p>
+    {% else %}
+    <p>No offers have been placed yet</p>
+    {% endif %}
     <p>{{ item.location }}</p>
     <p><b>Seller:</b> {{ item.seller }} ({{ item.seller.rating }}★)</p>
     <img class="item-img" src="{{ item.image.url }}" style="width: 333px"/>

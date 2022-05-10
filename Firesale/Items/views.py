@@ -118,8 +118,12 @@ def get_item_by_id(request, id):
     all_items = Items.objects.all()
     all_bids = Bids.objects.all()
     similar_items = get_similar_items(item, all_items)
+    try:
+        max_bid = Bids.objects.filter(item_id=item.id).latest('bidamount')
+    except ObjectDoesNotExist:
+        max_bid = None
     context = {'item': item, 'categories': Categories.objects.all().order_by('name'),
-               'items': similar_items, 'form': CreateBidsForm(), 'max_bid': Bids.objects.filter(item_id=item.id).latest('bidamount')}
+               'items': similar_items, 'form': CreateBidsForm(), 'max_bid': max_bid}
 
     if request.method == 'POST':
         try:
