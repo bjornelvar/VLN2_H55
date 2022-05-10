@@ -1,20 +1,22 @@
 {% extends 'base.html' %}
 {% block content %}
-    <div>
+    <div class="items_header">
     {% if request.get_full_path == "/items/" %}
         <h1>All items</h1>
+            {% include 'items/order_by_list.html' %}
     {% else %}
         {% for category in categories %}
             {%  if category.id == current_category %}
                 <h1>{{ category.name }}</h1>
             {% endif %}
         {% endfor %}
+        {% include 'items/order_by_list.html' %}
     {% endif %}
     </div>
 {#        {% endfor %}#}
-    {% include 'items/order_by_list.html' %}
+
     <div class="items_container">
-        <div class="category_list">
+        <div class="category_container">
                 {% include 'items/category_list.html' with category=category %}
         </div>
         <div class="items">

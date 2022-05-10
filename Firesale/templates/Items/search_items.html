@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
-    <p> {{ query }}</p>
+    <div class="items_header">
     {% if search_term %}
 
         {% if current_category_name != '' %}
@@ -12,8 +12,10 @@
     {% else %}
         <h2> No search term entered. Showing all items. </h2>
     {% endif %}
-
     {% include 'items/order_by_list.html' %}
+    </div>
+
+
     <div class="items_container">
         <div class="category_list">
                 {% include 'items/category_list.html' with item=item %}
