@@ -10,7 +10,7 @@
         <div class="search_bar_container">
             <div class="d-flex" id="search_form">
     {#            {% csrf_token %}#}
-                    <select class="form-control m-auto" id="category-select" name="category-select">
+                    <select class="form-control m-auto" id="category-select" name="category-select" style="width: 30%" >
                         <option value="">All Categories</option>
                         {% for category in categories %}
                             <option value={{ category.id }}>{{ category.name }}</option>
