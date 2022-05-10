@@ -2,8 +2,11 @@
 *** FIRE SALE TO-DO ***
 -----------------------
 
-* Láta nýjan user fá default mynd og addast í profiles töfluna um leið og hann er registered. [ ]
+* Láta nýjan user fá default mynd og addast í profiles töfluna um leið og hann er registered. []
 
-* Auto login eftir register. [ ]
+* Auto login eftir register. []
 
-* Láta price ekki geta verið negative. [ ]
+* Láta price ekki geta verið negative. [x]
+
+* Síða crashar þegar ég reyni að bidda logged out []
+	* if bidder_id==null gera eitthvað??
