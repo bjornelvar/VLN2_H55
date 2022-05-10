@@ -1,8 +1,8 @@
-<a class = "single-item_bids" href="/items/{{ item.id }}" style="width: 70rem; height: 15rem">
-    <div class = "single-item_bids_image" style="width: 15rem; height: 15rem">
+<div class = "single-item_bids" href="/items/{{ item.id }}" style="width: 70rem; height: 15rem">
+    <a class = "single-item_bids_image" href="/items/{{ item.id }}" style="width: 15rem; height: 15rem">
       <img class="item-preview-image" src="{{ item.image.url }}" width="120" height="300" alt="Product image">
-    </div>
-      <div class="card-body">
+    </a>
+      <a class="card-body" href="/items/{{ item.id }}">
             <h5 class="card-title">{{ item.name }}</h5>
                 {% for max_bid in max_bids %}
                 {% if max_bid.item_id == item.id %}
@@ -12,8 +12,8 @@
             <p class="card-text">Your current offer ${{ item.your_offer }}</p>
             <p class="card-text">Listed {{ item.listdate | timesince }} ago</p>
               <p class="card-text"> Sold by: {{ item.seller }} ({{ item.seller.rating }}★)</p>
-      </div>
-          <div class="bid-again-button">
-              <button class="btn btn-primary" style=" align-self: center">Bid Again</button>
-          </div>
-</a>
+      </a>
+          <a class="bid-again-button" href="/items/{{ item.id }}">
+              <button class="btn btn-primary" style="background-color: indianred; border: none; font-size: xx-large">Bid Again</button>
+          </a>
+</div>

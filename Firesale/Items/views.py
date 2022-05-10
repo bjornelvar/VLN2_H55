@@ -145,19 +145,22 @@ def get_item_by_id(request, id):
     if request.method == 'POST':
         try:
             bid = all_bids.get(item_id=id, bidder_id=request.user.id)
-            form = CreateBidsForm(request.POST, instance=bid) # If exists adds an instance to the form
+            form = CreateBidsForm(request.POST, instance=bid)   # If exists adds an instance to the form
         except ObjectDoesNotExist:
             form = CreateBidsForm(request.POST)
 
-        if form.is_valid() and float(request.POST.get('bidamount')) >= item.price and item.seller_id != request.user.id: # Float? Comparea max bid líka.
-            new_bid = form.save(commit=False)
-            new_bid.bidder_id = request.user.id
-            new_bid.item_id = id
-            messages.success(request, "Bid placed successfully")
-            new_bid.save()
+        if form.is_valid() and float(request.POST.get('bidamount')) >= item.price and item.seller_id != request.user.id:    # Float? Comparea max bid líka.
+            if max_bid.bidamount is None or float(request.POST.get('bidamount')) > max_bid.bidamount:
+                new_bid = form.save(commit=False)
+                new_bid.bidder_id = request.user.id
+                new_bid.item_id = id
+                messages.success(request, "Bid placed successfully")
+                new_bid.save()
+            else:
+                messages.error(request, "Bid must be higher than current bid")
 
         else:
-            messages.error(request, "Bid not placed")
+            messages.error(request, "Bid must be higher than the start price")
     return render(request, 'items/item_details.html', context)
 
 

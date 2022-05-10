@@ -10,7 +10,7 @@ class ShippingForm(forms.Form):
     address_2 = forms.CharField(required=False)
     city = forms.CharField(required=True)
     country = CountryField(blank_label='(Select country)').formfield()
-    zip = forms.CharField(required=True)
+    zip = forms.CharField(required=True, widget=forms.TextInput(attrs={'size': 6}))
 
 
 class BillingForm(forms.Form):
@@ -18,7 +18,7 @@ class BillingForm(forms.Form):
     billing_address = forms.CharField(required=True)
     city = forms.CharField(required=True)
     country = CountryField(blank_label='(Select country)').formfield()
-    zip = forms.CharField(required=True)
+    zip = forms.CharField(required=True, widget=forms.TextInput(attrs={'size': 6}))
 
 
 class PaymentForm(forms.Form):

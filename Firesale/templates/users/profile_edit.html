@@ -9,6 +9,12 @@
 {##}
 {#    </form>#}
     <form class="form form-horizontal" method="post">
+    <style>
+     .helptext {
+         display: none;
+     }
+    </style>
+
     {% csrf_token %}
     {{ edituserform }}
     {{ bioform }}

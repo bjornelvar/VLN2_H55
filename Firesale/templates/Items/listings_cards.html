@@ -1,16 +1,17 @@
-<a class = "single-item_listings" href="/items/{{ item.id }}" style="width: 70rem; height: 15rem">
-    <div class = "single-item_listings_image" style="width: 15rem; height: 15rem">
+
+<div class = "single-item_listings" href="/items/{{ item.id }}" style="width: 70rem; height: 15rem">
+    <a class = "single-item_listings_image" href="/items/{{ item.id }}" style="width: 15rem; height: 15rem">
       <img class="item-preview-image" src="{{ item.image.url }}" width="120" height="300" alt="Product image">
-    </div>
-      <div class="card-body">
+    </a>
+      <a class="card-body" href="/items/{{ item.id }}">
         <h5 class="card-title">{{ item.name }}</h5>
         <p class="card-text">Highest current offer ${{ item.max_offer }}</p>
         <p class="card-text">Listed {{ item.listdate | timesince }} ago</p>
-      </div>
-                <div class="accept-button">
-                        <button class="btn btn-primary" href="#" style="background: var(--bs-green)"><b>ACCEPT BID</b></button> {# SETJA FUNCTIONALITY #}
-                </div>
-</a>
+      </a>
+    <a class="accept-button" href="create_listing.html">
+        <button class="btn btn-primary" href="{% url 'create_listing' %}" style="background-color: #3eb058; border: none; font-size: xx-large"><b>ACCEPT BID</b></button> {# SETJA FUNCTIONALITY #}
+    </a>
+</div>
 
 
 
