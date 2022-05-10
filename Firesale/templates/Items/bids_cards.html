@@ -8,13 +8,18 @@
             <h5 class="card-title">{{ item.name }}</h5>
                 {% for max_bid in max_bids %}
                 {% if max_bid.item_id == item.id %}
-            <p class="card-text">Highest current offer ${{ max_bid.max_offer }}</p>
+                    <p class="card-text">Highest current offer ${{ max_bid.max_offer }}</p>
+                    {% if item.your_offer < max_bid.max_offer %}
+                        <p style="color:red; border: 1px solid red;font-weight: bold; margin:0 auto; text-align: center"> You have been outbid for this item! </p>
+                    {% endif %}
                 {% endif %}
                 {% endfor %}
             <p class="card-text">Your current offer ${{ item.your_offer }}</p>
             <p class="card-text">Listed {{ item.listdate | timesince }} ago</p>
               <p class="card-text"> Sold by: {{ item.seller }} ({{ item.seller.rating }}★)</p>
+
       </a>
+
           <a class="bid-again-button" href="/items/{{ item.id }}">
               <button class="btn btn-primary" style="background-color: indianred; border: none; font-size: xx-large">Bid Again</button>
           </a>
