@@ -1,28 +1,49 @@
 $(document).ready(function() {
     $("#search_term").on("input", function () {
         console.log("test")
-        $("#search_button").attr("href", "/items/search/?search_val=" + $("#search_term").val().replace(/ /g, "%20"))
+        $("#search_button").attr("href", "/items/search/?search_val=" + $("#search_term").val().replace(/ /g, "+"))
     });
     $("#search_button").on("click", function () {
         if ($("#category-select").val() != "") {
-            $("#search_button").attr("href", "/items/search/?search_val=" + $("#search_term").val().replace(/ /g, "%20") + "&category=" + $("#category-select").val())
+            $("#search_button").attr("href", "/items/search/?search_val=" + $("#search_term").val().replace(/ /g, "+") + "&category=" + $("#category-select").val())
         }
     });
-    $("#order_val").on("mouseover", function () {
-        console.log("Hello", $("#order_val").attr("data-value"))
-        $("#order_val").attr("href", "/items/?order_by=" + $("#order_val").attr("data-value"))
-    });
-    $("#order_val1").on("mouseover", function () {
-        console.log("Hello", $("#order_val1").attr("data-value"))
-        $("#order_val1").attr("href", "/items/?order_by=" + $("#order_val1").attr("data-value"))
-    });
-    $("#order_val2").on("mouseover", function () {
-        console.log("Hello", $("#order_val2").attr("data-value"))
-        $("#order_val2").attr("href", "/items/?order_by=" + $("#order_val2").attr("data-value"))
-    });
-    $("#order_val3").on("mouseover", function () {
-        console.log("Hello", $("#order_val3").attr("data-value"))
-        $("#order_val3").attr("href", "/items/?order_by=" + $("#order_val3").attr("data-value"))
+    // $("#order_val").on("mouseover", function () {
+    //     console.log("Hello", $("#order_val").attr("data-value"))
+    //     $("#order_val").attr("href", "?order_by=" + $("#order_val").attr("data-value"))
+    // });
+    // $("#order_val1").on("mouseover", function () {
+    //     console.log("Hello", $("#order_val1").attr("data-value"))
+    //     $("#order_val1").attr("href", "?order_by=" + $("#order_val1").attr("data-value"))
+    // });
+    // $("#order_val2").on("mouseover", function () {
+    //     console.log("Hello", $("#order_val2").attr("data-value"))
+    //     $("#order_val2").attr("href", "?order_by=" + $("#order_val2").attr("data-value"))
+    // });
+    // $("#order_val3").on("mouseover", function () {
+    //     console.log("Hello", $("#order_val3").attr("data-value"))
+    //     $("#order_val3").attr("href", "?order_by=" + $("#order_val3").attr("data-value"))
+    // });
+    $('#order_by_menu li a').on('click', function(){
+        let txt = ($(this).data('value'));
+        let pathname = String(window.location.pathname);
+
+        if (pathname.includes("/items/search/")) {
+            let searchParams = new URLSearchParams(window.location.search);
+            let category_string = searchParams.get('category');
+            let search_string = searchParams.get('search_val');
+            pathname = (pathname + "?search_val=" + String(search_string));
+                if (category_string != null) {
+                    pathname = pathname + "&category=" + String(category_string);
+                }
+            $(this).attr("href", pathname + "&order_by=" + txt)
+                }
+
+        else {
+            $(this).attr("href", "?order_by=" + txt)
+        }
+
     });
 
 });
+

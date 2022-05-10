@@ -19,6 +19,7 @@ from django.http import HttpResponse
 
 def index(request):
     items = Items.objects.all().order_by("name")
+
     if "order_by" in request.GET:
         order_by_val = request.GET["order_by"]
         items = items.order_by(order_by_val)
@@ -39,7 +40,7 @@ def search_items(request):
 
     if "search_val" in request.GET:
         search_val = request.GET["search_val"]
-        search_term = search_val.replace("%20", " ")
+        search_term = search_val.replace("+", " ")
         items = Items.objects.filter(name__icontains=search_term)
         current_category_name = ''
         category_id = ''
@@ -48,6 +49,17 @@ def search_items(request):
         category_id = request.GET["category"]
         items = items.filter(category_id=category_id)
         current_category_name = Categories.objects.get(id=category_id).name
+
+    if "order_by" in request.GET:
+        order_by_val = request.GET["order_by"]
+        items = items.order_by(order_by_val)
+
+    # else:
+    #     items = Items.objects.all().order_by("name")
+    #     search_val = ''
+    #     search_term = ''
+    #     current_category_name = ''
+    #     category_id = ''
 
     paginator = Paginator(items, 1)
     page_num = request.GET.get('page', 1)
@@ -60,6 +72,11 @@ def search_items(request):
 
 def get_items_by_category(request, id):
     items = Items.objects.filter(category_id=id).order_by('name').annotate(max_offer = Max('bids__bidamount'))
+
+    if "order_by" in request.GET:
+        order_by_val = request.GET["order_by"]
+        items = items.order_by(order_by_val)
+
     paginator = Paginator(items,9)
     page_num = request.GET.get('page', 1)
     try:
