@@ -1,12 +1,31 @@
-<button class="btn btn-primary" href="#" style="background: var(--bs-green)"><b>ACCEPT BID</b></button> {# SETJA FUNCTIONALITY #}
-<a class = "single-item" href="/items/{{ item.id }}">
-    <div class="card" style="width: 70rem; height: 28rem">
-      <img class="item-preview-image" src="{{ item.image.url }}" width="120" height="200" alt="Product image">
+<a class = "single-item_listings" href="/items/{{ item.id }}" style="width: 70rem; height: 15rem">
+    <div class = "single-item_listings_image" style="width: 15rem; height: 15rem">
+      <img class="item-preview-image" src="{{ item.image.url }}" width="120" height="300" alt="Product image">
+    </div>
       <div class="card-body">
         <h5 class="card-title">{{ item.name }}</h5>
         <p class="card-text">Highest current offer ${{ item.max_offer }}</p>
         <p class="card-text">Listed {{ item.listdate | timesince }} ago</p>
-{#          <p class="card-text"> Sold by: {{ item.seller }} ({{ item.seller.rating }}★)</p>#}
       </div>
-    </div>
+                <div class="accept-button">
+                        <button class="btn btn-primary" href="#" style="background: var(--bs-green)"><b>ACCEPT BID</b></button> {# SETJA FUNCTIONALITY #}
+                </div>
 </a>
+
+
+
+{#<button class="btn btn-primary" href="#" style="background: var(--bs-green)"><b>ACCEPT BID</b></button> {# SETJA FUNCTIONALITY #}
+{#<a class = "single-item" href="/items/{{ item.id }}">#}
+{#    <div class="card" style="width: 70rem; height: 28rem">#}
+{#      <img class="item-preview-image" src="{{ item.image.url }}" width="120" height="200" alt="Product image">#}
+{#      <div class="card-body">#}
+{#        <h5 class="card-title">{{ item.name }}</h5>#}
+{#        <p class="card-text">Highest current offer ${{ item.max_offer }}</p>#}
+{#        <p class="card-text">Listed {{ item.listdate | timesince }} ago</p>#}
+{#          <p class="card-text"> Sold by: {{ item.seller }} ({{ item.seller.rating }}★)</p>#}
+{#      </div>#}
+{#    </div>#}
+{#</a>#}
+
+
+

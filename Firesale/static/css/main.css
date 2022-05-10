@@ -163,6 +163,42 @@ a{
     object-fit: scale-down;
 }
 
-.card-body{
+.single-item_bids > .card-body{
     flex-grow:1;
+}
+
+/*LISTINGS CSS --------------------------------------------------------------*!*/
+
+.single-item_listings {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin: 0 0rem;
+    padding: 0rem;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+    border-radius: 0.5rem;
+    background: #fff;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+.accept-button{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 25%;
+}
+
+.single-item_listings_image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    object-fit: scale-down;
+}
+
+.single-item_listings > .card-body{
+    flex-grow:1;
+
 }
