@@ -25,6 +25,7 @@
     <a class="accept-button" href="{% url 'accept-bid' %}?bid_id={{ bid.id }}">
         <button class="btn btn-primary" href="{% url 'accept-bid' %}?bid_id={{ bid.id }}" style="background-color: #3eb058; border: none; font-size: xx-large"><b>ACCEPT BID</b></button> {# SETJA FUNCTIONALITY #}
               {% endif %}
+        </a>
           {% endfor %}
     {% else %}
     <a class="accept-button" style="background-color: firebrick">

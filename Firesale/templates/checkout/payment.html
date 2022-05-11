@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+    {% if user.is_authenticated %}
+    <form class="form form-horizontal" enctype='multipart/form-data' action="{%  url 'payment' %}" method="post">
+        {%  csrf_token %}
+        <h2>John Wick is in great danger, and he needs your help to wipe all the squads in the Tilted Towers.</h2>
+        {{ payment_form.as_p }}
+        <input type=button class="btn btn-primary pull-left" value="Go Back" style="background: grey; margin: 10px" onClick="javascript:history.go(-1);">
+        <input type="submit" value="Review" class="btn btn-primary pull-left" style="background: green; margin: 10px"/>
+    </form>
+    {% else %}
+    <h1>You must be logged in to checkout</h1>
+    {% endif %}
+{% endblock %}
