@@ -12,7 +12,6 @@ class Bids(models.Model):
     bidder = models.ForeignKey(Profiles, on_delete=models.CASCADE)
     item = models.ForeignKey(Items, on_delete=models.CASCADE)
     biddate = models.DateTimeField(auto_now=True)
-    # bidamount = models.FloatField()
     bidamount = models.DecimalField(
         max_digits=15,
         decimal_places=1,

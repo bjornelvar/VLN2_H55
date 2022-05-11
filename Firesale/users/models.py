@@ -25,3 +25,4 @@ class Review(models.Model):
         validators=[MinValueValidator(Decimal('0.0')), MaxValueValidator(Decimal('5.0'))],
         null=True
     )
+
