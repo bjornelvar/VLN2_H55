@@ -44,8 +44,8 @@ def my_listings(response):
 
 @login_required
 def my_bids(response):
-    context = {'items': Items.objects.filter(bids__bidder=response.user.id).order_by('bids__biddate').annotate(your_offer = Max('bids__bidamount')),
-               'max_bids': Bids.objects.all().annotate(max_offer = Max('bidamount'))} # Reverse order líka?
+    context = {'bids': Bids.objects.filter(bidder_id=response.user.id).order_by('biddate'),
+               'max_bids': Items.objects.all().annotate(max_offer = Max('bids__bidamount'))} # Reverse order líka?
     return render(response,   'users/my_bids.html', context)
 
 @login_required
