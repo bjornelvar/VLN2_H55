@@ -21,13 +21,13 @@ class CreditCardField(forms.CharField):
         'invalid': _(u'The credit card number you entered is invalid.'),
     }
 
-    def clean(self, value):
-        value = value.replace(' ', '').replace('-', '')
-        if self.required and not value:
-            raise forms.util.ValidationError(self.error_messages['required'])
-        if value and not re.match(CREDIT_CARD_RE, value):
-            raise forms.util.ValidationError(self.error_messages['invalid'])
-        return value
+    # def clean(self, value):
+    #     value = value.replace(' ', '').replace('-', '')
+    #     if self.required and not value:
+    #         raise forms.util.ValidationError(self.error_messages['required'])
+    #     if value and not re.match(CREDIT_CARD_RE, value):
+    #         raise forms.util.ValidationError(self.error_messages['invalid'])
+    #     return value
 
 
 class ExpiryDateWidget(forms.MultiWidget):

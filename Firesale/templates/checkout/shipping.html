@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+    {% if user.is_authenticated %}
+    <form class="form form-horizontal" enctype='multipart/form-data' action="{%  url 'shipping' %}" method="post">
+        {%  csrf_token %}
+        <h2>Shipping Information</h2>
+        {{ shipping_form.as_p }}
+{#        <input type=button class="btn btn-primary pull-left" value="Go Back" style="background: grey; margin: 10px" onClick="javascript:history.go(-1);">#}
+        <input type="submit" value="Payment" class="btn btn-primary pull-left" href="{% url 'payment' %}" style="border: none; background: deepskyblue; margin: 10px"/>
+    </form>
+    {% else %}
+    <h1>You must be logged in to checkout</h1>
+    {% endif %}
+{% endblock %}
