@@ -2,11 +2,40 @@
 *** FIRE SALE TO-DO ***
 -----------------------
 
-* Láta nýjan user fá default mynd og addast í profiles töfluna um leið og hann er registered. []
+KRÖFUR
+-------
+
+* Láta nýjan user fá default mynd og addast í profiles töfluna um leið og hann er registered. [X]
+
+* Láta price ekki geta verið negative. [X]
+
+* Settings screen þar sem er hægt að breyta email, password og NOTIFICATION SETTINGS []
+
+* Notification kerfi sem alertar alla bidders þegar item er accepted []
+
+* Klára Checkout og rating []
+
+* Finna út hvað checkout á að gera (búa til Orders töflu líklegast) []
+
+* Gera confirmation síðu í endann á checkout []
+
+
+BUGS
+----
+* Síða crashar þegar ég reyni að bidda logged out []
+	(Láta bid takkann bara birtast if_user_authenticated?)
+
+* Pages sýnir stundum blank númer í miðjunni og crashar ef maður ýtir á það []
+	
+
+EXTRA
+-----
 
 * Auto login eftir register. []
 
-* Láta price ekki geta verið negative. [x]
+* CSS á item details og edit profile []
 
-* Síða crashar þegar ég reyni að bidda logged out []
-	* if bidder_id==null gera eitthvað??
+* Final CSS, litasamsetning, laga staðsetningu á texta osfrv []
+
+* Gera readme þar sem við listum auka kröfur til að tryggja auka stig []
+
