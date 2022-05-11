@@ -40,7 +40,7 @@ EXTRA
 
 * Final CSS, litasamsetning, laga staðsetningu á texta osfrv []
 
-* Setja icons með á "All items" og "Sell an item" í navbar
+* Setja icons með á "All items" og "Sell an item" í navbar []
 
 * Gera readme þar sem við listum auka kröfur til að tryggja auka stig []
 
