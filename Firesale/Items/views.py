@@ -150,7 +150,7 @@ def get_item_by_id(request, id):
     except ObjectDoesNotExist:
         max_bid = None
     context = {'item': item, 'categories': Categories.objects.all().order_by('name'),
-               'items': similar_items, 'form': CreateBidsForm(), 'max_bid': max_bid}
+               'items': similar_items, 'form': CreateBidsForm(), 'max_bid': max_bid, }
 
     if request.method == 'POST':
         try:
