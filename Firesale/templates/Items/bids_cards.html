@@ -1,26 +1,26 @@
-<div class = "single-item_bids" href="/items/{{ item.id }}" style="width: 70rem; height: 15rem">
-    <a class = "single-item_bids_image" href="/items/{{ item.id }}" style="width: 15rem; height: 15rem">
-      {% with item.itemimages_set.all|first as img %}
+<div class = "single-item_bids" href="/items/{{ bid.item.id }}" style="width: 70rem; height: 15rem">
+    <a class = "single-item_bids_image" href="/items/{{ bid.item.id }}" style="width: 15rem; height: 15rem">
+      {% with bid.item.itemimages_set.all|first as img %}
       <img class="item-preview-image" src="{{ img.image.url }}" width="120" height="300" alt="Product image">
       {% endwith %}
     </a>
-      <a class="card-body" href="/items/{{ item.id }}">
-            <h5 class="card-title">{{ item.name }}</h5>
+      <a class="card-body" href="/items/{{ bid.item.id }}">
+            <h5 class="card-title">{{ bid.item.name }}</h5>
                 {% for max_bid in max_bids %}
-                {% if max_bid.item_id == item.id %}
+                {% if max_bid.id == bid.item.id %}
                     <p class="card-text">Highest current offer ${{ max_bid.max_offer }}</p>
-                    {% if item.your_offer < max_bid.max_offer %}
+                    {% if bid.bidamount < max_bid.max_offer %}
                         <p style="color:red; border: 1px solid red;font-weight: bold; margin:0 auto; text-align: center"> You have been outbid for this item! </p>
                     {% endif %}
                 {% endif %}
                 {% endfor %}
-            <p class="card-text">Your current offer ${{ item.your_offer }}</p>
-            <p class="card-text">Listed {{ item.listdate | timesince }} ago</p>
-              <p class="card-text"> Sold by: {{ item.seller }} ({{ item.seller.rating }}★)</p>
+            <p class="card-text">Your current offer ${{ bid.bidamount }}</p>
+            <p class="card-text">Listed {{ bid.item.listdate | timesince }} ago</p>
+              <p class="card-text"> Sold by: {{ bid.item.seller }} ({{ item.seller.rating }}★)</p>
 
       </a>
 
-          <a class="bid-again-button" href="/items/{{ item.id }}">
+          <a class="bid-again-button" href="/items/{{ bid.item.id }}">
               <button class="btn btn-primary" style="background-color: indianred; border: none; font-size: xx-large">Bid Again</button>
           </a>
 </div>

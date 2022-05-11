@@ -2,8 +2,8 @@
 {% block content %}
     <h1>My Bids</h1>
     <div class="items">
-        {% for item in items %}
-            {% include 'items/bids_cards.html' with item=item max_bids=max_bids%}
+        {% for bid in bids %}
+            {% include 'items/bids_cards.html' with bid=bid max_bids=max_bids%}
         {% endfor %}
     </div>
 {% endblock %}

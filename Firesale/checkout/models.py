@@ -5,3 +5,7 @@
 #     cc_number = CardNumberField('card number')
 #     cc_expiry = CardExpiryField('expiration date')
 #     cc_code = SecurityCodeField('security code')
+#
+#
+# class Orders(models.Model):
+#     sender = models.ForeignKey
