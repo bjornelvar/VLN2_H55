@@ -22,6 +22,7 @@ KRÖFUR
 
 BUGS
 ----
+
 * Síða crashar þegar ég reyni að bidda logged out []
 	(Láta bid takkann bara birtast if_user_authenticated?)
 
@@ -35,7 +36,11 @@ EXTRA
 
 * CSS á item details og edit profile []
 
+* Public profile síða fyrir users, þannig þú getur skoðað profile hjá öðrum []
+
 * Final CSS, litasamsetning, laga staðsetningu á texta osfrv []
+
+* Setja icons með á "All items" og "Sell an item" í navbar
 
 * Gera readme þar sem við listum auka kröfur til að tryggja auka stig []
 
