@@ -118,12 +118,15 @@ def create_listing(request):
         if form.is_valid():
             item = form.save(commit=False)
             item.seller_id = request.user.id
-            form_images = CreateListingFormImages(request.POST, request.FILES)
-
-            if form_images.is_valid():
+            if request.FILES:
+                form_images = CreateListingFormImages(request.POST, request.FILES)
+                if form_images.is_valid():
+                    item.save()
+                    for image in request.FILES.getlist('image'):
+                        ItemImages.objects.create(image=image, item_id=item.id)
+            else:
                 item.save()
-                for image in request.FILES.getlist('image'):
-                    ItemImages.objects.create(image=image, item_id=item.id)
+                ItemImages.objects.create(item_id=item.id)
 
                 return redirect('items-index')
 
