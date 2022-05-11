@@ -26,7 +26,6 @@ def index(request):
         order_by_val = request.GET["order_by"]
         items = items.order_by(order_by_val)
 
-
     items = items.annotate(max_offer = Max('bids__bidamount'))
     paginator = Paginator(items,9)
     page_num = request.GET.get('page', 1)
@@ -39,7 +38,6 @@ def index(request):
 
 
 def search_items(request):
-
     if "search_val" in request.GET:
         search_val = request.GET["search_val"]
         search_term = search_val.replace("+", " ")

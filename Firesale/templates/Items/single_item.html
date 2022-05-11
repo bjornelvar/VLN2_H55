@@ -15,11 +15,12 @@
     {% endwith %}
       <div class="card-body">
         <h5 class="card-title">{{ item.name }}</h5>
-        <p class="card-text">Price: ${{ item.price }}</p>
           {% if item.max_offer %}
-        <p class="card-text">Highest current offer: ${{ item.max_offer }}</p>
+        <p class="card-text">Current bid:</p>
+            <p class="card-text" style="font-size:1.25rem; font-weight:bold;">${{ item.max_offer }}</p>
           {% else %}
-          <p class="card-text">No offers have been placed yet</p>
+        <p class="card-text">Starting price:</p>
+              <p class="card-text" style="font-size:1.25rem; font-weight:bold;">${{ item.price }}</p>
           {% endif %}
         <p class="card-text">Listed {{ item.listdate | timesince }} ago</p>
           <p class="card-text"> Sold by: {{ item.seller }} ({{ item.seller.rating }}★)</p>

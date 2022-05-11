@@ -13,12 +13,12 @@
                 {% endfor %}
             <p class="card-text">Your current offer ${{ bid.bidamount }}</p>
             <p class="card-text">Listed {{ bid.item.listdate | timesince }} ago</p>
-              <p class="card-text"> Sold by: {{ bid.item.seller }} ({{ item.seller.rating }}★)</p>
+              <p class="card-text"> Sold by: {{ bid.item.seller }} ({{ bid.item.seller.rating }}★)</p>
 
       </a>
           {% if bid.is_accepted == True %}
               <div class="bid-button-container">
-              <p style="padding: 0.5rem; margin:0 auto; margin-bottom:1rem; color:#4CAF50; border: 1px solid green;font-weight: bold;  text-align: center; border-radius: 1rem;"> Bid Accepted! </p>
+              <p style="padding: 0.5rem; margin:0 auto; margin-bottom:1rem; color:#4CAF50; border: 1px solid #4CAF50;font-weight: bold;  text-align: center; border-radius: 1rem;"> Bid Accepted! </p>
               <form action="{% url 'shipping' %}">
                     <input type="submit" class="checkout-button" value="Checkout" />
             </form>
@@ -28,7 +28,7 @@
               {% for max_bid in max_bids %}
                 {% if max_bid.id == bid.item.id %}
                   {% if bid.bidamount < max_bid.max_offer %}
-                        <p style="padding: 0.5rem; margin:0 auto; margin-bottom:1rem; color:red; border: 1px solid green;font-weight: bold;  text-align: center; border-radius: 1rem;"> You have been outbid for this item! </p>
+                        <p style="padding: 0.5rem; margin:0 auto; margin-bottom:1rem; color:red; border: 1px solid red;font-weight: bold;  text-align: center; border-radius: 1rem;"> You have been outbid! </p>
                   {% endif %}
                 {% endif %}
               {% endfor %}
