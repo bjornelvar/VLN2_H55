@@ -98,8 +98,8 @@ a{
 }
 
 .carousel {
-    max-width: 40em;
-    height: auto;
+    width: 40em;
+    height: 35em;
 }
 
 .carousel img {
