@@ -109,12 +109,12 @@ def send_email_notification(bid):
         if user.id == bid.bidder_id:
             winner_email = user.email
             print("winner_email:", winner_email)
-            send_mail("FireSale: Bid accepted!", f"Congratulations! Your bid of {bid.bidamount} for {rejected_item_name} has been accepted! Go to the MY BIDS section on your FireSale dashboard to complete your order!", settings.EMAIL_HOST_USER, [winner_email], fail_silently=False)
+            send_mail("FireSale: Bid accepted!", f"Congratulations! Your bid of ${bid.bidamount} for {rejected_item_name} has been accepted! Go to the MY BIDS section on your FireSale dashboard to complete your order!", settings.EMAIL_HOST_USER, [winner_email], fail_silently=False)
             print(" Winner Email should be sent")
 
     for rejected_bid in all_bids_on_item:
         if rejected_bid.bidder_id != bid.bidder_id:
             rejected_email = User.objects.filter(id=rejected_bid.bidder_id).first().email
             print("rejected email:", rejected_email)
-            send_mail("FireSale: Bid rejected!", f"Your bid of {rejected_bid.bidamount} for {rejected_item_name} has been rejected! Go to the MY BIDS section on your FireSale dashboard to see the other bids.", settings.EMAIL_HOST_USER, [rejected_email], fail_silently=False)
+            send_mail("FireSale: Bid rejected!", f"Your bid of ${rejected_bid.bidamount} for {rejected_item_name} has been rejected! Go to the MY BIDS section on your FireSale dashboard to see the other bids.", settings.EMAIL_HOST_USER, [rejected_email], fail_silently=False)
             print(" Rejected Email should be sent")
