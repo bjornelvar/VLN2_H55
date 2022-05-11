@@ -112,8 +112,6 @@ def get_items_by_category(request, id):
 
 
 
-
-
 def create_listing(request):
     if request.method == 'POST':
         form = CreateListingForm(request.POST)

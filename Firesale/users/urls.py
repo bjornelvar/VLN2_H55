@@ -11,4 +11,5 @@ urlpatterns = [
     path('profile', views.show_profile, name='profile'),
     path('my_listings', views.my_listings, name='my-listings'),
     path('my_bids', views.my_bids, name='my-bids'),
+    path('', views.accept_bid, name='accept-bid')
 ]

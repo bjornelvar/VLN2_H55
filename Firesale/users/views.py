@@ -1,5 +1,5 @@
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.forms import UserCreationForm
 from users.models import Profiles
 from users.forms.profile_forms import *
@@ -69,6 +69,12 @@ def profile(request):
         'imageform': UploadImage(instance=profile),     # UploadImage fallið er í users>forms>profile_forms.py
         'edituserform': EditUserForm(instance=user),
     })
+
+def accept_bid(request):
+    bid = get_object_or_404(Bids, pk=request.GET.get('bid_id'))
+    bid.is_accepted = True
+    bid.save()
+    return redirect('my-listings')
 
 def show_profile(request):
     return render(request, 'users/profile.html')

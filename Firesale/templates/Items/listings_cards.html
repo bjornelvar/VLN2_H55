@@ -10,11 +10,24 @@
     </a>
       <a class="card-body" href="/items/{{ item.id }}">
         <h5 class="card-title">{{ item.name }}</h5>
+      {% if item.max_offer %}
         <p class="card-text">Highest current offer ${{ item.max_offer }}</p>
+      {% else %}
+        <p class="card-text">No offers have been made</p>
+      {% endif %}
         <p class="card-text">Listed {{ item.listdate | timesince }} ago</p>
       </a>
-    <a class="accept-button" href="{% url 'create_listing' %}">
-        <button class="btn btn-primary" href="{% url 'create_listing' %}" style="background-color: #3eb058; border: none; font-size: xx-large"><b>ACCEPT BID</b></button> {# SETJA FUNCTIONALITY #}
+    {% if item.max_offer %}
+        {% for bid in item.bids_set.all %}
+              {% if bid.bidamount == item.max_offer %}
+    <a class="accept-button" href="{% url 'accept-bid' %}?bid_id={{ bid.id }}">
+        <button class="btn btn-primary" href="{% url 'accept-bid' %}?bid_id={{ bid.id }}" style="background-color: #3eb058; border: none; font-size: xx-large"><b>ACCEPT BID</b></button> {# SETJA FUNCTIONALITY #}
+              {% endif %}
+          {% endfor %}
+    {% else %}
+    <a class="accept-button" style="background-color: firebrick">
+        <button class="btn btn-primary" disabled style="background-color: firebrick; border: none; font-size: xx-large"><b>NO BIDS</b></button>
+    {% endif %}
     </a>
 </div>
 
