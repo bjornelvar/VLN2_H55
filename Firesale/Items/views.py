@@ -18,8 +18,9 @@ from django.http import HttpResponse
 
 
 def index(request):
-    items = Items.objects.filter(has_accepted_bid=False).order_by("name")
-
+    # items = Items.objects.filter(has_accepted_bid=False).order_by("name")
+    exlude_items = Items.objects.filter(bids__is_accepted=True).values('id')
+    items = Items.objects.exclude(id__in=exlude_items).order_by("name")
 
     if "order_by" in request.GET:
         order_by_val = request.GET["order_by"]
