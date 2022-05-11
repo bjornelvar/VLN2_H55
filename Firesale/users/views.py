@@ -2,6 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.forms import UserCreationForm
 from users.models import Profiles
+from django.contrib import messages
 from users.forms.profile_forms import *
 from items.models import Items
 from bids.models import Bids
@@ -52,17 +53,26 @@ def profile(request):
         form2 = EditUserForm(instance=user, data=request.POST)
 
         if 'image' == btn:
-            form = UploadImage(request.POST, request.FILES, instance=profile)
+            if request.FILES:
+                form = UploadImage(request.POST, request.FILES, instance=profile)
+                if form.is_valid():
+                    image = form.save(commit=False)
+                    image.user = request.user
+                    image.save()
+                    return redirect('profile')
+            else:
+                messages.error(request, 'No image attached')
 
-        if form1.is_valid():
-            profile = form1.save(commit=False)
-            profile.user = request.user
-            profile.save()
+        else:
+            if form1.is_valid():
+                profile = form1.save(commit=False)
+                profile.user = request.user
+                profile.save()
 
-        if form2.is_valid():
-            user = form2.save(commit=False)
-            user.save()
-            return redirect('profile')
+            if form2.is_valid():
+                user = form2.save(commit=False)
+                user.save()
+                return redirect('profile')
 
     return render(request, 'users/profile_edit.html', {
         'bioform': ProfileForm(instance=profile),      # ProfileForm fallið er í users>forms>profile_forms.py
