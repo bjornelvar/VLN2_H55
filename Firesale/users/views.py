@@ -1,12 +1,16 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
 from users.models import Profiles
 from django.contrib import messages
 from users.forms.profile_forms import *
 from items.models import Items
 from bids.models import Bids
 from django.db.models import Max
+from django.core.mail import send_mail
+from django.conf import settings
+
 
 
 # def register(request):
@@ -83,8 +87,23 @@ def profile(request):
 def accept_bid(request):
     bid = get_object_or_404(Bids, pk=request.GET.get('bid_id'))
     bid.is_accepted = True
+    send_email_notification(bid)
     bid.save()
+
     return redirect('my-listings')
 
 def show_profile(request):
     return render(request, 'users/profile.html')
+
+
+def send_email_notification(bid):
+    all_bids_on_item = Bids.objects.filter(item_id=bid.item_id)
+    for user in User.objects.all():
+        if user.id == bid.bidder:
+            winner_email = user.email
+            send_mail("FireSale: Bid accepted!", f"Congratulations! Your bid of {bid.bidamount} for {bid.item_id} has been accepted! Go to the MY BIDS section on your FireSale dashboard to complete the purchase!", settings.EMAIL_HOST_USER, winner_email, fail_silently=False)
+
+    for rejected_bid in all_bids_on_item:
+        if rejected_bid.bidder != bid.bidder:
+            rejected_email = User.objects.filter(id=rejected_bid.bidder).first().email
+            send_mail("FireSale: Bid rejected!", f"Your bid of {rejected_bid.bidamount} for {rejected_bid.item_id} has been rejected! Go to the MY BIDS section on your FireSale dashboard to see the other bids.", settings.EMAIL_HOST_USER, rejected_email, fail_silently=False)
