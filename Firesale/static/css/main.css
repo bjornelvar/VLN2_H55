@@ -208,12 +208,36 @@ a{
     transition: all 0.3s ease-in-out;
 }
 
-.bid-again-button{
+.bid-button-container{
     display: flex;
-    align-items: center;
+    flex-grow:2;
+    flex-direction: column;
     justify-content: center;
-    width: 25%;
-    background-color: indianred;
+    align-items: center;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease-in-out;
+}
+
+.checkout-button{
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+}
+
+.bid-again-button{
+  background-color: #4ac1f7; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
 }
 
 .single-item_bids_image {
@@ -252,13 +276,6 @@ a{
     background-color: #3eb058;
 }
 
-.checkout-button{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 25%;
-    background-color: lightskyblue;
-}
 
 .single-item_listings_image {
     display: flex;

@@ -22,5 +22,9 @@ class Bids(models.Model):
     class Meta:
         unique_together = (('bidder', 'item'),)
 
+    def __str__(self):
+        return f"{self.bidder} - {self.item} - {self.bidamount}"
+
+
 
 
