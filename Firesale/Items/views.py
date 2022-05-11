@@ -129,7 +129,7 @@ def create_listing(request):
                 item.save()
                 ItemImages.objects.create(item_id=item.id)
 
-                return redirect('items-index')
+                return redirect('my-listings')
 
     else:
         form = CreateListingForm()
@@ -158,9 +158,14 @@ def get_item_by_id(request, id):
             form = CreateBidsForm(request.POST, instance=bid)   # If exists adds an instance to the form
         except ObjectDoesNotExist:
             form = CreateBidsForm(request.POST)
-
         if form.is_valid() and float(request.POST.get('bidamount')) >= item.price and item.seller_id != request.user.id:    # Float? Comparea max bid líka.
-            if max_bid.bidamount is None or float(request.POST.get('bidamount')) > max_bid.bidamount:
+            if max_bid is None:
+                new_bid = form.save(commit=False)
+                new_bid.bidder_id = request.user.id
+                new_bid.item_id = id
+                messages.success(request, "Bid placed successfully")
+                new_bid.save()
+            elif float(request.POST.get('bidamount')) > max_bid.bidamount:
                 new_bid = form.save(commit=False)
                 new_bid.bidder_id = request.user.id
                 new_bid.item_id = id
