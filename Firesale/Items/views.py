@@ -124,6 +124,7 @@ def create_listing(request):
                     item.save()
                     for image in request.FILES.getlist('image'):
                         ItemImages.objects.create(image=image, item_id=item.id)
+                        return redirect('my-listings')
             else:
                 item.save()
                 ItemImages.objects.create(item_id=item.id)

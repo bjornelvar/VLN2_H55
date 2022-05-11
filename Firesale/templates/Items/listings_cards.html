@@ -10,8 +10,10 @@
     </a>
       <a class="card-body" href="/items/{{ item.id }}">
         <h5 class="card-title">{{ item.name }}</h5>
-      {% if item.max_offer %}
+      {% if bid.is_accepted == True %}
         <p class="card-text">Highest current offer ${{ item.max_offer }}</p>
+      {% elif item.max_offer %}
+        <p class="card-text">Sold for ${{ item.max_offer }}</p>
       {% else %}
         <p class="card-text">No offers have been made</p>
       {% endif %}
@@ -19,7 +21,7 @@
       </a>
     {% if item.max_offer %}
         {% for bid in item.bids_set.all %}
-              {% if bid.bidamount == item.max_offer %}
+              {% if bid.bidamount == item.max_offer and bid.is_accepted == False %}
     <a class="accept-button" href="{% url 'accept-bid' %}?bid_id={{ bid.id }}">
         <button class="btn btn-primary" href="{% url 'accept-bid' %}?bid_id={{ bid.id }}" style="background-color: #3eb058; border: none; font-size: xx-large"><b>ACCEPT BID</b></button> {# SETJA FUNCTIONALITY #}
               {% endif %}
