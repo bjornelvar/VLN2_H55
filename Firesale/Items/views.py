@@ -18,7 +18,8 @@ from django.http import HttpResponse
 
 
 def index(request):
-    items = Items.objects.all().order_by("name")
+    items = Items.objects.filter(has_accepted_bid=False).order_by("name")
+
 
     if "order_by" in request.GET:
         order_by_val = request.GET["order_by"]
@@ -41,7 +42,7 @@ def search_items(request):
     if "search_val" in request.GET:
         search_val = request.GET["search_val"]
         search_term = search_val.replace("+", " ")
-        items = Items.objects.filter(name__icontains=search_term)
+        items = Items.objects.filter(name__icontains=search_term, has_accepted_bid=False)
         current_category_name = ''
         category_id = ''
 
@@ -71,7 +72,7 @@ def search_items(request):
 
 
 def get_items_by_category(request, id):
-    items = Items.objects.filter(category_id=id).order_by('name').annotate(max_offer = Max('bids__bidamount'))
+    items = Items.objects.filter(category_id=id, has_accepted_bid=False).order_by('name').annotate(max_offer = Max('bids__bidamount'))
 
     if "order_by" in request.GET:
         order_by_val = request.GET["order_by"]
@@ -142,7 +143,7 @@ def create_listing(request):
 
 def get_item_by_id(request, id):
     item = get_object_or_404(Items, pk=id)
-    all_items = Items.objects.all()
+    all_items = Items.objects.filter(has_accepted_bid=False)
     all_bids = Bids.objects.all()
     similar_items = get_similar_items(item, all_items)
     try:

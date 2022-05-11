@@ -88,16 +88,19 @@ def profile(request):
 def accept_bid(request):
     bid = get_object_or_404(Bids, pk=request.GET.get('bid_id'))
     bid.is_accepted = True
-    send_email_notification(bid)
     bid.save()
+    item = get_object_or_404(Items, pk=bid.item_id)
+    item.has_accepted_bid = True
+    item.save()
+    send_email_notification(bid)
 
     return redirect('my-listings')
 
 def show_profile(request):
     return render(request, 'users/profile.html')
 
-
 def send_email_notification(bid):
+    # Works badly on @ru.is mails. Probably due to some type of filtering on RU's mail server
     all_bids_on_item = Bids.objects.filter(item_id=bid.item_id)
     print("bid_id: ", bid.id)
     print("bidder_id: ", bid.bidder_id)
@@ -106,11 +109,10 @@ def send_email_notification(bid):
         if user.id == bid.bidder_id:
             winner_email = user.email
             print("winner_email:", winner_email)
-            send_mail("FireSale: Bid accepted!", f"Congratulations! Your bid of {bid.bidamount} for {rejected_item_name} has been accepted! Go to the MY BIDS section on your FireSale dashboard to complete the purchase!", settings.EMAIL_HOST_USER, [winner_email], fail_silently=False)
+            send_mail("FireSale: Bid accepted!", f"Congratulations! Your bid of {bid.bidamount} for {rejected_item_name} has been accepted! Go to the MY BIDS section on your FireSale dashboard to complete your order!", settings.EMAIL_HOST_USER, [winner_email], fail_silently=False)
             print(" Winner Email should be sent")
 
     for rejected_bid in all_bids_on_item:
-        # rejected_emails = []
         if rejected_bid.bidder_id != bid.bidder_id:
             rejected_email = User.objects.filter(id=rejected_bid.bidder_id).first().email
             print("rejected email:", rejected_email)

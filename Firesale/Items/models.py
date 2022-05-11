@@ -34,6 +34,7 @@ class Items(models.Model):
         validators=[MinValueValidator(Decimal('0.1'))]
     )
     seller = models.ForeignKey(Profiles, on_delete=models.CASCADE)
+    has_accepted_bid = models.BooleanField(default=False)
     sold = models.BooleanField(default=False)
 
     def __str__(self):
