@@ -252,6 +252,14 @@ a{
     background-color: #3eb058;
 }
 
+.checkout-button{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 25%;
+    background-color: lightskyblue;
+}
+
 .single-item_listings_image {
     display: flex;
     align-items: center;
