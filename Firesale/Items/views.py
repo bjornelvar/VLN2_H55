@@ -24,6 +24,8 @@ def index(request):
     if "order_by" in request.GET:
         order_by_val = request.GET["order_by"]
         items = items.order_by(order_by_val)
+    else:
+        order_by_val = ''
 
     items = items.annotate(max_offer = Max('bids__bidamount'))
     paginator = Paginator(items,9)
@@ -32,7 +34,7 @@ def index(request):
         page = paginator.get_page(page_num)
     except EmptyPage or PageNotAnInteger:
         page = paginator.page(1)
-    context = {'items': page, 'categories': Categories.objects.all().order_by('name') }
+    context = {'location': "index", 'order_by_val': order_by_val, 'items': page, 'categories': Categories.objects.all().order_by('name') }
     return render(request,   'items/index.html', context)
 
 
@@ -53,12 +55,12 @@ def search_items(request):
         order_by_val = request.GET["order_by"]
         items = items.order_by(order_by_val)
 
-    items = items.annotate(max_offer=Max('bids__bidamount'))
+    # items = items.annotate(max_offer=Max('bids__bidamount'))
 
-    paginator = Paginator(items, 9)
+    paginator = Paginator(items, 1)
     page_num = request.GET.get('page', 1)
     page = paginator.get_page(page_num)
-    context = {'search_val': search_val, 'search_term': search_term, 'items': page,
+    context = {'location': "search", 'search_val': search_val, 'search_term': search_term, 'items': page,
                'categories': Categories.objects.all().order_by('name'), 'current_category':category_id, 'current_category_name': current_category_name}
     return render(request, 'items/search_items.html', context)
 
@@ -71,13 +73,13 @@ def get_items_by_category(request, id):
         order_by_val = request.GET["order_by"]
         items = items.order_by(order_by_val)
 
-    paginator = Paginator(items,9)
+    paginator = Paginator(items,1)
     page_num = request.GET.get('page', 1)
     try:
         page = paginator.get_page(page_num)
     except EmptyPage or PageNotAnInteger:
         page = paginator.page(1)
-    context = {'items': page, 'categories': Categories.objects.all().order_by('name'), 'current_category': id }
+    context = {'location': "category", 'items': page, 'categories': Categories.objects.all().order_by('name'), 'current_category': id }
     return render(request,   'items/index-by-category.html', context)
 
 
