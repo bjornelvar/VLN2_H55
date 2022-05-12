@@ -10,6 +10,7 @@ from django.db.models import Max
 from django.core.mail import send_mail
 from django.conf import settings
 from django.contrib.auth.models import User
+from checkout.models import Orders
 
 
 
@@ -41,6 +42,11 @@ def register(request):
 def my_listings(response):
     context = {'bids':Bids.objects.all(), 'items': Items.objects.filter(seller_id=response.user.id).order_by('listdate').annotate(max_offer = Max('bids__bidamount'))} # Reverse order líka?
     return render(response,   'users/my_listings.html', context)
+
+@login_required
+def my_orders(request):
+    context = {'orders' : Orders.objects.filter(receiver_id=request.user.id)}
+    return render(request,   'users/my_orders.html', context)
 
 @login_required
 def my_bids(response):

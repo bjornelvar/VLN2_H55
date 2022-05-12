@@ -14,5 +14,6 @@ urlpatterns = [
     path('', views.accept_bid, name='accept-bid'),
     path('my_listings/edit_listing/<int:id>', views.edit_listing, name='edit-listing'),
     path('my_listings/delete_item/<int:id>', views.delete_item, name='delete-item'),
-    path('profile/<int:id>', views.show_profile, name='user-profile')
+    path('profile/<int:id>', views.show_profile, name='user-profile'),
+    path('my_orders', views.my_orders, name='my-orders'),
 ]

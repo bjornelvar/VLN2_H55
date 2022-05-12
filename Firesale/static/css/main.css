@@ -411,6 +411,10 @@ background: linear-gradient(to right bottom, rgba(246, 211, 101, 1), rgba(253, 1
     height: 200px;
 }
 
+.seller-link {
+    color: #0ba6ff;
+}
+
 /*@media (min-width:360px) and (max-width:640px) {*/
 /*    .pro-box-section .pro-box img {*/
 /*        height: auto;*/
