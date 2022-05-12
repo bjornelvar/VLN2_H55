@@ -221,15 +221,15 @@ a{
     align-items: center;
     padding: 0.5rem;
     border-radius: 0.5rem;
-    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+    /*box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);*/
     transition: all 0.3s ease-in-out;
     background: #f6d365;
 
 
     /* Chrome 10-25, Safari 5.1-6 */
-    background: -webkit-linear-gradient(to right bottom, rgba(246, 211, 101, 1), rgba(253, 160, 133, 1));
+    background: -webkit-linear-gradient(to right,#FFFFFF , #FBBF77);
     /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-    background: linear-gradient(to right bottom, rgba(246, 211, 101, 1), rgba(253, 160, 133, 1));
+    background: linear-gradient(to right,#FFFFFF , #FBBF77);
 
 }
 

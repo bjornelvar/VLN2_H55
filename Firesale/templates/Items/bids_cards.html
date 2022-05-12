@@ -6,14 +6,18 @@
     </a>
       <a class="card-body" href="/items/{{ bid.item.id }}">
             <h5 class="card-title">{{ bid.item.name }}</h5>
+                <br>
                 {% for max_bid in max_bids %}
                 {% if max_bid.id == bid.item.id %}
-                    <p class="card-text">Highest current offer ${{ max_bid.max_offer }}</p>
+                    <p class="card-text" >Highest current offer:</p>
+                    <h4 style="line-height:2px;">${{ max_bid.max_offer }}</h4>
+                    <br>
                 {% endif %}
                 {% endfor %}
-            <p class="card-text">Your current offer ${{ bid.bidamount }}</p>
-            <p class="card-text">Listed {{ bid.item.listdate | timesince }} ago</p>
-              <p class="card-text"> Sold by: {{ bid.item.seller }} ({{ bid.item.seller.rating }}★)</p>
+          <p class="card-text" >Your current offer:</p>
+          <h4 style="line-height:1px;">${{ bid.bidamount }}</h4>
+            <p class="card-text" style="color:grey; line-height:5px;">Listed {{ bid.item.listdate | timesince }} ago</p>
+              <p class="card-text" style="color:grey; line-height:5px;"> Sold by: {{ bid.item.seller }} ({{ bid.item.seller.rating }}★)</p>
 
       </a>
           {% if bid.is_accepted == True %}
@@ -29,6 +33,9 @@
                 {% if max_bid.id == bid.item.id %}
                   {% if bid.bidamount < max_bid.max_offer %}
                         <p style="padding: 0.5rem; margin:0 auto; margin-bottom:1rem; color:red; border: 1px solid red;font-weight: bold;  text-align: center; border-radius: 1rem;"> You have been outbid! </p>
+                  {% elif bid.bidamount >= max_bid.max_offer %}
+                      <img src="/static/images/crown.png" class="img-fluid" alt="" width="50">
+                      <p style="padding: 0.5rem; margin:0 auto; margin-bottom:1rem; color:black; font-weight: bold;  text-align: center; border-radius: 1rem;"> You are the highest bidder! </p>
                   {% endif %}
                 {% endif %}
               {% endfor %}

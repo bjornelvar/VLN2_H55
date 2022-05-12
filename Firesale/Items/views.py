@@ -53,12 +53,7 @@ def search_items(request):
         order_by_val = request.GET["order_by"]
         items = items.order_by(order_by_val)
 
-    # else:
-    #     items = Items.objects.all().order_by("name")
-    #     search_val = ''
-    #     search_term = ''
-    #     current_category_name = ''
-    #     category_id = ''
+    items = items.annotate(max_offer=Max('bids__bidamount'))
 
     paginator = Paginator(items, 9)
     page_num = request.GET.get('page', 1)

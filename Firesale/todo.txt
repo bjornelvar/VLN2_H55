@@ -13,27 +13,22 @@ KRÖFUR
 
 * Settings screen þar sem er hægt að breyta email, password og NOTIFICATION SETTINGS []
 
-* Notification kerfi sem alertar alla bidders þegar item er accepted []
+* Notification kerfi sem alertar alla bidders þegar item er accepted [X]
 
 * Klára Checkout og rating []
 
-* Finna út hvað checkout á að gera (búa til Orders töflu líklegast) []
+* Finna út hvað checkout á að gera (búa til Orders töflu líklegast) [X]
 
 * Gera confirmation síðu í endann á checkout []
 
-* Láta checkout takka birtast ef offer is accepted og userid = bidderid []
+* Láta checkout takka birtast ef offer is accepted og userid = bidderid [X]
 
-* Láta accept bid takka hverfa og sýna Sold For texta þegar item is accepted []
+* Láta accept bid takka hverfa og sýna Sold For texta þegar item is sold []
 
-* Getur ennþá biddað á hlut þó svo að það sé búið að accepta bid []
+* Getur ennþá biddað á hlut þó svo að það sé búið að accepta bid [] (löguðum við þetta ekki bjössi?)
 
 * Bid must be higher than start price þegar start price er 0 og það er bid á vörunni []
 
-* requirements.txt
-    * pip install django-formtools
-    * pip install django-countries
-    * pip install django-credit-cards
-    * pip install Levenshtein
 
 
 BUGS
@@ -59,6 +54,8 @@ EXTRA
 * Final CSS, litasamsetning, laga staðsetningu á texta osfrv []
 
 * Setja icons með á "All items" og "Sell an item" í navbar []
+
+* Setja filter á items "Include my listings"
 
 * Gera readme þar sem við listum auka kröfur til að tryggja auka stig []
 
