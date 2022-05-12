@@ -42,7 +42,7 @@ BUGS
 EXTRA
 -----
 
-* Láta search virka með enter
+* Láta search virka með enter []
 
 * Auto login eftir register. []
 

@@ -11,9 +11,8 @@ $(document).ready(function() {
         }
     });
 
-
     // HOME SEARCH BAR FUNCTION
-        $("#search_term_home").on("input", function () {
+    $("#search_term_home").on("input", function () {
         console.log("test")
         $("#search_button_home").attr("href", "/items/search/?search_val=" + $("#search_term_home").val().replace(/ /g, "+"))
     });
@@ -21,6 +20,19 @@ $(document).ready(function() {
         if ($("#category-select_home").val() != "") {
             $("#search_button_home").attr("href", "/items/search/?search_val=" + $("#search_term_home").val().replace(/ /g, "+") + "&category=" + $("#category-select_home").val())
         }
+    });
+
+    $("#search_term").keypress(function (e) {
+        if (e.which == 13) {
+            $("#search_button").get(0).click();
+            }
+    });
+
+    $("#search_term_home").keypress(function (e) {
+        if (e.which == 13) {
+            $("#search_button_home").get(0).click();
+
+            }
     });
 
 

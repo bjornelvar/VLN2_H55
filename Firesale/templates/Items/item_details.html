@@ -44,7 +44,7 @@
     <p>{{ item.location }}</p>
     <p><b>Seller:</b> {{ item.seller }} ({{ item.seller.rating }}★)</p>
     {% include 'messages.html' %}
-    {% if not item.has_accepted_bid %}
+    {% if not item.has_accepted_bid and user.is_authenticated%}
     <form class="form form-horizontal" method="post">
         {% csrf_token %}
         {{ form }}  {# bids>forms>bids_forms.py #}

@@ -13,7 +13,7 @@ class CreateListingForm(ModelForm):
         CATEGORY_CHOICES = [('Books', 'Books'), ('Transportation', 'Transportation'),
                             ('Electronics', 'Electronics'), ('Clothing', 'Clothing'), ('Furniture', 'Furniture'),
                             ('Sports', 'Sports'), ('Home', 'Home'), ('Other', 'Other')]
-        exclude = ['id', 'seller', 'sold']
+        exclude = ['id', 'seller', 'sold', 'has_accepted_bid']
         widgets = {
             'name': widgets.TextInput(attrs={'class': 'form-control'}),
             'condition': widgets.Select(choices=CONDITION_CHOICES, attrs={'class': 'form-control'}),
