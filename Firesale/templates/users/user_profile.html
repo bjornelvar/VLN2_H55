@@ -30,12 +30,14 @@
       </div>
     </div>
   </div>
-        <div class="scrollable_items">
-              {% for item in some_user.profiles.items_set.all %}
-            {% include 'items/single_item.html' with item=item%}
-              {% endfor %}
-        </div>
-
+<div class="user_items_container">
+    <h3 style="margin-left: 1rem">{{ some_user }}'s listings:</h3>
+    <div class="scrollable_items">
+          {% for item in some_user.profiles.items_set.all %}
+        {% include 'items/single_item.html' with item=item%}
+          {% endfor %}
+    </div>
+</div>
 
 </section>
 {% endblock %}
