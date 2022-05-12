@@ -1,15 +1,19 @@
 from django.db import models
+from django_countries.fields import CountryField
+
 from users.models import Profiles
 from items.models import Items
 
 
 class ShippingInformation(models.Model):
     user = models.OneToOneField(Profiles, on_delete=models.CASCADE, primary_key=True)
-    country = models.CharField(max_length=50)
+    first_name = models.CharField(max_length=50)
+    last_name = models.CharField(max_length=50)
+    country = CountryField(blank_label='(Select country)')
     zip = models.CharField(max_length=10)
     city = models.CharField(max_length=50)
-    state_province_region = models.CharField(max_length=100, null=True)
-    address = models.CharField(max_length=150)
+    address_1 = models.CharField(max_length=150)
+    address_2 = models.CharField(max_length=150, blank=True)
     phone = models.CharField(max_length=15)
 
 

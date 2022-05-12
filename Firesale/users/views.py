@@ -120,3 +120,8 @@ def send_email_notification(bid):
             print("rejected email:", rejected_email)
             send_mail("FireSale: Bid rejected!", f"Your bid of ${rejected_bid.bidamount} for {rejected_item_name} has been rejected! Go to the MY BIDS section on your FireSale dashboard to see the other bids.", settings.EMAIL_HOST_USER, [rejected_email], fail_silently=False)
             print(" Rejected Email should be sent")
+
+
+def edit_listing(request, id):
+    item = get_object_or_404(Items, pk=id)
+    
