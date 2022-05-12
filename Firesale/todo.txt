@@ -29,6 +29,12 @@ KRÖFUR
 
 * Bid must be higher than start price þegar start price er 0 og það er bid á vörunni []
 
+* requirements.txt
+    * pip install django-formtools
+    * pip install django-countries
+    * pip install django-credit-cards
+    * pip install Levenshtein
+
 
 BUGS
 ----
