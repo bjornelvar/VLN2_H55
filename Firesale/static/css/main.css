@@ -51,7 +51,7 @@ a{
 
 }
 
-.items a {
+.single-item {
     /*width: calc(25% - 3rem);*/
     margin: 0 0rem;
     padding: 0rem;
