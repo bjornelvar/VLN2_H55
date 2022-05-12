@@ -3,7 +3,11 @@
     <h1>My Bids</h1>
     <div class="items">
         {% for bid in bids %}
-            {% include 'items/bids_cards.html' with bid=bid max_bids=max_bids%}
+            {% if bid.item.has_accepted_bid == False %}
+                {% include 'items/bids_cards.html' with bid=bid max_bids=max_bids%}
+            {% elif bid.is_accepted %}
+                {% include 'items/bids_cards.html' with bid=bid max_bids=max_bids%}
+            {% endif %}
         {% endfor %}
     </div>
 {% endblock %}
