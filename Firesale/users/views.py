@@ -2,6 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.forms import UserCreationForm
 from users.models import Profiles
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib import messages
 from users.forms.profile_forms import *
 from items.models import Items
@@ -39,9 +40,30 @@ def register(request):
     return render(request, 'users/register.html', context)
 
 @login_required
-def my_listings(response):
-    context = {'bids':Bids.objects.all(), 'items': Items.objects.filter(seller_id=response.user.id).order_by('listdate').annotate(max_offer = Max('bids__bidamount'))} # Reverse order líka?
-    return render(response,   'users/my_listings.html', context)
+def my_listings(request):
+    sold_filter = None
+    if "sold" in request.GET:
+        sold = request.GET["sold"]
+        if sold == "false":
+            items = Items.objects.filter(seller_id=request.user.id).order_by('listdate') \
+                .annotate(max_offer=Max('bids__bidamount')).filter(sold=False)
+            sold_filter = False
+        else:
+            items = Items.objects.filter(seller_id=request.user.id).order_by('listdate') \
+                .annotate(max_offer=Max('bids__bidamount'))
+            sold_filter = True
+    else:
+        items = Items.objects.filter(seller_id=request.user.id).order_by('listdate') \
+            .annotate(max_offer=Max('bids__bidamount'))
+
+    paginator = Paginator(items,5)
+    page_num = request.GET.get('page', 1)
+    try:
+        page = paginator.get_page(page_num)
+    except EmptyPage or PageNotAnInteger:
+        page = paginator.page(1)
+    context = {'bids':Bids.objects.all(), 'items': page, 'sold_filter': sold_filter} # Reverse order líka?
+    return render(request,   'users/my_listings.html', context)
 
 @login_required
 def my_orders(request):

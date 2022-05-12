@@ -9,7 +9,7 @@ urlpatterns = [
     path('logout', LogoutView.as_view(next_page='login'), name='logout'),
     path('profile_edit', views.edit_profile, name='profile-edit'),
     path('profile', views.show_profile, name='profile'),
-    path('my_listings', views.my_listings, name='my-listings'),
+    path('my_listings/', views.my_listings, name='my-listings'),
     path('my_bids', views.my_bids, name='my-bids'),
     path('', views.accept_bid, name='accept-bid'),
     path('my_listings/edit_listing/<int:id>', views.edit_listing, name='edit-listing'),

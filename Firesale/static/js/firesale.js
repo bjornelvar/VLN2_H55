@@ -58,7 +58,23 @@ $(document).ready(function() {
     });
 
 
-});
+    $("#sold-filter").on("click", function () {
+    let pathname = String(window.location.pathname);
+    let params = new URLSearchParams(window.location.search);
+    let pageString = params.get('page');
+    if (pageString == null) {
+        pageString = 1;
+    }
+    if($('#sold-filter').prop('checked')) {
+        window.location.replace(pathname + '?page=' + pageString);
+    }
+    else {
+        window.location.replace(pathname + '?page=' + pageString + "&sold=false");
+    }
+
+    });
+
+
 
 function scrollOnClick(direction){
     console.log("you clicked"+direction)
@@ -70,7 +86,7 @@ function scrollOnClick(direction){
     }
 }
 
-
+});
 
 
 
