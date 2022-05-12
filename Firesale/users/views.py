@@ -71,11 +71,21 @@ def my_orders(request):
     return render(request,   'users/my_orders.html', context)
 
 @login_required
-def my_bids(response):
-    user_bids = Bids.objects.filter(bidder_id=response.user.id).order_by('biddate')
-    context = {'bids': Bids.objects.filter(bidder_id=response.user.id).order_by('biddate'),
-               'max_bids': Items.objects.all().annotate(max_offer = Max('bids__bidamount'))} # Reverse order líka?
-    return render(response,   'users/my_bids.html', context)
+def my_bids(request):
+    bids = Bids.objects.filter(bidder_id=request.user.id).order_by('biddate')
+    bids1 = bids.filter(item__has_accepted_bid=False)
+    bids2 = bids.filter(is_accepted=True)
+    bids = bids1 | bids2
+    paginator = Paginator(bids,5)
+    page_num = request.GET.get('page', 1)
+    try:
+        page = paginator.get_page(page_num)
+    except EmptyPage or PageNotAnInteger:
+        page = paginator.page(1)
+
+    # user_bids = Bids.objects.filter(bidder_id=request.user.id).order_by('biddate')
+    context = {'bids': page, 'max_bids': Items.objects.all().annotate(max_offer = Max('bids__bidamount'))} # Reverse order líka?
+    return render(request,   'users/my_bids.html', context)
 
 @login_required
 def edit_profile(request):

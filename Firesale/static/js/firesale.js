@@ -86,7 +86,7 @@ function scrollOnClick(direction){
     }
 }
 
-});
+
     $('#slider-left').on('click', function (){
         console.log("clicked")
         document.getElementById('scrollable_container').scrollLeft -= 400;
