@@ -50,7 +50,7 @@ def my_bids(response):
     return render(response,   'users/my_bids.html', context)
 
 @login_required
-def profile(request):
+def edit_profile(request):
     profile = Profiles.objects.filter(user=request.user).first()
     user = User.objects.filter(id=request.user.id).first()
     if request.method == 'POST':
@@ -98,7 +98,11 @@ def accept_bid(request):
 
     return redirect('my-listings')
 
-def show_profile(request):
+def show_profile(request, id=None):
+    if id:
+        return render(request, 'users/user_profile.html', {
+            'some_user': get_object_or_404(User, pk=id)
+        })
     return render(request, 'users/profile.html')
 
 def send_email_notification(bid):

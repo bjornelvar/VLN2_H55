@@ -37,7 +37,11 @@
                             <p class="tag-section"><strong>Listed:</strong><span> {{ item.listdate | timesince }} ago</span></p>
                         </div>
                         <div class="col-lg-12">
-                            <p class="tag-section"><strong>Sold by:</strong><span> {{ item.seller }} ({{ item.seller.rating }} ★) </span></p>
+                            {% if user.id == item.seller_id %}
+                            <p class="tag-section"><strong>Sold by:</strong><span> <a href="{% url 'profile' %}">{{ item.seller }}</a> ({{ item.seller.rating }} ★) </span></p>
+                            {% else %}
+                            <p class="tag-section"><strong>Sold by:</strong><span> <a href="{% url 'user-profile' id=item.seller_id %}">{{ item.seller }}</a> ({{ item.seller.rating }} ★) </span></p>
+                            {% endif %}
                         </div>
                         <div class="col-lg-12">
     {% if user.id == item.seller_id %}
