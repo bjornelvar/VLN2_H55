@@ -44,11 +44,13 @@
     <p>{{ item.location }}</p>
     <p><b>Seller:</b> {{ item.seller }} ({{ item.seller.rating }}★)</p>
     {% include 'messages.html' %}
+    {% if not item.has_accepted_bid %}
     <form class="form form-horizontal" method="post">
         {% csrf_token %}
         {{ form }}  {# bids>forms>bids_forms.py #}
     <input type="submit" class="btn btn-primary" value="Submit bid">
     </form>
+    {% endif %}
     <div class="similar_items">
         {% include 'items/similar_items.html' with category=category %}
     </div>

@@ -25,6 +25,10 @@ KRÖFUR
 
 * Láta accept bid takka hverfa og sýna Sold For texta þegar item is accepted []
 
+* Getur ennþá biddað á hlut þó svo að það sé búið að accepta bid []
+
+* Bid must be higher than start price þegar start price er 0 og það er bid á vörunni []
+
 
 BUGS
 ----
