@@ -106,13 +106,24 @@ a{
     transition: all 0.3s ease-in-out;
 }
 
-.button-left img{
-    size: 2rem
+.slider-btn {
+    width: 4rem;
+    height: auto;
+    position: relative;
+    bottom: 225px;
+    opacity: 0.6;
+    transition: all 0.2s ease-in-out;
+
 }
 
-.button-right img{
-    size: 2rem;
+.slider-btn:hover {
+    transform: scale(1.10);
+    opacity: 1;
+}
 
+.button-right {
+    float: right;
+    right: 3px;
 }
 
 /*ITEM DETAILS CSS -------------------------------------------------------*/

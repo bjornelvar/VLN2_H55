@@ -56,7 +56,19 @@ $(document).ready(function() {
             $(this).attr("href", "?order_by=" + txt)
         }
     });
+
+
 });
+
+function scrollOnClick(direction){
+    console.log("you clicked"+direction)
+    if (direction === "right") {
+        document.getElementById('scrollable_container').scrollLeft += 20;
+    }
+    else if (direction === "left") {
+        document.getElementById('scrollable_container').scrollLeft -= 20;
+    }
+}
 
 
 
