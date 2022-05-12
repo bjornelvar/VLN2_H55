@@ -39,16 +39,16 @@ KRÖFUR
 BUGS
 ----
 
-* Síða crashar þegar ég reyni að bidda logged out []
+* Síða crashar þegar ég reyni að bidda logged out [X]
 	(Láta bid takkann bara birtast if_user_authenticated?)
 
-* Pages sýnir stundum blank númer í miðjunni og crashar ef maður ýtir á það []
+* Pages sýnir stundum blank númer í miðjunni og crashar ef maður ýtir á það [X]
 	
 
 EXTRA
 -----
 
-* Láta search virka með enter []
+* Láta search virka með enter [X]
 
 * Auto login eftir register. []
 

@@ -39,7 +39,7 @@ def register(request):
 
 @login_required
 def my_listings(response):
-    context = {'items': Items.objects.filter(seller_id=response.user.id).order_by('listdate').annotate(max_offer = Max('bids__bidamount'))} # Reverse order líka?
+    context = {'bids':Bids.objects.all(), 'items': Items.objects.filter(seller_id=response.user.id).order_by('listdate').annotate(max_offer = Max('bids__bidamount'))} # Reverse order líka?
     return render(response,   'users/my_listings.html', context)
 
 @login_required
@@ -88,6 +88,7 @@ def profile(request):
 
 def accept_bid(request):
     bid = get_object_or_404(Bids, pk=request.GET.get('bid_id'))
+    print(bid)
     bid.is_accepted = True
     bid.save()
     item = get_object_or_404(Items, pk=bid.item_id)

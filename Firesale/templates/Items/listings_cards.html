@@ -3,6 +3,7 @@
             {{ form.as_p }}
         </form>
 <div class = "single-item_listings" href="/items/{{ item.id }}" style="width: 70rem; height: 15rem">
+
     <a class = "single-item_listings_image" href="/items/{{ item.id }}" style="width: 15rem; height: 15rem">
         {% with item.itemimages_set.all|first as img %}
       <img class="item-preview-image" src="{{ img.image.url }}" width="120" height="300" alt="Product image">
@@ -38,15 +39,24 @@
 {#        <button class="btn btn-primary" disabled style="background-color: firebrick; border: none; font-size: xx-large"><b>NO BIDS</b></button>#}
 {#    {% endif %}#}
 {#    </a>#}
-        {% if item.max_offer %}
-             <div class="bid-button-container">
-              <form action="{% url 'accept-bid' %}?bid_id={{ bid.id }}">
-                    <input type="submit" class="checkout-button" value="Accept Bid" />
-            </form>
+        {% if item.max_offer and item.has_accepted_bid == False %}
+            {{ bid.id }}
+            <div class="bid-button-container">
+                 {% for bid in item.bids_set.all %}
+                    {% if bid.bidamount == item.max_offer %}
+                        <a class="checkout-button" href="{% url 'accept-bid' %}?bid_id={{ bid.id }}">Accept</a>
+                    {% endif %}
+                {% endfor %}
               </div>
+        {% elif item.max_offer and item.has_accepted_bid != False %}
+                <div class="bid-button-container">
+                    <h4 style="color:white">You have accepted this bid</h4>
+                </div>
         {% else %}
+
              <div class="bid-button-container">
-                    <h4 style="color: white;">No bids yet</h4>
+
+                    <h4 style="color: red;">No bids yet</h4>
               </div>
         {% endif %}
 
