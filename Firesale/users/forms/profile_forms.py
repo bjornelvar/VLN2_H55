@@ -32,7 +32,7 @@ class ProfileForm(ModelForm):
         }
 
 
-class UploadImage(ModelForm):
+class UploadImageForm(ModelForm):
     class Meta:
         model = Profiles
         exclude = ['id', 'rating', 'user', 'bio']
@@ -40,7 +40,7 @@ class UploadImage(ModelForm):
             'image': widgets.FileInput(attrs={'class': 'form-control'})
         }
 
-class EditListing(ModelForm):
+class EditListingForm(ModelForm):
     class Meta:
         model = Items
         CONDITION_CHOICES = [('Like New', 'Like New'), ('Very Good', 'Very Good'),
@@ -52,4 +52,15 @@ class EditListing(ModelForm):
             'description': widgets.Textarea(attrs={'class': 'form-control'}),
             'category': widgets.Select(attrs={'class': 'form-control'}),
             'price': widgets.NumberInput(attrs={'class': 'form-control'}),
+        }
+
+class AddListingPicturesForm(ModelForm):
+    class Meta:
+        model = ItemImages
+        fields = ['image']
+        labels = {
+            'image': 'Attatch images'
+        }
+        widgets = {
+            'image': widgets.FileInput(attrs={'class': 'form-control', 'multiple': True})
         }

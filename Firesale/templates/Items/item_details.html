@@ -45,7 +45,7 @@
     <p><b>Seller:</b> {{ item.seller }} ({{ item.seller.rating }}★)</p>
     {% if user.id == item.seller_id %}
     <div>
-        <a type="Button" class="btn btn-primary" href="#">Edit listing</a>
+        <a type="Button" class="btn btn-primary" href="{% url 'edit-listing' id=item.id %}">Edit listing</a>
     </div>
     {% else %}
     {% include 'messages.html' %}

@@ -1,10 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'base.html' %}
+{% block content %}
+        {% if user.is_authenticated %}
+            {% if user.id == item.seller_id %}
+    <form class="form form-horizontal" enctype='multipart/form-data' action="{%  url 'edit-listing' id=item.id %}" method="post">
+        {%  csrf_token %}
+        {{ form }}
+        {{ imageform }}
+        <input type="submit" value="Update" class="btn btn-primary pull-right" style="clear:both; margin: 10px 0" />
+    </form>
+            {% else %}
+                <h1>You can only edit your own listings</h1>
+            {% endif %}
+    {% else %}
+    <h1>You must be logged in to edit this listing.</h1>
+    {% endif %}
 
-</body>
-</html>
+{% endblock %}

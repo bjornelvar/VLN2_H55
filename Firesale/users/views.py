@@ -60,7 +60,7 @@ def profile(request):
 
         if 'image' == btn:
             if request.FILES:
-                form = UploadImage(request.POST, request.FILES, instance=profile)
+                form = UploadImageForm(request.POST, request.FILES, instance=profile)
                 if form.is_valid():
                     image = form.save(commit=False)
                     image.user = request.user
@@ -82,7 +82,7 @@ def profile(request):
 
     return render(request, 'users/profile_edit.html', {
         'bioform': ProfileForm(instance=profile),      # ProfileForm fallið er í users>forms>profile_forms.py
-        'imageform': UploadImage(instance=profile),     # UploadImage fallið er í users>forms>profile_forms.py
+        'imageform': UploadImageForm(instance=profile),     # UploadImage fallið er í users>forms>profile_forms.py
         'edituserform': EditUserForm(instance=user),
     })
 
@@ -123,4 +123,23 @@ def send_email_notification(bid):
 
 def edit_listing(request, id):
     item = get_object_or_404(Items, pk=id)
-    
+
+    if request.method == 'POST':
+        form = EditListingForm(instance=item, data=request.POST)
+        if form.is_valid():
+            item_edits = form.save(commit=False)
+            item_edits.seller_id = request.user.id
+            item.save()
+            if request.FILES:
+                form_images = AddListingPicturesForm(request.POST, request.FILES)
+                if form_images.is_valid():
+                    for image in request.FILES.getlist('image'):
+                        ItemImages.objects.create(image=image, item_id=item.id)
+
+            return redirect('my-listings')
+
+    return render(request, 'users/edit_listing.html', {
+        'form': EditListingForm(instance=item),
+        'imageform': AddListingPicturesForm(),
+        'item': item
+    })
