@@ -14,11 +14,9 @@ class Profiles(models.Model):
     def __str__(self):
         return self.user.username
 
-class Review(models.Model):
-    reviewed = models.ForeignKey(User, related_name='reviewed', on_delete=models.CASCADE)
-    reviewer = models.ForeignKey(User, related_name='reviewer', on_delete=models.CASCADE)
-    review = models.CharField(max_length=255)
-    reviewdate = models.DateTimeField(auto_now_add=True)
+class Ratings(models.Model):
+    rated_user = models.ForeignKey(User, related_name='rated_user', on_delete=models.CASCADE)
+    rated_by = models.ForeignKey(User, related_name='rated_by', on_delete=models.CASCADE)
     rating = models.DecimalField(
         max_digits=1,
         decimal_places=1,
