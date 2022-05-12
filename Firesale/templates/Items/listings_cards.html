@@ -10,7 +10,7 @@
         {% endwith %}
     </a>
 <div class="position-absolute bottom-0 start-0">
-    <a type="button" href="{% url 'edit-listing' id=item.id %}" style="padding: 0.5rem;color: black;margin-bottom: 10px; margin-left: 10px;">Edit listing</a>
+    <a type="button" class="btn-outline-secondary" href="{% url 'edit-listing' id=item.id %}" style="padding: 0.5rem;color: black;margin-bottom: 10px; margin-left: 10px;">Edit listing</a>
 </div>
       <a class="card-body" href="/items/{{ item.id }}">
         <h5 class="card-title">{{ item.name }}</h5>
