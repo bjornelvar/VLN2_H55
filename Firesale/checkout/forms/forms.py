@@ -1,16 +1,30 @@
 from django import forms
 from django.core.validators import MinValueValidator, MaxValueValidator
+from django.forms import ModelForm
 from django_countries.fields import CountryField
 from checkout.fields import CreditCardField, ExpiryDateField, VerificationValueField
+from checkout.models import ShippingInformation
+
+
+# class ShippingForm(ModelForm):
+#     class Meta:
+#         model = ShippingInformation
+#         fields = ['country']
+#         widgets = {
+#             'country': CountryField().formfield()
+#         }
 
 
 class ShippingForm(forms.Form):
-    full_name = forms.CharField(required=True)
-    address_1 = forms.CharField(required=True)
-    address_2 = forms.CharField(required=False)
-    city = forms.CharField(required=True)
-    country = CountryField(blank_label='(Select country)').formfield()
-    zip = forms.CharField(required=True, widget=forms.TextInput(attrs={'size': 6}))
+    class Meta:
+        model = ShippingInformation
+        first_name = forms.CharField(required=True)
+        last_name = forms.CharField(required=True)
+        address_1 = forms.CharField(required=True)
+        address_2 = forms.CharField(required=False)
+        city = forms.CharField(required=True)
+        country = CountryField(blank_label='(Select country)').formfield()
+        zip = forms.CharField(required=True, widget=forms.TextInput(attrs={'size': 6}))
 
 
 class PaymentForm(forms.Form):
