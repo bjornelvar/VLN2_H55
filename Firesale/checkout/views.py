@@ -1,18 +1,66 @@
 from django.shortcuts import render, redirect
 from formtools.wizard.views import SessionWizardView
 
+from checkout.models import ShippingInformation
 
-class CheckoutWizard(SessionWizardView):
-    template_name = "checkout/checkout.html"
+
+
+class CheckoutWizard2(SessionWizardView):
+    template_name = 'checkout/checkout.html'
+    instance = None
+
+    def get_form_instance(self, step):
+        if self.instance is None:
+            self.instance = ShippingInformation()
+        return self.instance
 
     def done(self, form_list, **kwargs):
-        form_data = process_form_data(form_list)
-        return render(self.request, "checkout/done.html", {"form_data": form_data})
+        self.instance.save()
 
 
-def process_form_data(form_list):
-    form_data = [form.cleaned_data for form in form_list]
-    return form_data
+
+class CheckoutWizard(SessionWizardView):
+    template_name = 'checkout/checkout.html'
+    def dispatch(self, request, *args, **kwargs):
+        self.instance = ShippingInformation()
+        self.instance.user_id = request.user.id
+        print(self.instance)
+        print('dispatch')
+        return super(CheckoutWizard, self).dispatch(request, *args, **kwargs)
+
+    def get_form_instance(self, step):
+        print('get')
+        return self.instance
+
+    def done(self, form_list, **kwargs):
+        print('done')
+        self.instance.save()
+        return render(self.request, "checkout/done.html")
+
+
+
+
+
+# class CheckoutWizard(SessionWizardView):
+#     template_name = "checkout/checkout.html"
+
+    # def get_form_instance(self, step):
+    #     if self.instance is None:
+    #         self.instance = ShippingInformation()
+    #     return self.instance
+
+    # def done(self, form_list, **kwargs):
+    #     form_data = process_form_data(form_list)
+    #     print('done fall eftir process')
+    #     return render(self.request, "checkout/done.html", {"form_data": form_data})
+
+
+
+# def process_form_data(form_list):
+#     form_data = [form.cleaned_data for form in form_list]
+#     print(f'fyrsta form: {form_data[0]}')
+#     print(form_data[0].values())
+#     return form_data
 
 
 
