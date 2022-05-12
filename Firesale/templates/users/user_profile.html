@@ -37,8 +37,8 @@
         {% include 'items/single_item.html' with item=item%}
           {% endfor %}
     </div>
-    <input class="slider-btn button-left" onclick="scrollOnClick('left')" type="image" src="/static/images/arrow-left.png">
-    <input class="slider-btn button-right" onclick="scrollOnClick('right')" type="image" src="/static/images/arrow-right.png">
+    <input class="slider-btn button-left" id="slider-left" type="image" src="/static/images/arrow-left.png">
+    <input class="slider-btn button-right" id="slider-right" type="image" src="/static/images/arrow-right.png">
 </div>
 
 </section>

@@ -56,19 +56,15 @@ $(document).ready(function() {
             $(this).attr("href", "?order_by=" + txt)
         }
     });
-
-
+    $('#slider-left').on('click', function (){
+        console.log("clicked")
+        document.getElementById('scrollable_container').scrollLeft -= 400;
+    });
+    $('#slider-right').on('click', function (){
+        console.log("clicked r")
+        document.getElementById('scrollable_container').scrollLeft += 400;
+    });
 });
-
-function scrollOnClick(direction){
-    console.log("you clicked"+direction)
-    if (direction === "right") {
-        document.getElementById('scrollable_container').scrollLeft += 20;
-    }
-    else if (direction === "left") {
-        document.getElementById('scrollable_container').scrollLeft -= 20;
-    }
-}
 
 
 

@@ -91,6 +91,7 @@ a{
     white-space: nowrap;
     justify-content: flex-start;
     gap: 2vw;
+    scroll-behavior: smooth;
 }
 
 .scrollable_items a {
