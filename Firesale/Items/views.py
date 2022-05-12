@@ -19,7 +19,7 @@ from django.http import HttpResponse
 
 def index(request):
     # items = Items.objects.filter(has_accepted_bid=False).order_by("name")
-    items = Items.objects.filter(has_accepted_bid=False).order_by('name')
+    items = Items.objects.filter(has_accepted_bid=False, sold=False).order_by('name')
 
     if "order_by" in request.GET:
         order_by_val = request.GET["order_by"]
@@ -40,7 +40,7 @@ def search_items(request):
     if "search_val" in request.GET:
         search_val = request.GET["search_val"]
         search_term = search_val.replace("+", " ")
-        items = Items.objects.filter(name__icontains=search_term, has_accepted_bid=False)
+        items = Items.objects.filter(name__icontains=search_term, has_accepted_bid=False , sold=False)
         current_category_name = ''
         category_id = ''
 
@@ -65,7 +65,7 @@ def search_items(request):
 
 
 def get_items_by_category(request, id):
-    items = Items.objects.filter(category_id=id, has_accepted_bid=False).order_by('name').annotate(max_offer = Max('bids__bidamount'))
+    items = Items.objects.filter(category_id=id, has_accepted_bid=False, sold=False).order_by('name').annotate(max_offer = Max('bids__bidamount'))
 
     if "order_by" in request.GET:
         order_by_val = request.GET["order_by"]
@@ -112,13 +112,14 @@ def create_listing(request):
         if form.is_valid():
             item = form.save(commit=False)
             item.seller_id = request.user.id
-            item.save()
             if request.FILES:
                 form_images = CreateListingFormImages(request.POST, request.FILES)
                 if form_images.is_valid():
+                    item.save()
                     for image in request.FILES.getlist('image'):
                         ItemImages.objects.create(image=image, item_id=item.id)
             else:
+                item.save()
                 ItemImages.objects.create(item_id=item.id)
 
             return redirect('my-listings')

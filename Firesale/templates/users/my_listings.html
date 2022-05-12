@@ -3,14 +3,76 @@
     <h1>My Listings</h1>
     <div class="items">
     {% if items %}
+
+            {% if sold_filter == True %}
+    <div class="form-check form-switch">
+        <input class="form-check-input" id="sold-filter" type="checkbox" checked>
+          <label class="form-check-label" for="flexSwitchCheckChecked">Show sold items</label>
+    </div>
+    {% elif sold_filter == False %}
+    <div class="form-check form-switch">
+        <input class="form-check-input" id="sold-filter" type="checkbox">
+          <label class="form-check-label" for="flexSwitchCheckChecked">Show sold items</label>
+    </div>
+        {% else %}
+            <div class="form-check form-switch">
+        <input class="form-check-input" id="sold-filter" type="checkbox" checked>
+          <label class="form-check-label" for="flexSwitchCheckChecked">Show sold items</label>
+    </div>
+    {% endif %}
+
         {% for item in items %}
             {% include 'items/listings_cards.html' with item=item %}
         {% endfor %}
+
+
+            <div class="pages">
+<nav aria-label="Page navigation example">
+  <ul class="pagination justify-content-center">
+
+      {% if items.has_previous %}
+            <li class="page-item">
+              <a class="page-link" href="{% url 'my-listings' %}?page={{ items.previous_page_number }}" tabindex="-1">Previous</a>
+            </li>
+      {%  else %}
+          <li class="page-item disabled">
+              <a class="page-link" href="#" tabindex="-1">Previous</a>
+            </li>
+      {% endif %}
+
+      {% for page in items.paginator.page_range %}
+          {% if page == items.number %}
+             <li class="page-item active"><a class="page-link" href="{% url 'my-listings' %}?page={{ page }}">{{ page }}</a></li>
+          {% else %}
+             <li class="page-item"><a class="page-link" href="{% url 'my-listings' %}?page={{ page }}">{{ page }}</a></li>
+          {% endif %}
+      {% endfor %}
+
+      {% if items.has_next %}
+            <li class="page-item">
+                <a class="page-link" href="{% url 'my-listings' %}?page={{ items.next_page_number }}">Next</a>
+            </li>
+              {% else %}
+                  <li class="page-item disabled">
+                      <a class="page-link" href="#">Next</a>
+              {% endif %}
+          </ul>
+</nav>
+    </div>
+
+
+
+
+
+
     {% else %}
         <div class="position-absolute top-50 start-50 translate-middle">
         <h2 style="text-align: center">No listings</h2>
-            <a type="button" style="color: black;" class="btn btn-primary" href="{% url 'create_listing' %}">Create a listing</a>
+            <br>
+            <a type="button" class="bid-again-button" href="{% url 'create_listing' %}">Create a listing</a>
         </div>
     {% endif %}
     </div>
+
+
 {% endblock %}

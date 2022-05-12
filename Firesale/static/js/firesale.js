@@ -56,6 +56,45 @@ $(document).ready(function() {
             $(this).attr("href", "?order_by=" + txt)
         }
     });
+
+
+    $("#sold-filter").on("click", function () {
+    let pathname = String(window.location.pathname);
+    let params = new URLSearchParams(window.location.search);
+    let pageString = params.get('page');
+    if (pageString == null) {
+        pageString = 1;
+    }
+    if($('#sold-filter').prop('checked')) {
+        window.location.replace(pathname + '?page=' + pageString);
+    }
+    else {
+        window.location.replace(pathname + '?page=' + pageString + "&sold=false");
+    }
+
+    });
+
+
+
+function scrollOnClick(direction){
+    console.log("you clicked"+direction)
+    if (direction === "right") {
+        document.getElementById('scrollable_container').scrollLeft += 20;
+    }
+    else if (direction === "left") {
+        document.getElementById('scrollable_container').scrollLeft -= 20;
+    }
+}
+
+
+    $('#slider-left').on('click', function (){
+        console.log("clicked")
+        document.getElementById('scrollable_container').scrollLeft -= 400;
+    });
+    $('#slider-right').on('click', function (){
+        console.log("clicked r")
+        document.getElementById('scrollable_container').scrollLeft += 400;
+    });
 });
 
 

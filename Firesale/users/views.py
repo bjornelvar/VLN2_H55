@@ -2,6 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.forms import UserCreationForm
 from users.models import Profiles
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib import messages
 from users.forms.profile_forms import *
 from items.models import Items
@@ -10,6 +11,7 @@ from django.db.models import Max
 from django.core.mail import send_mail
 from django.conf import settings
 from django.contrib.auth.models import User
+from checkout.models import Orders
 
 
 
@@ -38,19 +40,64 @@ def register(request):
     return render(request, 'users/register.html', context)
 
 @login_required
-def my_listings(response):
-    context = {'bids':Bids.objects.all(), 'items': Items.objects.filter(seller_id=response.user.id).order_by('listdate').annotate(max_offer = Max('bids__bidamount'))} # Reverse order líka?
-    return render(response,   'users/my_listings.html', context)
+def my_listings(request):
+    sold_filter = None
+    if "sold" in request.GET:
+        sold = request.GET["sold"]
+        if sold == "false":
+            items = Items.objects.filter(seller_id=request.user.id).order_by('listdate') \
+                .annotate(max_offer=Max('bids__bidamount')).filter(sold=False)
+            sold_filter = False
+        else:
+            items = Items.objects.filter(seller_id=request.user.id).order_by('listdate') \
+                .annotate(max_offer=Max('bids__bidamount'))
+            sold_filter = True
+    else:
+        items = Items.objects.filter(seller_id=request.user.id).order_by('listdate') \
+            .annotate(max_offer=Max('bids__bidamount'))
+
+    paginator = Paginator(items,5)
+    page_num = request.GET.get('page', 1)
+    try:
+        page = paginator.get_page(page_num)
+    except EmptyPage or PageNotAnInteger:
+        page = paginator.page(1)
+    context = {'bids':Bids.objects.all(), 'items': page, 'sold_filter': sold_filter} # Reverse order líka?
+    return render(request,   'users/my_listings.html', context)
 
 @login_required
-def my_bids(response):
-    user_bids = Bids.objects.filter(bidder_id=response.user.id).order_by('biddate')
-    context = {'bids': Bids.objects.filter(bidder_id=response.user.id).order_by('biddate'),
-               'max_bids': Items.objects.all().annotate(max_offer = Max('bids__bidamount'))} # Reverse order líka?
-    return render(response,   'users/my_bids.html', context)
+def my_orders(request):
+
+    orders = Orders.objects.filter(receiver_id=request.user.id)
+    paginator = Paginator(orders,5)
+    page_num = request.GET.get('page', 1)
+    try:
+        page = paginator.get_page(page_num)
+    except EmptyPage or PageNotAnInteger:
+        page = paginator.page(1)
+
+    context = {'orders': page}
+    return render(request,   'users/my_orders.html', context)
 
 @login_required
-def profile(request):
+def my_bids(request):
+    bids = Bids.objects.filter(bidder_id=request.user.id).order_by('biddate')
+    bids1 = bids.filter(item__has_accepted_bid=False)
+    bids2 = bids.filter(is_accepted=True)
+    bids = bids1 | bids2
+    paginator = Paginator(bids,5)
+    page_num = request.GET.get('page', 1)
+    try:
+        page = paginator.get_page(page_num)
+    except EmptyPage or PageNotAnInteger:
+        page = paginator.page(1)
+
+    # user_bids = Bids.objects.filter(bidder_id=request.user.id).order_by('biddate')
+    context = {'bids': page, 'max_bids': Items.objects.all().annotate(max_offer = Max('bids__bidamount'))} # Reverse order líka?
+    return render(request,   'users/my_bids.html', context)
+
+@login_required
+def edit_profile(request):
     profile = Profiles.objects.filter(user=request.user).first()
     user = User.objects.filter(id=request.user.id).first()
     if request.method == 'POST':
@@ -98,7 +145,11 @@ def accept_bid(request):
 
     return redirect('my-listings')
 
-def show_profile(request):
+def show_profile(request, id=None):
+    if id:
+        return render(request, 'users/user_profile.html', {
+            'some_user': get_object_or_404(User, pk=id)
+        })
     return render(request, 'users/profile.html')
 
 def send_email_notification(bid):
@@ -144,3 +195,8 @@ def edit_listing(request, id):
         'imageform': AddListingPicturesForm(),
         'item': item
     })
+
+def delete_item(request,id):
+    item = get_object_or_404(Items, pk=id)
+    item.delete()
+    return redirect('my-listings')

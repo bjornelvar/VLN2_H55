@@ -3,10 +3,6 @@ a{
     color: #000;
 }
 
-.container{
-
-}
-
 /*PROFILE CSS -------------------------------------------------------------*/
 
 .btn-bio {
@@ -55,7 +51,7 @@ a{
 
 }
 
-.single-item{
+.single-item {
     /*width: calc(25% - 3rem);*/
     margin: 0 0rem;
     padding: 0rem;
@@ -76,15 +72,59 @@ a{
 }
 
 .item-preview-image {
-  object-fit: scale-down;
-  width: 200px;
-  height: 200px;
-  margin: 0 auto;
+    object-fit: scale-down;
+    width: 200px;
+    height: 200px;
+    margin: 0 auto;
 }
 
 .single-item:hover {
-  transform: scale(1.05);
+    transform: scale(1.05);
     color:black;
+}
+
+.scrollable_items {
+    width: 100%;
+    height: 380px;
+    overflow: auto;
+    flex-wrap: wrap;
+    white-space: nowrap;
+    justify-content: flex-start;
+    gap: 2vw;
+    scroll-behavior: smooth;
+}
+
+.scrollable_items a {
+    margin: 1rem;
+    padding: 0;
+    display: inline-block;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+    border-radius: 0.5rem;
+    background: #fff;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+.slider-btn {
+    width: 4rem;
+    height: auto;
+    position: relative;
+    bottom: 225px;
+    opacity: 0.6;
+    transition: all 0.2s ease-in-out;
+
+}
+
+.slider-btn:hover {
+    transform: scale(1.10);
+    opacity: 1;
+}
+
+.button-right {
+    float: right;
+    right: 3px;
 }
 
 /*ITEM DETAILS CSS -------------------------------------------------------*/
@@ -117,6 +157,19 @@ a{
     justify-content: flex-start;
     margin: 0 3rem;
     gap: 2vw;
+
+}
+
+.similar_items_container a {
+    margin: 0 0rem;
+    padding: 0rem;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+    border-radius: 0.5rem;
+    background: #fff;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
 }
 
 /*CATEGORY CSS ------------------------------------------------------------*/
@@ -244,6 +297,10 @@ a{
   font-size: 16px;
 }
 
+.checkout-button:hover {
+  background-color: #3e8e41;
+}
+
 .bid-again-button{
   background-color: #4ac1f7; /* Green */
   border: none;
@@ -253,6 +310,12 @@ a{
   text-decoration: none;
   font-size: 16px;
 }
+
+.bid-again-button:hover{
+  background-color: #447e9b; /* Green */
+  color:white;
+}
+
 
 .single-item_bids_image {
     display: flex;
@@ -303,6 +366,23 @@ a{
 
 }
 
+.edit-button {
+    background-color: #4ac1f7; /* Green */
+    color: white;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    border: 1px solid #4ac1f7;
+    border-radius: 0.5rem;
+
+    margin-bottom: 25px;
+    transition: all 0.3s ease-in-out;
+}
+
+
+
 
 /*HOME PAGE CSS --------------------------------------------------------------*!*!*/
 .category_div_home{
@@ -327,7 +407,7 @@ background: linear-gradient(to right bottom, rgba(246, 211, 101, 1), rgba(253, 1
 
 .hedding {
     font-size: 20px;
-    color: #ab8181`;
+    color: #ab8181;
 }
 
 .main-section {
@@ -370,8 +450,12 @@ background: linear-gradient(to right bottom, rgba(246, 211, 101, 1), rgba(253, 1
     height: 200px;
 }
 
-@media (min-width:360px) and (max-width:640px) {
-    .pro-box-section .pro-box img {
-        height: auto;
-    }
+.seller-link {
+    color: #0ba6ff;
 }
+
+/*@media (min-width:360px) and (max-width:640px) {*/
+/*    .pro-box-section .pro-box img {*/
+/*        height: auto;*/
+/*    }*/
+/*}*/

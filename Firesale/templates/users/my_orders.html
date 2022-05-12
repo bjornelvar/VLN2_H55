@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% block content %}
+   <br>
+    <h1>My Orders</h1>
+    <br>
+    <div class="items">
+{#    {% if orders %}#}
+{#        {% for order in orders %}#}
+            {% include 'users/order_card.html' with order=order %}
+{#        {% endfor %}#}
+{#    {% else %}#}
+{#        <div class="position-absolute top-50 start-50 translate-middle">#}
+{#                <h2 style="text-align: center">No Orders</h2>#}
+{#        </div>#}
+{#    {% endif %}#}
+    </div>
+
+
+
+
+
+
+    <div class="pages">
+    <nav aria-label="Page navigation example">
+  <ul class="pagination justify-content-center">
+
+      {% if orders.has_previous %}
+            <li class="page-item">
+              <a class="page-link" href="{% url 'my-orders' %}?page={{ orders.previous_page_number }}" tabindex="-1">Previous</a>
+            </li>
+      {%  else %}
+          <li class="page-item disabled">
+              <a class="page-link" href="#" tabindex="-1">Previous</a>
+            </li>
+      {% endif %}
+
+      {% for page in orders.paginator.page_range %}
+          {% if page == orders.number %}
+             <li class="page-item active"><a class="page-link" href="{% url 'my-orders' %}?page={{ page }}">{{ page }}</a></li>
+          {% else %}
+             <li class="page-item"><a class="page-link" href="{% url 'my-orders' %}?page={{ page }}">{{ page }}</a></li>
+          {% endif %}
+      {% endfor %}
+
+      {% if orders.has_next %}
+            <li class="page-item">
+                <a class="page-link" href="{% url 'my-orders' %}?page={{ orders.next_page_number }}">Next</a>
+            </li>
+              {% else %}
+                  <li class="page-item disabled">
+                      <a class="page-link" href="#">Next</a>
+              {% endif %}
+          </ul>
+</nav>
+    <div>
+        <p>Showing {{ orders.start_index }}-{{ orders.end_index }} items of {{ orders.paginator.count }}</p>
+    </div>
+</div>
+
+{% endblock %}
