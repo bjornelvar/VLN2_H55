@@ -9,7 +9,7 @@ class ShippingInformation(models.Model):
     user = models.OneToOneField(Profiles, on_delete=models.CASCADE, primary_key=True)
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
-    country = CountryField(blank_label='(select country)')
+    country = CountryField(blank_label='(Select country)')
     zip = models.CharField(max_length=10)
     city = models.CharField(max_length=50)
     address_1 = models.CharField(max_length=150)
