@@ -36,8 +36,10 @@ class PaymentForm(forms.Form):
                                            min_length=3,
                                            widget=forms.TextInput(attrs={'size': '3', 'placeholder': 'CVC'}))
 
+
 class RateSellerForm(forms.Form):
     rating = forms.DecimalField(required=False, validators=[MinValueValidator(0.1), MaxValueValidator(5)])
+
 
 class ReviewForm(forms.Form):
     check = forms.BooleanField(required=False)

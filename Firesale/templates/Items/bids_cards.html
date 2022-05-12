@@ -27,7 +27,7 @@
               <div class="bid-button-container">
               <img src="/static/images/Green-Check.png" class="img-fluid" alt="" width="50">
               <p style="padding: 0.5rem; margin:0 auto; margin-bottom:1rem; color:#4CAF50;font-weight: bold;  text-align: center; border-radius: 1rem;"> Bid Accepted! </p>
-              <form action="{% url 'checkout' %}">
+              <form action="{% url 'checkout' id=bid.item.id %}">
                     <input type="submit" class="checkout-button" value="Checkout" />
             </form>
               </div>
