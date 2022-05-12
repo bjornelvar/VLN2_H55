@@ -10,28 +10,43 @@
     </a>
       <a class="card-body" href="/items/{{ item.id }}">
         <h5 class="card-title">{{ item.name }}</h5>
+      <br>
       {% if item.max_offer %}
-        <p class="card-text">Highest current offer ${{ item.max_offer }}</p>
-{#      {% elif bid.is_accepted == True %}#}
-{#        <p class="card-text">Sold for ${{ item.max_offer }}</p>#}
+          <div>
+          <p class="card-text">Highest current offer:</p>
+          <h3>$ {{ item.max_offer }}</h3>
+          </div>
       {% else %}
         <p class="card-text">No offers have been placed yet</p>
       {% endif %}
-        <p class="card-text">Listed {{ item.listdate | timesince }} ago</p>
+      <br>
+        <p class="card-text" style="color:grey;">Listed {{ item.listdate | timesince }} ago</p>
       </a>
-    {% if item.max_offer %}
-        {% for bid in item.bids_set.all %} {# item.bids_set.all finnur öll bid fyrir tiltekið item #}
-              {% if bid.bidamount == item.max_offer and bid.is_accepted == False %}
-    <a class="accept-button" href="{% url 'accept-bid' %}?bid_id={{ bid.id }}">
-        <button class="btn btn-primary" href="{% url 'accept-bid' %}?bid_id={{ bid.id }}" style="background-color: #3eb058; border: none; font-size: xx-large"><b>ACCEPT BID</b></button> {# SETJA FUNCTIONALITY #}
-              {% endif %}
-        </a>
-          {% endfor %}
-    {% else %}
-    <a class="accept-button" style="background-color: firebrick">
-        <button class="btn btn-primary" disabled style="background-color: firebrick; border: none; font-size: xx-large"><b>NO BIDS</b></button>
-    {% endif %}
-    </a>
+{#    {% if item.max_offer %}#}
+{#        {% for bid in item.bids_set.all %} {# item.bids_set.all finnur öll bid fyrir tiltekið item #}
+{#              {% if bid.bidamount == item.max_offer and bid.is_accepted == False %}#}
+{#    <a class="accept-button" href="{% url 'accept-bid' %}?bid_id={{ bid.id }}">#}
+{#        <button class="btn btn-primary" href="{% url 'accept-bid' %}?bid_id={{ bid.id }}" style="background-color: #3eb058; border: none; font-size: xx-large"><b>ACCEPT BID</b></button> {# SETJA FUNCTIONALITY #}
+{#              {% endif %}#}
+{#        </a>#}
+{#          {% endfor %}#}
+{#    {% else %}#}
+{#    <a class="accept-button" style="background-color: firebrick">#}
+{#        <button class="btn btn-primary" disabled style="background-color: firebrick; border: none; font-size: xx-large"><b>NO BIDS</b></button>#}
+{#    {% endif %}#}
+{#    </a>#}
+        {% if item.max_offer %}
+             <div class="bid-button-container">
+              <form action="{% url 'accept-bid' %}?bid_id={{ bid.id }}">
+                    <input type="submit" class="checkout-button" value="Accept Bid" />
+            </form>
+              </div>
+        {% else %}
+             <div class="bid-button-container">
+                    <h4 style="color: white;">No bids yet</h4>
+              </div>
+        {% endif %}
+
 </div>
 
 

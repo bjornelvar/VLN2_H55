@@ -3,6 +3,9 @@ a{
     color: #000;
 }
 
+.container{
+
+}
 
 /*PROFILE CSS -------------------------------------------------------------*/
 
@@ -124,6 +127,7 @@ a{
     border: 1px solid #E5E5E5;
     padding: 1rem;
 
+
 }
 
 
@@ -209,6 +213,7 @@ a{
 }
 
 .bid-button-container{
+
     display: flex;
     flex-grow:2;
     flex-direction: column;
@@ -218,7 +223,16 @@ a{
     border-radius: 0.5rem;
     box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease-in-out;
+    background: #f6d365;
+
+
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: -webkit-linear-gradient(to right bottom, rgba(246, 211, 101, 1), rgba(253, 160, 133, 1));
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: linear-gradient(to right bottom, rgba(246, 211, 101, 1), rgba(253, 160, 133, 1));
+
 }
+
 
 .checkout-button{
   background-color: #4CAF50; /* Green */
