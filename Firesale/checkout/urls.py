@@ -5,5 +5,5 @@ from .forms.forms import ShippingForm, PaymentForm, ReviewForm, RateSellerForm
 from .views import CheckoutWizard
 
 urlpatterns = [
-    path('', CheckoutWizard.as_view([ShippingForm, PaymentForm, RateSellerForm, ReviewForm])),
+    path('', CheckoutWizard.as_view([ShippingForm, PaymentForm, RateSellerForm, ReviewForm]), name='checkout'),
 ]
