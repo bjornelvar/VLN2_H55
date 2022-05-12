@@ -6,25 +6,20 @@ from checkout.fields import CreditCardField, ExpiryDateField, VerificationValueF
 from checkout.models import ShippingInformation
 
 
-# class ShippingForm(ModelForm):
-#     class Meta:
-#         model = ShippingInformation
-#         fields = ['country']
-#         widgets = {
-#             'country': CountryField().formfield()
-#         }
-
-
-class ShippingForm(forms.Form):
+class ShippingForm(ModelForm):
     class Meta:
         model = ShippingInformation
-        first_name = forms.CharField(required=True)
-        last_name = forms.CharField(required=True)
-        address_1 = forms.CharField(required=True)
-        address_2 = forms.CharField(required=False)
-        city = forms.CharField(required=True)
-        country = CountryField(blank_label='(Select country)').formfield()
-        zip = forms.CharField(required=True, widget=forms.TextInput(attrs={'size': 6}))
+        fields = ['first_name', 'last_name', 'address_1', 'address_2', 'city', 'zip', 'country', 'phone']
+
+
+# class ShippingForm(forms.Form):
+#         first_name = forms.CharField(required=True)
+#         last_name = forms.CharField(required=True)
+#         address_1 = forms.CharField(required=True)
+#         address_2 = forms.CharField(required=False)
+#         city = forms.CharField(required=True)
+#         country = CountryField(blank_label='(Select country)').formfield()
+#         zip = forms.CharField(required=True, widget=forms.TextInput(attrs={'size': 6}))
 
 
 class PaymentForm(forms.Form):
