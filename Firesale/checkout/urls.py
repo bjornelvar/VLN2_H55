@@ -1,9 +1,9 @@
 from django.urls import path
 from . import views
+from items import views as item_views
+from .forms.forms import ShippingForm, PaymentForm, ReviewForm, RateSellerForm
+from .views import CheckoutWizard
 
 urlpatterns = [
-    # path('', views.checkout_info, name='checkout'),
-    path('shipping/', views.shipping_info, name='shipping'),
-    path('payment/', views.payment_info, name='payment'),
-    path('review/', views.review_info, name='review'),
+    path('', CheckoutWizard.as_view([ShippingForm, PaymentForm, RateSellerForm, ReviewForm])),
 ]

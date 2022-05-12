@@ -1,18 +1,29 @@
-{% extends "base.html" %}
+{% extends 'base.html' %}
+
 {% block content %}
-    {% if user.is_authenticated %}
-    <form class="form form-horizontal" enctype='multipart/form-data' action="{%  url 'checkout' %}" method="post">
-        {%  csrf_token %}
-        <h2>Shipping Information</h2>
-        {{ shipping_form.as_p }}
-        <h2>Billing Information</h2>
-        {{ billing_form.as_p }}
-        <h2>John Wick is in great danger, and he needs your help to wipe all the squads in the Tilted Towers.</h2>
-        {{ payment_form.as_p }}
-        <input type=button class="btn btn-primary pull-left" value="Go Back" style="background: grey; margin: 10px" onClick="javascript:history.go(-1);">
-        <input type="submit" value="Review" class="btn btn-primary pull-left" style="background: green; margin: 10px"/>
-    </form>
+    <p>Step {{ wizard.steps.step1 }} of {{ wizard.steps.count }}</p>
+    {% for field in form %}
+        {{ field.error }}
+    {% endfor %}
+<form action="" method="post">
+    {% csrf_token %}
+    <table>
+        {{ wizard.management_form }}
+    {% if wizard.form.forms %}
+        {{ wizard.form.management_form }}
+        {% for form in wizard.form.forms %}
+            {{ form }}
+        {% endfor %}
     {% else %}
-    <h1>You must be logged in to checkout</h1>
+        {{ wizard.form }}
     {% endif %}
+    </table>
+
+{% if wizard.steps.prev %}
+    <button name="wizard_goto_step" type="submit" value="{{ wizard.steps.first }}">First Step</button>
+    <button name="wizard_goto_step" type="submit" value="{{ wizard.steps.prev }}">Previous Step</button>
+{% endif %}
+    <a class="btn btn-primary ms-auto" role="button" href="{% url 'my-bids' %}" style="border: none; margin: 11px;background: var(--bs-orange);">Cancel</a>
+    <input type="submit" value="Next Step" />
+</form>
 {% endblock %}

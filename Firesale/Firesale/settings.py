@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     'users.apps.UsersConfig',
     'bids.apps.BidsConfig',
     'checkout.apps.CheckoutConfig',
+    'formtools',
 ]
 
 MIDDLEWARE = [
