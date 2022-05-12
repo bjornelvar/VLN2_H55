@@ -67,7 +67,16 @@ def my_listings(request):
 
 @login_required
 def my_orders(request):
-    context = {'orders' : Orders.objects.filter(receiver_id=request.user.id)}
+
+    orders = Orders.objects.filter(receiver_id=request.user.id)
+    paginator = Paginator(orders,5)
+    page_num = request.GET.get('page', 1)
+    try:
+        page = paginator.get_page(page_num)
+    except EmptyPage or PageNotAnInteger:
+        page = paginator.page(1)
+
+    context = {'orders': page}
     return render(request,   'users/my_orders.html', context)
 
 @login_required
