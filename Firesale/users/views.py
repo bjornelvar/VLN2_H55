@@ -144,3 +144,8 @@ def edit_listing(request, id):
         'imageform': AddListingPicturesForm(),
         'item': item
     })
+
+def delete_item(request,id):
+    item = get_object_or_404(Items, pk=id)
+    item.delete()
+    return redirect('my-listings')

@@ -8,6 +8,9 @@
         {{ imageform }}
         <input type="submit" value="Update" class="btn btn-primary pull-right" style="clear:both; margin: 10px 0" />
     </form>
+    <form class="form form-horizontal" action="{%  url 'delete-item' id=item.id %}">
+        <input type="submit" value="Delete Listing" class="btn btn-danger pull-left" style="clear:both; margin: 10px 0" />
+    </form>
             {% else %}
                 <h1>You can only edit your own listings</h1>
             {% endif %}

@@ -3,10 +3,6 @@ a{
     color: #000;
 }
 
-.container{
-
-}
-
 /*PROFILE CSS -------------------------------------------------------------*/
 
 .btn-bio {
@@ -117,6 +113,7 @@ a{
     justify-content: flex-start;
     margin: 0 3rem;
     gap: 2vw;
+
 }
 
 /*CATEGORY CSS ------------------------------------------------------------*/
@@ -327,7 +324,7 @@ background: linear-gradient(to right bottom, rgba(246, 211, 101, 1), rgba(253, 1
 
 .hedding {
     font-size: 20px;
-    color: #ab8181`;
+    color: #ab8181;
 }
 
 .main-section {
@@ -370,8 +367,8 @@ background: linear-gradient(to right bottom, rgba(246, 211, 101, 1), rgba(253, 1
     height: 200px;
 }
 
-@media (min-width:360px) and (max-width:640px) {
-    .pro-box-section .pro-box img {
-        height: auto;
-    }
-}
+/*@media (min-width:360px) and (max-width:640px) {*/
+/*    .pro-box-section .pro-box img {*/
+/*        height: auto;*/
+/*    }*/
+/*}*/
