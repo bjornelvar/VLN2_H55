@@ -87,6 +87,17 @@ function scrollOnClick(direction){
 }
 
 });
+    $('#slider-left').on('click', function (){
+        console.log("clicked")
+        document.getElementById('scrollable_container').scrollLeft -= 400;
+    });
+    $('#slider-right').on('click', function (){
+        console.log("clicked r")
+        document.getElementById('scrollable_container').scrollLeft += 400;
+    });
+});
+
+
 
 
 
