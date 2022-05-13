@@ -63,6 +63,8 @@ EXTRA
 
 * Working notification settings [X]
 
+* Eyða listing eyðir einnig öllum image files tengd við listingið [X]
+
 * Final CSS, litasamsetning, laga staðsetningu á texta osfrv []
 
 * Setja icons með á "All items" og "Sell an item" í navbar []
