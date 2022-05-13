@@ -8,6 +8,7 @@ from checkout.models import ShippingInformation
 from items.models import Items
 from bids.models import Bids
 from users.models import Ratings, Profiles
+from checkout.models import Orders
 from django.db.models import Max
 from django.db.models import Avg
 
@@ -90,6 +91,8 @@ class CheckoutWizard(SessionWizardView):
             seller = get_object_or_404(Profiles, pk=item.seller_id)
             seller.rating = avg_rating
             seller.save()
+            order = Orders.objects.create(receiver_id=self.request.user.id, sender_id=item.seller_id, item_id=item.id)
+            order.save()
         return redirect('my-orders')
 
 
