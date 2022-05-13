@@ -33,7 +33,7 @@ def register(request):
         form = CustomRegisterForm(request.POST) # Sækir í users>forms>profile_forms.py
         if form.is_valid():
             new_user = form.save()
-            messages.success(request, 'Your account has been created! You will now be logged in.')
+            # messages.success(request, 'Your account has been created! You will now be logged in.')
             new_user = authenticate(username=form.cleaned_data['username'],
                                     password=form.cleaned_data['password1'],
                                     )
