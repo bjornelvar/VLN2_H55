@@ -79,21 +79,19 @@ def get_items_by_category(request, id):
 def create_listing(request):
     if request.method == 'POST':
         form = CreateListingForm(request.POST)
+        form_images = CreateListingFormImages(request.POST, request.FILES)
         if form.is_valid():
             item = form.save(commit=False)
             item.seller_id = request.user.id
-            if request.FILES:
-                form_images = CreateListingFormImages(request.POST, request.FILES)
-                if form_images.is_valid():
-                    item.save()
-                    for image in request.FILES.getlist('image'):
-                        ItemImages.objects.create(image=image, item_id=item.id)
+            if request.FILES and form_images.is_valid():
+                item.save()
+                for image in request.FILES.getlist('image'):
+                    ItemImages.objects.create(image=image, item_id=item.id)
             else:
                 item.save()
                 ItemImages.objects.create(item_id=item.id)
 
             return redirect('my-listings')
-
     else:
         form = CreateListingForm()
         form_images = CreateListingFormImages()
