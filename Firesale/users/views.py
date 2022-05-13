@@ -15,7 +15,7 @@ from checkout.models import Orders
 from django.contrib.auth import authenticate, login
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.template.loader import render_to_string
-
+import os
 
 
 def register(request):
@@ -208,6 +208,11 @@ def edit_listing(request, id):
 @login_required
 def delete_item(request, id):
     item = get_object_or_404(Items, pk=id)
+    item_images = ItemImages.objects.filter(item_id=item.id)
+    for image in item_images:
+        if image.image.name != 'images/no-image-default.png':
+            if os.path.isfile(image.image.path):
+                os.remove(image.image.path)
     item.delete()
     return redirect('my-listings')
 
