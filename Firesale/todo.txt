@@ -9,13 +9,15 @@ KRÖFUR
 
 
 
-* Klára Checkout og rating []
+* Klára Checkout [X]
+
+* Klára ratings [X]
 
 * Finna út hvað checkout á að gera (búa til Orders töflu líklegast) [X]
 
-* Gera confirmation síðu í endann á checkout []
+* Gera confirmation síðu í endann á checkout [X]
 
-* Laga order by í search
+* Laga order by í search[]
 
 
 
