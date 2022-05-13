@@ -37,7 +37,7 @@ KRÖFUR
 
 * Láta accept bid takka hverfa og sýna Sold For texta þegar item is sold []
 
-* Getur ennþá biddað á hlut þó svo að það sé búið að accepta bid [] (löguðum við þetta ekki bjössi?)
+* Getur ennþá biddað á hlut þó svo að það sé búið að accepta bid [X] (löguðum við þetta ekki bjössi?)
 
 * Bid must be higher than start price þegar start price er 0 og það er bid á vörunni []
 
@@ -55,6 +55,8 @@ BUGS
 EXTRA
 -----
 
+* Icon á flipa [X]
+
 * Láta search virka með enter [X]
 
 * Auto login eftir register. [X]
@@ -67,7 +69,7 @@ EXTRA
 
 * Setja icons með á "All items" og "Sell an item" í navbar []
 
-* Setja filter á items "Include my listings"
+* Setja filter á items "Include my listings" []
 
 * Gera readme þar sem við listum auka kröfur til að tryggja auka stig []
 
