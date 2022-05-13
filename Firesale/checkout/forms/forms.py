@@ -25,14 +25,14 @@ class ShippingForm(ModelForm):
 
 class PaymentForm(forms.Form):
     name_on_card = forms.CharField(max_length=50,
-                                   required=False,
+                                   required=True,
                                    widget=forms.TextInput(attrs={'placeholder': 'John Doe'}))
-    card_number = CreditCardField(required=False,
+    card_number = CreditCardField(required=True,
                                   max_length=16,
                                   min_length=16,
                                   widget=forms.TextInput(attrs={'size': '16', 'placeholder': '1234 1234 1234 1234'}))
-    expiry_date = ExpiryDateField(required=False)
-    security_code = VerificationValueField(required=False,
+    expiry_date = ExpiryDateField(required=True)
+    security_code = VerificationValueField(required=True,
                                            max_length=3,
                                            min_length=3,
                                            widget=forms.TextInput(attrs={'size': '3', 'placeholder': 'CVC'}))
