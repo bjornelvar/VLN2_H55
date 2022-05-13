@@ -4,7 +4,6 @@ from items.models import Items, ItemImages
 
 
 class CreateListingForm(ModelForm):
-
     class Meta:
         model = Items
         CONDITION_CHOICES = [('Like New', 'Like New'), ('Very Good', 'Very Good'),
@@ -21,8 +20,8 @@ class CreateListingForm(ModelForm):
             'price': widgets.NumberInput(attrs={'class': 'form-control'}),
         }
 
-class CreateListingFormImages(ModelForm):
 
+class CreateListingFormImages(ModelForm):
     class Meta:
         model = ItemImages
         exclude = ['id', 'item']
