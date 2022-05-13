@@ -20,9 +20,9 @@
             <b>Email:</b>
         </div>
         <div class="col">
-            <form method="post">
+            <form method="post" action="{% url 'change-email' %}">
                 {% csrf_token %}
-                <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="{{ user.email }}" style="width: 13rem;">
+                <input type="text" readonly class="form-control-plaintext" id="staticEmail" name="email" value="{{ user.email }}" style="width: 13rem;">
                 <input type="submit" disabled class="btn btn-primary btn-sm" id="change_email" value="Update Email" style="margin-top: 5px">
             </form>
             <input class="edit_email-btn" id="unlock_typing" type="image" src="/static/images/edit-logo.png">

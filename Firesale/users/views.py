@@ -14,6 +14,8 @@ from django.contrib.auth.models import User
 from checkout.models import Orders
 from django.contrib.auth import authenticate, login
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+from django.template.loader import render_to_string
+
 
 
 
@@ -219,15 +221,18 @@ def send_email_verify_email(request):
     id_bytes = str(request.user.id).encode('ascii')
     uidb64 = urlsafe_base64_encode(id_bytes)
     print(uidb64)
-    message = render(request, 'users/verify_email_email.html', {
-        'uidb64': uidb64
+    html_message = render_to_string('users/verify_email_email.html', {
+        'uidb64': uidb64,
+        'user': request.user
     })
     user_email = request.user.email
-    send_mail('FireSale verify email', 'Click the link below to verify your email', settings.EMAIL_HOST_USER, [user_email], fail_silently=False, auth_user=None, auth_password=None, connection=None, html_message=message)
-    return HttpResponse(status=200)
+    send_mail('FireSale verify email', html_message, settings.EMAIL_HOST_USER, [user_email], fail_silently=False)
+    return redirect('user-settings')
 
 def verify_email(request, uidb64):
     uid = urlsafe_base64_decode(uidb64)
+    uid = int(uid.decode('ascii'))
+
     if request.user.id == uid:
         unverifiedemail = get_object_or_404(UnverifiedEmails, pk=uid)
         unverifiedemail.delete()
@@ -235,3 +240,18 @@ def verify_email(request, uidb64):
     else:
         validlink = False
     return render(request, 'users/verify_email_complete.html', {'validlink': validlink})
+
+def change_email(request):
+    user = get_object_or_404(User, pk=request.user.id)
+    if request.method == 'POST':
+        print(request.POST)
+        if request.POST:
+            user.email = request.POST.get('email')
+            try:
+                email = UnverifiedEmails.objects.get(pk=user.id)
+                email.email = request.POST.get('email')
+                email.save()
+            except:
+                UnverifiedEmails.objects.create(user_id=user.id, email=request.POST.get('email'))
+            user.save()
+        return redirect('user-settings')

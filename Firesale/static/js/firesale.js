@@ -95,16 +95,6 @@ $(document).ready(function() {
 
     })
 
-    $('#send_email').on('click', function (){
-        let text_element = document.createElement('p');
-        let text = document.createTextNode("An email has been sent to you, if you didn't recieve an email click the link again.");
-        text_element.appendChild(text);
-        let div = document.getElementById('verify_link');
-        div.appendChild(text_element);
-
-
-    });
-
     $(".page-link").on( 'click', function (element) {
     // $(element).attr('href', function() {
         let href = $(this).attr('href')

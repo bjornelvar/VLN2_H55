@@ -56,4 +56,5 @@ urlpatterns = [
     path('profile/toggle_notifs/', views.toggle_notifications, name='toggle-notifs'),
     path('email_verify/', views.send_email_verify_email, name='email-verify'),
     path('email_verify/<uidb64>/', views.verify_email, name='email-verify-confirm'),
+    path('change_email/', views.change_email, name='change-email')
 ]
