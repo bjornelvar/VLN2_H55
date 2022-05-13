@@ -1,1 +1,28 @@
 {% extends 'base.html' %}
+
+{% block content %}
+    <div>
+        <ul class="nav nav-tabs">
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'profile-edit' %}">Profile</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="{% url 'user-settings' %}" style="background: #f4f5f7;">Security and Privacy</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Notifications</a>
+          </li>
+        </ul>
+    </div>
+    <div class="row" style="background-color: #f4f5f7; padding-bottom: 1rem; padding-top: 1rem">
+        <h3>Contact</h3>
+        <p><b>Email:</b> {{ user.email }} </p>
+        <a href="#">Change Email</a>
+    </div>
+    <div class="row" style="background-color: #f4f5f7; margin-top: 1rem; padding-top: 1rem;">
+        <h3>Security</h3>
+        <p><b>Password:</b> •••••••••••••••</p>
+        <a href="{% url 'password_change' %}">Change password</a>
+    </div>
+
+{% endblock %}

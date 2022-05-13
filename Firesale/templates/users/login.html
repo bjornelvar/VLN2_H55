@@ -6,6 +6,7 @@
         {{ form }}
         <input type="submit" class="btn btn-primary" value="Login">
     </form>
+    <p>Forgot your password? <a href="{% url 'password_reset' %}">Click here</a></p>
     <div class="noaccount">
         <h4>Don't have an account?</h4>
         <a class="btn btn-primary" href="{% url 'register' %}"> Register</a>

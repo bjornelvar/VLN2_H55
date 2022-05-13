@@ -200,3 +200,6 @@ def delete_item(request,id):
     item = get_object_or_404(Items, pk=id)
     item.delete()
     return redirect('my-listings')
+
+def user_settings(request):
+    return render(request, 'users/user_settings.html')
