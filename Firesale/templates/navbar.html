@@ -1,6 +1,9 @@
+{% load static %}
 <nav class="navbar navbar-light navbar-expand bg-light navigation-clean">
     <div class="container">
-        <a class="navbar-brand" href="/" style="color: var(--bs-orange);">FireSale</a>
+        <a class="navbar-brand" href="/" style="color: var(--bs-orange);"><b>FireSale</b>
+        <img class="navbar-brand" src="{% static 'images/firesalenavcon.png' %}" width="50" height="50">
+        </a>
         <button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1"></button>
         <a class="btn btn-primary ms-auto" role="button" href="{% url 'items-index' %}" style="border: none; margin: 11px;background: var(--bs-orange);">All Items</a>
 {% if user.is_authenticated %}

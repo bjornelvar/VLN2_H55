@@ -19,10 +19,17 @@
         <h5 class="card-title">{{ item.name }}</h5>
       <br>
       {% if item.max_offer %}
+          {% if item.sold == False %}
           <div>
           <p class="card-text">Highest current offer:</p>
           <h3>$ {{ item.max_offer }}</h3>
           </div>
+          {% else %}
+          <div>
+          <p class="card-text">Sold for:</p>
+          <h3>$ {{ item.max_offer }}</h3>
+          </div>
+          {% endif %}
       {% else %}
         <p class="card-text">No offers have been placed yet</p>
       {% endif %}
