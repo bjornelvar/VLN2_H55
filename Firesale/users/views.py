@@ -216,3 +216,6 @@ def toggle_notifications(request):
 @login_required
 def send_email_verify_email(request):
     pass
+
+def verify_email(request):
+    pass

@@ -23,7 +23,7 @@ KRÖFUR
 
 * Láta price ekki geta verið negative. [X]
 
-* Settings screen þar sem er hægt að breyta email, password og NOTIFICATION SETTINGS []
+* Settings screen þar sem er hægt að breyta email, password og NOTIFICATION SETTINGS [X]
 
 * Notification kerfi sem alertar alla bidders þegar item er accepted [X]
 
