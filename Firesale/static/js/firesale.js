@@ -96,7 +96,6 @@ $(document).ready(function() {
     }) // end of unlock typing function
 
     // PRESERVE ORDER BY PARAMETER ON PAGE RELOAD FUNCTION
-    })
 
     $('#send_email').on('click', function (){
         let text_element = document.createElement('p');
@@ -121,5 +120,7 @@ $(document).ready(function() {
 
 
  });
+
+
 
 
