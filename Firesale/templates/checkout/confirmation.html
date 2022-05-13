@@ -4,90 +4,68 @@
 <div class = "" href="/items/{{ item.id }}">
     <div class="card" style="width: 18rem; height:20rem; line-height:0.7rem;">
         <p class="single-item_category_name">{{ item.category }}</p>
-    {% with item.itemimages_set.all|first as img %}
-      <img class="item-preview-image" src="{{ img.image.url }}" width="120" height="100" alt="Product image" style="max-height:100px;">
-    {% endwith %}
-      <div class="card-body">
-        <h5 class="card-title">{{ item.name }}</h5>
-        <p class="card-text">Amount:</p>
+        {% with item.itemimages_set.all|first as img %}
+            <img class="item-preview-image" src="{{ img.image.url }}" width="120" height="100" alt="Product image" style="max-height:100px;">
+        {% endwith %}
+        <div class="card-body">
+            <h5 class="card-title">{{ item.name }}</h5>
+            <p class="card-text">Amount:</p>
             <p class="card-text" style="font-size:1.25rem; font-weight:bold;">${{ max_bid }}</p>
-        <p class="card-text">Listed {{ item.listdate | timesince }} ago</p>
-          <p class="card-text"> Sold by: {{ item.seller }} ({{ item.seller.rating }}★)</p>
-      </div>
+            <p class="card-text">Listed {{ item.listdate | timesince }} ago</p>
+            <p class="card-text"> Sold by: {{ item.seller }} ({{ item.seller.rating }}★)</p>
+        </div>
     </div>
 </div>
-    <div class="confirmation-container">
-        <div class="shipping-info">
-            <h3>Shipping Information</h3>
-            <p>Name: {{ shipping_info.first_name }} {{ shipping_info.last_name }}</p>
-            <p>Address:</p> <b>{{ shipping_info.address1 }} {{ shipping_info.address2 }} </b>
-            <p>City {{ shipping_info.city }}</p>
-            <p>ZIP: {{ shipping_info.zip }}</p>
-            <p>Country: {{ shipping_info.country }}</p>
-            <p>Phone: {{ shipping_info.phone }}</p>
-        </div>
 
-        <div class="payment-info">
-            <h3>Payment Information</h3>
-            <p>Name on card: {{ payment_info.name_on_card }}</p>
-            <p>Card number: Credit card starting with {{ payment_info.card_number|truncatechars:5 }}</p>
-        </div>
-
-        <div class="rating-info">
-            <h3>Rating for seller</h3>
-            <p> Rating for {{ item.seller }}: <b>{{ rating_info.rating }} ★ </b></p>
-        </div>
+<div class="confirmation-container">
+    <div class="shipping-info">
+        <h3>Shipping Information</h3>
+        <p>Name: {{ shipping_info.first_name }} {{ shipping_info.last_name }}</p>
+        <p>Address:</p> <b>{{ shipping_info.address1 }} {{ shipping_info.address2 }} </b>
+        <p>City {{ shipping_info.city }}</p>
+        <p>ZIP: {{ shipping_info.zip }}</p>
+        <p>Country: {{ shipping_info.country }}</p>
+        <p>Phone: {{ shipping_info.phone }}</p>
     </div>
 
-    <p>Step {{ wizard.steps.step1 }} of {{ wizard.steps.count }}</p>
+    <div class="payment-info">
+        <h3>Payment Information</h3>
+        <p>Name on card: {{ payment_info.name_on_card }}</p>
+        <p>Card number: Credit card starting with {{ payment_info.card_number|truncatechars:5 }}</p>
+    </div>
+
+    <div class="rating-info">
+        <h3>Rating for seller</h3>
+        <p> Rating for {{ item.seller }}: <b>{{ rating_info.rating }} ★ </b></p>
+    </div>
+</div>
+
+<p>Step {{ wizard.steps.step1 }} of {{ wizard.steps.count }}</p>
     {% for field in form %}
         {{ field.error }}
     {% endfor %}
 
 <form action="" method="post">
     {% csrf_token %}
+
     <table>
         {{ wizard.management_form }}
-    {% if wizard.form.forms %}
-        {{ wizard.form.management_form }}
-        {% for form in wizard.form.forms %}
-            {{ form }}
-        {% endfor %}
-    {% else %}
-        {{ wizard.form }}
-    {% endif %}
+        {% if wizard.form.forms %}
+            {{ wizard.form.management_form }}
+            {% for form in wizard.form.forms %}
+                {{ form }}
+            {% endfor %}
+        {% else %}
+            {{ wizard.form }}
+        {% endif %}
     </table>
 
     <a class="btn btn-primary" role="button" href="{% url 'my-bids' %}" style="border: none; margin: 6px;background: var(--bs-red);">Cancel</a>
-{% if wizard.steps.prev %}
-{#    <button name="wizard_goto_step" type="submit" value="{{ wizard.steps.first }}">First Step</button>#}
-    <button class="btn btn-primary" style="border: none; margin: 6px; background: antiquewhite; color: blue" name="wizard_goto_step" type="submit" value="{{ wizard.steps.prev }}">Previous</button>
-{% endif %}
+    {% if wizard.steps.prev %}
+        <button class="btn btn-primary" style="border: none; margin: 6px; background: antiquewhite; color: blue" name="wizard_goto_step" type="submit" value="{{ wizard.steps.prev }}">Previous</button>
+    {% endif %}
     <button class="btn btn-primary" style="border: none; margin: 6px;background: #3eb058;" name="wizard_goto_step" type="submit" value="submit">Confirm Purchase</button>
-{#    <input type="submit" value="Next Step" />#}
-
 
 </form>
 
-
-
-
-
-
-{#<a href="{% url 'checkout' %}/{{ form_data.order_id }}">#}
-{#{% block content %}#}
-{##}
-{#<h1>Checkout done!</h1>#}
-{##}
-{#    {{ instance.address_1 }}#}
-{#    {{ instance.address_2 }}#}
-{#    {{ instance.city }}#}
-{#    {{ instance.zip_code }}#}
-{#    {{ instance.country }}#}
-{#    {{ instance.phone }}#}
-{#{% for form in form_data %}#}
-{#{{ form }}#}
-{#{% endfor %}#}
-
-{##}
 {% endblock %}
