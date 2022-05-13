@@ -79,7 +79,7 @@ def my_orders(request):
 
 @login_required
 def my_bids(request):
-    bids = Bids.objects.filter(bidder_id=request.user.id).order_by('biddate')
+    bids = Bids.objects.filter(bidder_id=request.user.id).order_by('-is_accepted', 'biddate')
     bids1 = bids.filter(item__has_accepted_bid=False)
     bids2 = bids.filter(is_accepted=True)
     bids = bids1 | bids2
