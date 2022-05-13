@@ -26,7 +26,7 @@ class EditUserForm(ModelForm):
 class ProfileForm(ModelForm):
     class Meta:
         model = Profiles
-        exclude = ['id', 'rating', 'image', 'user']
+        exclude = ['id', 'rating', 'image', 'user', 'get_notifications']
         widgets = {
             'bio': widgets.Textarea(attrs={'class': 'form-control'})
         }
@@ -35,7 +35,8 @@ class ProfileForm(ModelForm):
 class UploadImageForm(ModelForm):
     class Meta:
         model = Profiles
-        exclude = ['id', 'rating', 'user', 'bio']
+        exclude = ['id', 'rating', 'user', 'bio', 'get_notifications']
+        labels = {'image': 'Change profile picture:'}
         widgets = {
             'image': widgets.FileInput(attrs={'class': 'form-control'})
         }

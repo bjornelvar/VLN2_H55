@@ -10,6 +10,7 @@ class Profiles(models.Model):
     bio = models.CharField(max_length=255, blank=True, null=True)
     image = models.ImageField(upload_to='images/', default='images/blank-profile-picture.png')
     rating = models.FloatField(null=True)
+    get_notifications = models.BooleanField(default=True)
 
     def __str__(self):
         return self.user.username

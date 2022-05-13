@@ -1,5 +1,5 @@
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404, HttpResponse
 from django.contrib.auth.forms import UserCreationForm
 from users.models import Profiles
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
@@ -168,17 +168,20 @@ def send_email_notification(bid):
     rejected_item_name = Items.objects.filter(id=bid.item_id).first().name
     for user in User.objects.all():
         if user.id == bid.bidder_id:
-            winner_email = user.email
-            print("winner_email:", winner_email)
-            send_mail("FireSale: Bid accepted!", f"Congratulations! Your bid of ${bid.bidamount} for {rejected_item_name} has been accepted! Go to the MY BIDS section on your FireSale dashboard to complete your order!", settings.EMAIL_HOST_USER, [winner_email], fail_silently=False)
-            print(" Winner Email should be sent")
+            if user.profiles.get_notifications:
+                winner_email = user.email
+                print("winner_email:", winner_email)
+                send_mail("FireSale: Bid accepted!", f"Congratulations! Your bid of ${bid.bidamount} for {rejected_item_name} has been accepted! Go to the MY BIDS section on your FireSale dashboard to complete your order!", settings.EMAIL_HOST_USER, [winner_email], fail_silently=False)
+                print(" Winner Email should be sent")
 
     for rejected_bid in all_bids_on_item:
         if rejected_bid.bidder_id != bid.bidder_id:
-            rejected_email = User.objects.filter(id=rejected_bid.bidder_id).first().email
-            print("rejected email:", rejected_email)
-            send_mail("FireSale: Bid rejected!", f"Your bid of ${rejected_bid.bidamount} for {rejected_item_name} has been rejected! Go to the MY BIDS section on your FireSale dashboard to see the other bids.", settings.EMAIL_HOST_USER, [rejected_email], fail_silently=False)
-            print(" Rejected Email should be sent")
+            rejected_user = User.objects.filter(id=rejected_bid.bidder_id).first()
+            if rejected_user.profiles.get_notifications:
+                rejected_email = rejected_user.email
+                print("rejected email:", rejected_email)
+                send_mail("FireSale: Bid rejected!", f"Your bid of ${rejected_bid.bidamount} for {rejected_item_name} has been rejected! Go to the MY BIDS section on your FireSale dashboard to see the other bids.", settings.EMAIL_HOST_USER, [rejected_email], fail_silently=False)
+                print(" Rejected Email should be sent")
 
 
 def edit_listing(request, id):
@@ -211,3 +214,9 @@ def delete_item(request,id):
 
 def user_settings(request):
     return render(request, 'users/user_settings.html')
+
+def toggle_notifications(request):
+    profile = Profiles.objects.get(pk=request.POST['id'])
+    profile.get_notifications = request.POST['get_notifications'] == 'true'
+    profile.save()
+    return HttpResponse(status=200)

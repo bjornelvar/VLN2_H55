@@ -59,7 +59,7 @@ EXTRA
 
 * CSS á item details og edit profile [X]
 
-* Public profile síða fyrir users, þannig þú getur skoðað profile hjá öðrum []
+* Public profile síða fyrir users, þannig þú getur skoðað profile hjá öðrum [X]
 
 * Final CSS, litasamsetning, laga staðsetningu á texta osfrv []
 

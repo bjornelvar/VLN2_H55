@@ -13,10 +13,11 @@
 {#          </li>#}
         </ul>
     </div>
-    <div class="row" style="background-color: #f4f5f7; padding-bottom: 1rem;">
+    <div class="row" style="background-color: #f4f5f7; padding-bottom: 1rem; padding-top: 1rem;">
+    <h3>Profile Picture</h3>
         <p>Current profile picture:</p>
         <img src="{{ user.profiles.image.url }}" style="max-width: 100px; height: auto">
-         <form method="post" enctype="multipart/form-data">
+         <form method="post" enctype="multipart/form-data" style="margin-top: 1rem;">
          {% csrf_token %}
              <input type="hidden" name="name" value="image">
          {{ imageform }}
