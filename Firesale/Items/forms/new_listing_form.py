@@ -4,7 +4,6 @@ from items.models import Items, ItemImages
 
 
 class CreateListingForm(ModelForm):
-    # image = forms.CharField(required=True, widget=forms.TextInput(attrs={'class': 'form-control'}))
 
     class Meta:
         model = Items
@@ -19,8 +18,6 @@ class CreateListingForm(ModelForm):
             'condition': widgets.Select(choices=CONDITION_CHOICES, attrs={'class': 'form-control'}),
             'description': widgets.Textarea(attrs={'class': 'form-control'}),
             'category': widgets.Select(choices=CATEGORY_CHOICES, attrs={'class': 'form-control'}),
-            # 'subcategory': widgets.Select(attrs={'class': 'form-control'}),
-            #'image': widgets.FileInput(attrs={'class': 'form-control'}),
             'price': widgets.NumberInput(attrs={'class': 'form-control'}),
         }
 

@@ -13,12 +13,11 @@ import Levenshtein
 from django.http import HttpResponse
 
 
-# Create your views here.
+
 # @login_required(login_url="/%2Fuserslogin")
 
 
 def index(request):
-    # items = Items.objects.filter(has_accepted_bid=False).order_by("name")
     items = Items.objects.filter(has_accepted_bid=False, sold=False).order_by('name')
 
     if "order_by" in request.GET:
@@ -55,7 +54,7 @@ def search_items(request):
         order_by_val = request.GET["order_by"]
         items = items.order_by(order_by_val)
 
-    # items = items.annotate(max_offer=Max('bids__bidamount'))
+
     items = items.annotate(max_offer=Max('bids__bidamount'))
     paginator = Paginator(items, 1)
     page_num = request.GET.get('page', 1)
@@ -83,32 +82,7 @@ def get_items_by_category(request, id):
     context = {'location': "category", 'items': page, 'categories': Categories.objects.all().order_by('name'), 'current_category': id }
     return render(request,   'items/index-by-category.html', context)
 
-
-# def get_items_by_order(request, order_val):
-#     items = Items.objects
-#     if order_val == 'name':
-#         items = items.order_by(order_val)
-#
-#     elif order_val == 'category':
-#         items = items.order_by(order_val)
-#
-#     elif order_val == 'price20desc':
-#         items = items.order_by('-price')
-#
-#     elif order_val == 'price20asc':
-#         items = items.order_by('price')
-#
-#     paginator = Paginator(items, 9)
-#     page_num = request.GET.get('page', 1)
-#     try:
-#         page = paginator.get_page(page_num)
-#     except EmptyPage or PageNotAnInteger:
-#         page = paginator.page(1)
-#     context = {'items': page, 'categories': Categories.objects.all().order_by('name')}
-#     return render(request, 'items/index.html', context)
-
-
-
+@login_required
 def create_listing(request):
     if request.method == 'POST':
         form = CreateListingForm(request.POST)
