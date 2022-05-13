@@ -87,7 +87,7 @@ $(document).ready(function() {
 
 
     $('#unlock_typing').on('click', function (){
-        input = document.getElementById('staticEmail')
+        let input = document.getElementById('staticEmail')
         document.getElementById('unlock_typing').classList.replace('edit_email-btn', 'visually-hidden')
         document.getElementById('change_email').removeAttribute('disabled')
         input.classList.replace('form-control-plaintext', 'form-control')
@@ -96,6 +96,18 @@ $(document).ready(function() {
     }) // end of unlock typing function
 
     // PRESERVE ORDER BY PARAMETER ON PAGE RELOAD FUNCTION
+    })
+
+    $('#send_email').on('click', function (){
+        let text_element = document.createElement('p');
+        let text = document.createTextNode("An email has been sent to you, if you didn't recieve an email click the link again.");
+        text_element.appendChild(text);
+        let div = document.getElementById('verify_link');
+        div.appendChild(text_element);
+
+
+    });
+
     $(".page-link").on( 'click', function (element) {
     // $(element).attr('href', function() {
         let href = $(this).attr('href')

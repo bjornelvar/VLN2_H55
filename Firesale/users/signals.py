@@ -11,6 +11,7 @@ def create_profile(sender, instance, created, **kwargs):
         Profiles.objects.create(user=instance)
         UnverifiedEmails.objects.create(user=instance, email=instance.email)
 
+
 @receiver(pre_save, sender=Profiles)
 def delete_old_profile_pic(sender, instance, **kwargs):
     print("Signal received")

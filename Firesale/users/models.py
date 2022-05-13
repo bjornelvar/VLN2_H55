@@ -3,8 +3,6 @@ from django.db import models
 from django.core.validators import MinValueValidator, MaxValueValidator
 from decimal import Decimal
 
-# Create your models here.
-
 
 class Profiles(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
@@ -26,6 +24,8 @@ class Ratings(models.Model):
         validators=[MinValueValidator(Decimal('0.0')), MaxValueValidator(Decimal('5.0'))],
         null=True
     )
+
+
 class UnverifiedEmails(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
     email = models.EmailField(null=True)
