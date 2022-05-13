@@ -52,7 +52,7 @@
                     {% endif %}
                 {% endfor %}
               </div>
-        {% elif item.max_offer and item.has_accepted_bid != False %}
+        {% elif item.max_offer and item.has_accepted_bid != False and item.sold == False%}
                 <div class="bid-button-container">
                 <img src="/static/images/Green-Check.png" class="img-fluid" alt="" width="50">
                     <h4 style="color:black;">Bid accepted.</h4><br>
