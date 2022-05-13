@@ -42,15 +42,15 @@ def my_listings(request):
     if "sold" in request.GET:
         sold = request.GET["sold"]
         if sold == "false":
-            items = Items.objects.filter(seller_id=request.user.id).order_by('has_accepted_bid', '-listdate') \
+            items = Items.objects.filter(seller_id=request.user.id).order_by('-listdate') \
                 .annotate(max_offer=Max('bids__bidamount')).filter(sold=False)
             sold_filter = False
         else:
-            items = Items.objects.filter(seller_id=request.user.id).order_by('has_accepted_bid', '-listdate') \
+            items = Items.objects.filter(seller_id=request.user.id).order_by('-listdate') \
                 .annotate(max_offer=Max('bids__bidamount'))
             sold_filter = True
     else:
-        items = Items.objects.filter(seller_id=request.user.id).order_by('has_accepted_bid', '-listdate') \
+        items = Items.objects.filter(seller_id=request.user.id).order_by('-listdate') \
             .annotate(max_offer=Max('bids__bidamount'))
 
     paginator = Paginator(items, 5)
@@ -79,7 +79,7 @@ def my_orders(request):
 
 @login_required
 def my_bids(request):
-    bids = Bids.objects.filter(bidder_id=request.user.id).order_by('biddate')
+    bids = Bids.objects.filter(bidder_id=request.user.id).order_by('-is_accepted', 'biddate')
     bids1 = bids.filter(item__has_accepted_bid=False)
     bids2 = bids.filter(is_accepted=True)
     bids = bids1 | bids2
