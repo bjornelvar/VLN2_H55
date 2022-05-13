@@ -61,6 +61,8 @@ EXTRA
 
 * Public profile síða fyrir users, þannig þú getur skoðað profile hjá öðrum [X]
 
+* Working notification settings [X]
+
 * Final CSS, litasamsetning, laga staðsetningu á texta osfrv []
 
 * Setja icons með á "All items" og "Sell an item" í navbar []
