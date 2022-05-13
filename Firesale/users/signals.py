@@ -1,7 +1,7 @@
 from django.db.models.signals import post_save, pre_save
 from django.dispatch import receiver
 from django.contrib.auth.models import User
-from .models import Profiles
+from .models import Profiles, UverifiedEmails
 import os
 
 
@@ -9,6 +9,7 @@ import os
 def create_profile(sender, instance, created, **kwargs):
     if created:
         Profiles.objects.create(user=instance)
+        UverifiedEmails.objects.create(user=instance, email=instance.email)
 
 @receiver(pre_save, sender=Profiles)
 def delete_old_profile_pic(sender, instance, **kwargs):

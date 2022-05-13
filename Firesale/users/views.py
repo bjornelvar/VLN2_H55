@@ -220,3 +220,6 @@ def toggle_notifications(request):
     profile.get_notifications = request.POST['get_notifications'] == 'true'
     profile.save()
     return HttpResponse(status=200)
+
+def send_email_verify_email(request):
+    pass

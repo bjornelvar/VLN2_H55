@@ -24,4 +24,6 @@ class Ratings(models.Model):
         validators=[MinValueValidator(Decimal('0.0')), MaxValueValidator(Decimal('5.0'))],
         null=True
     )
-
+class UverifiedEmails(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
+    email = models.EmailField(null=True)
