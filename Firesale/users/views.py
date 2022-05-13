@@ -12,6 +12,8 @@ from django.core.mail import send_mail
 from django.conf import settings
 from django.contrib.auth.models import User
 from checkout.models import Orders
+from django.contrib.auth import authenticate, login
+
 
 
 
@@ -30,8 +32,13 @@ def register(request):
     if request.method == 'POST':
         form = CustomRegisterForm(request.POST) # Sækir í users>forms>profile_forms.py
         if form.is_valid():
-            form.save()
-            return redirect('login')
+            new_user = form.save()
+            messages.success(request, 'Your account has been created! You will now be logged in.')
+            new_user = authenticate(username=form.cleaned_data['username'],
+                                    password=form.cleaned_data['password1'],
+                                    )
+            login(request, new_user)
+            return redirect('home:home-index')
     else:
         form = CustomRegisterForm()
 

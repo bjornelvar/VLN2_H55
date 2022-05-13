@@ -55,7 +55,7 @@ EXTRA
 
 * Láta search virka með enter [X]
 
-* Auto login eftir register. []
+* Auto login eftir register. [X]
 
 * CSS á item details og edit profile [X]
 
