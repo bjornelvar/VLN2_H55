@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container">
+  <div class="row">
+    <div class="col-12">
+        {% if validlink %}
+      <h2 class="my-5">Your Email Was Verified Successfully</h2>
+      <p>
+        Your email has been verified.
+        <input type="button" class="btn-primary" href="{% url 'user-settings' %}">Go Back To Setting.</input>
+        {% else %}
+        <h2 class="my-5">Not A Valid Link, Your Email Was Not Verified</h2>
+      <p>
+        <input type="button" class="btn-primary" href="{% url 'home:home-index' %}">Go To Home Page.</input>
+        {% endif %}
+      </p>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

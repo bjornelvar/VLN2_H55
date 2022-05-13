@@ -1,7 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404, HttpResponse
 from django.contrib.auth.forms import UserCreationForm
-from users.models import Profiles
+from users.models import Profiles, UnverifiedEmails
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib import messages
 from users.forms.profile_forms import *
@@ -13,6 +13,7 @@ from django.conf import settings
 from django.contrib.auth.models import User
 from checkout.models import Orders
 from django.contrib.auth import authenticate, login
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 
 
 def register(request):
@@ -224,8 +225,23 @@ def toggle_notifications(request):
 
 @login_required
 def send_email_verify_email(request):
-    pass
+    id_bytes = str(request.user.id).encode('ascii')
+    uidb64 = urlsafe_base64_encode(id_bytes)
+    print(uidb64)
+    message = render(request, 'users/verify_email_email.html', {
+        'uidb64': uidb64
+    })
+    user_email = request.user.email
+    send_mail('FireSale verify email', 'Click the link below to verify your email', settings.EMAIL_HOST_USER, [user_email], fail_silently=False, auth_user=None, auth_password=None, connection=None, html_message=message)
+    return HttpResponse(status=200)
 
 
-def verify_email(request):
-    pass
+def verify_email(request, uidb64):
+    uid = urlsafe_base64_decode(uidb64)
+    if request.user.id == uid:
+        unverifiedemail = get_object_or_404(UnverifiedEmails, pk=uid)
+        unverifiedemail.delete()
+        validlink = True
+    else:
+        validlink = False
+    return render(request, 'users/verify_email_complete.html', {'validlink': validlink})
