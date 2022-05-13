@@ -7,20 +7,22 @@
         <a class="card-body" href="/items/{{ bid.item.id }}">
                 <h5 class="card-title">{{ bid.item.name }}</h5>
                     <br>
-            <div class="bid-price" style="display:flex; flex-direction: column; margin-top:-20px; gap: 2.5px;">
+            <div class="bid-price" style="display:flex; flex-direction: column; margin-top:-20px;">
                 {% for max_bid in max_bids %}
                 {% if max_bid.id == bid.item.id %}
                 <p class="card-text">Highest current offer:</p>
                 <h4 style="line-height:5px;">${{ max_bid.max_offer }}</h4>
-                    <br>
+
                 {% endif %}
                 {% endfor %}
                 <p class="card-text" >Your current offer:</p>
                 <h4 style="line-height:5px;">${{ bid.bidamount }}</h4>
             </div>
                 <br>
+        <div>
             <p class="card-text" style="color:grey; line-height:5px;">Listed {{ bid.item.listdate | timesince }} ago</p>
             <p class="card-text" style="color:grey; line-height:5px;"> Sold by: {{ bid.item.seller }} ({{ bid.item.seller.rating }}★)</p>
+        </div>
         </a>
         {% if bid.is_accepted == True%}
             <div class="bid-button-container">
