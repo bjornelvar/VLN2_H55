@@ -3,6 +3,7 @@ from items.models import Items
 from items.models import Categories
 # Create your views here.
 
+
 def index(response):
     return render(response, 'home/home-index.html')
 
