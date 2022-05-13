@@ -93,7 +93,9 @@ $(document).ready(function() {
         input.classList.replace('form-control-plaintext', 'form-control')
         input.removeAttribute('readonly')
 
-    })
+    }) // end of unlock typing function
+
+    // PRESERVE ORDER BY PARAMETER ON PAGE RELOAD FUNCTION
     $(".page-link").on( 'click', function (element) {
     // $(element).attr('href', function() {
         let href = $(this).attr('href')

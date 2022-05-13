@@ -152,21 +152,21 @@ def get_item_by_id(request, id):
 def get_similar_items(main_item, all_items):
     items = []
     for item in all_items:
-        if len(items) == 3:
+        if len(items) == 3: # Until 3 similar items are found
             return items
-        if get_string_distance(main_item.name, item.name) < 8 and item.id != main_item.id and item not in items:
-            if item.category_id == main_item.category_id:
-                items.insert(0, item)
+        if get_string_distance(main_item.name, item.name) < 8 and item.id != main_item.id and item not in items: # if item has similar name and not the same item
+            if item.category_id == main_item.category_id: # if item has same category
+                items.insert(0, item) # Insert item at the beginning of the list
             else:
-                items.append(item)
+                items.append(item) # append item at the end of the list
     for item in all_items:
-        if len(items) == 3:
+        if len(items) == 3: # If 3 similar items were not found, populae the rest of the list with items from the same category
             return items
         if item.category_id == main_item.category_id and item.id != main_item.id and item not in items:
             items.append(item)
     return items
 
-
+# A function to get the distance between two strings for similar items calculation
 def get_string_distance(string1, string2):
     string1_clean = string1.replace(" ", "").replace("-", "")
     string2_clean = string2.replace(" ", "").replace("-", "")
