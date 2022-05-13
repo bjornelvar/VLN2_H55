@@ -35,7 +35,6 @@ class RateSellerForm(forms.Form):
 class SoldForm(ModelForm):
     class Meta:
         model = Items
-        # fields = ['sold']
         exclude = ('category', 'name', 'seller', 'description', 'price', 'condition', 'date_added', 'has_accepted_bid')
 
 
