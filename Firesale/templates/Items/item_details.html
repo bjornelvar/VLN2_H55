@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
-    <div class="items-container" style="margin-top:-25px;">
+
+<div class="items-container" style="margin-top:-25px;">
     <div class="col-lg-8 border p-3 main-section">
         <div class="row hedding m-0 pl-3 pt-0 pb-3">
             {{ item.name }}
@@ -38,15 +39,15 @@
                         </div>
                         <div class="col-lg-12">
                             {% if user.id == item.seller_id %}
-                            <p class="tag-section"><strong>Sold by:</strong><span> <a href="{% url 'profile' %}">{{ item.seller }}</a> ({{ item.seller.rating }} ★) </span></p>
+                                <p class="tag-section"><strong>Sold by:</strong><span> <a href="{% url 'profile' %}">{{ item.seller }}</a> ({{ item.seller.rating }} ★) </span></p>
                             {% else %}
-                            <p class="tag-section"><strong>Sold by:</strong><span> <a class="seller-link" style="font-weight:bold;" href="{% url 'user-profile' id=item.seller_id %}">{{ item.seller }}</a> ({{ item.seller.rating }} ★) </span></p>
+                                <p class="tag-section"><strong>Sold by:</strong><span> <a class="seller-link" style="font-weight:bold;" href="{% url 'user-profile' id=item.seller_id %}">{{ item.seller }}</a> ({{ item.seller.rating }} ★) </span></p>
                             {% endif %}
                         </div>
                         <div class="col-lg-12">
-    {% if user.id == item.seller_id %}
-    <div>
-        <a type="Button" class="btn btn-primary" style="color:black;" href="{% url 'edit-listing' id=item.id %}">Edit listing</a>
+                            {% if user.id == item.seller_id %}
+                        <div>
+                        <a type="Button" class="btn btn-primary" style="color:black;" href="{% url 'edit-listing' id=item.id %}">Edit listing</a>
     </div>
     {% else %}
         {% include 'messages.html' %}
@@ -58,10 +59,8 @@
                     <input type="submit" class="btn btn-primary" value="Submit bid">
                 </form>
             </label>
-
     {% endif %}
     {% endif %}
-
                         </div>
                     </div>
                 </div>
@@ -77,74 +76,3 @@
     </div>
 </div>
 {% endblock %}
-
-
-
-
-
-{#{% extends 'base.html' %}#}
-{#{% block content %}#}
-{#<div class="item-details_container">#}
-{#    <h2>{{ item.name }}</h2>#}
-{#    <div id="itemImageCarousel" class="carousel carousel-dark slide">#}
-{#  <div class="carousel-indicators">#}
-{#      {% for img in item.itemimages_set.all %}#}
-{#          {% if forloop.first %}#}
-{#        <button type="button" data-bs-target="#itemImageCarousel" data-bs-slide-to="{{ forloop.counter0 }}" class="active" aria-current="true" aria-label="Slide {{ forloop.counter }}"></button>#}
-{#          {% else %}#}
-{#            <button type="button" data-bs-target="#itemImageCarousel" data-bs-slide-to="{{ forloop.counter0 }}" aria-label="Slide {{ forloop.counter }}"></button>#}
-{#          {% endif %}#}
-{#      {% endfor %}#}
-{#  </div>#}
-{#  <div class="carousel-inner">#}
-{#      {% for img in item.itemimages_set.all %}#}
-{#          {% if forloop.first %}#}
-{#    <div class="carousel-item active">#}
-{#      <img src="{{ img.image.url }}" class="d-block w-100" alt="No image found">#}
-{#    </div>#}
-{#          {% else %}#}
-{#    <div class="carousel-item">#}
-{#      <img src="{{ img.image.url }}" class="d-block w-100" alt="No image found">#}
-{#    </div>#}
-{#      {% endif %}#}
-{#      {% endfor %}#}
-{#  </div>#}
-{#  <button class="carousel-control-prev" type="button" data-bs-target="#itemImageCarousel" data-bs-slide="prev">#}
-{#    <span class="carousel-control-prev-icon" aria-hidden="true"></span>#}
-{#    <span class="visually-hidden">Previous</span>#}
-{#  </button>#}
-{#  <button class="carousel-control-next" type="button" data-bs-target="#itemImageCarousel" data-bs-slide="next">#}
-{#    <span class="carousel-control-next-icon" aria-hidden="true"></span>#}
-{#    <span class="visually-hidden">Next</span>#}
-{#  </button>#}
-{#</div>#}
-
-
-{#    <p><b>Description:</b> {{ item.description }}</p>#}
-{#    <p><b>Price:</b> ${{ item.price }}</p>#}
-{#    {% if max_bid %}#}
-{#    <p><b>Highest current offer:</b> ${{ max_bid.bidamount }}</p>#}
-{#    {% else %}#}
-{#    <p>No offers have been placed yet</p>#}
-{#    {% endif %}#}
-{#    <p>{{ item.location }}</p>#}
-{#    <p><b>Seller:</b> {{ item.seller }} ({{ item.seller.rating }}★)</p>#}
-{#    {% if user.id == item.seller_id %}#}
-{#    <div>#}
-{#        <a type="Button" class="btn btn-primary" href="{% url 'edit-listing' id=item.id %}">Edit listing</a>#}
-{#    </div>#}
-{#    {% else %}#}
-{#    {% include 'messages.html' %}#}
-{#    {% if not item.has_accepted_bid and user.is_authenticated%}#}
-{#    <form class="form form-horizontal" method="post">#}
-{#        {% csrf_token %}#}
-{#        {{ form }}  {# bids>forms>bids_forms.py #}
-{#    <input type="submit" class="btn btn-primary" value="Submit bid">#}
-{#    </form>#}
-{#    {% endif %}#}
-{#    {% endif %}#}
-{#    <div class="similar_items">#}
-{#        {% include 'items/similar_items.html' with category=category %}#}
-{#    </div>#}
-{#</div>#}
-{#{% endblock %}#}

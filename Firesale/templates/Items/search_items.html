@@ -1,18 +1,17 @@
 {% extends 'base.html' %}
 {% block content %}
     <div class="items_header">
-    {% if search_term %}
-
-        {% if current_category_name != '' %}
-    <h2> Showing results for "{{ search_term }}" in category {{ current_category_name }}</h2>
+        {% if search_term %}
+            {% if current_category_name != '' %}
+                <h2> Showing results for "{{ search_term }}" in category {{ current_category_name }}</h2>
             {% else %}
-    <h2> Showing results for "{{ search_term }}"</h2>
+                <h2> Showing results for "{{ search_term }}"</h2>
             {% endif %}
 
-    {% else %}
-        <h2> No search term entered. Showing all items. </h2>
-    {% endif %}
-    {% include 'items/order_by_list.html' %}
+        {% else %}
+            <h2> No search term entered. Showing all items. </h2>
+        {% endif %}
+        {% include 'items/order_by_list.html' %}
     </div>
 
 
@@ -32,7 +31,8 @@
     </div>
 
 
-    <div class="pages">
+<div class="pages">
     {% include 'items/pages.html' with paginator=paginator items=items categories=categories current_category=current_category current_category_name=current_category_name search_term=search_term serach_val=search_val%}
         </div>
+
 {% endblock %}

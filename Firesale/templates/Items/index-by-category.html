@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
-    <div class="items_header">
+
+<div class="items_header">
     {% if request.get_full_path == "/items/" %}
         <h1>All items</h1>
             {% include 'items/order_by_list.html' %}
@@ -13,11 +14,10 @@
         {% include 'items/order_by_list.html' %}
     {% endif %}
     </div>
-{#        {% endfor %}#}
 
     <div class="items_container">
         <div class="category_container">
-                {% include 'items/category_list.html' with category=category %}
+            {% include 'items/category_list.html' with category=category %}
         </div>
         <div class="items">
             {% for item in items %}
@@ -29,8 +29,5 @@
 <div class="pages">
     {% include 'items/pages.html' with paginator=paginator items=items categories=categories %}
 </div>
-
-
-
 
 {% endblock %}

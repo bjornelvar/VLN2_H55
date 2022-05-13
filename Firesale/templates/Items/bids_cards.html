@@ -4,57 +4,48 @@
       <img class="item-preview-image" src="{{ img.image.url }}" width="120" height="300" alt="Product image">
       {% endwith %}
     </a>
-      <a class="card-body" href="/items/{{ bid.item.id }}">
-            <h5 class="card-title">{{ bid.item.name }}</h5>
-                <br>
-          <div class="bid-price" style="display:flex; flex-direction: column; margin-top:-20px; gap: 2.5px;">
+        <a class="card-body" href="/items/{{ bid.item.id }}">
+                <h5 class="card-title">{{ bid.item.name }}</h5>
+                    <br>
+            <div class="bid-price" style="display:flex; flex-direction: column; margin-top:-20px; gap: 2.5px;">
                 {% for max_bid in max_bids %}
                 {% if max_bid.id == bid.item.id %}
-                    <p class="card-text">Highest current offer:</p>
-                    <h4 style="line-height:5px;">${{ max_bid.max_offer }}</h4>
+                <p class="card-text">Highest current offer:</p>
+                <h4 style="line-height:5px;">${{ max_bid.max_offer }}</h4>
                     <br>
                 {% endif %}
                 {% endfor %}
-          <p class="card-text" >Your current offer:</p>
-          <h4 style="line-height:5px;">${{ bid.bidamount }}</h4>
-          </div>
-      <br>
+                <p class="card-text" >Your current offer:</p>
+                <h4 style="line-height:5px;">${{ bid.bidamount }}</h4>
+            </div>
+                <br>
             <p class="card-text" style="color:grey; line-height:5px;">Listed {{ bid.item.listdate | timesince }} ago</p>
-              <p class="card-text" style="color:grey; line-height:5px;"> Sold by: {{ bid.item.seller }} ({{ bid.item.seller.rating }}★)</p>
-
-      </a>
-          {% if bid.is_accepted == True%}
-              <div class="bid-button-container">
-              <img src="/static/images/Green-Check.png" class="img-fluid" alt="" width="50">
-              <p style="padding: 0.5rem; margin:0 auto; margin-bottom:1rem; color:#4CAF50;font-weight: bold;  text-align: center; border-radius: 1rem;"> Bid Accepted! </p>
-              <form action="{% url 'checkout' id=bid.item.id %}">
-                    <input type="submit" class="checkout-button" value="Checkout" />
+            <p class="card-text" style="color:grey; line-height:5px;"> Sold by: {{ bid.item.seller }} ({{ bid.item.seller.rating }}★)</p>
+        </a>
+        {% if bid.is_accepted == True%}
+            <div class="bid-button-container">
+            <img src="/static/images/Green-Check.png" class="img-fluid" alt="" width="50">
+            <p style="padding: 0.5rem; margin:0 auto; margin-bottom:1rem; color:#4CAF50;font-weight: bold;  text-align: center; border-radius: 1rem;"> Bid Accepted! </p>
+            <form action="{% url 'checkout' id=bid.item.id %}">
+                <input type="submit" class="checkout-button" value="Checkout" />
             </form>
-              </div>
-          {% else %}
-              <div class="bid-button-container">
-              {% for max_bid in max_bids %}
+            </div>
+        {% else %}
+            <div class="bid-button-container">
+                {% for max_bid in max_bids %}
                 {% if max_bid.id == bid.item.id %}
-                  {% if bid.bidamount < max_bid.max_offer %}
-                    <img src="/static/images/red-x.png" class="img-fluid" alt="" width="50">
+                    {% if bid.bidamount < max_bid.max_offer %}
+                        <img src="/static/images/red-x.png" class="img-fluid" alt="" width="50">
                         <p style="padding: 0.5rem; margin:0 auto; margin-bottom:1rem; color:red;font-weight: bold;  text-align: center; border-radius: 1rem;"> You have been outbid! </p>
-                  {% elif bid.bidamount >= max_bid.max_offer %}
-                      <img src="/static/images/crown.png" class="img-fluid" alt="" width="50">
-                      <p style="padding: 0.5rem; margin:0 auto; margin-bottom:1rem; color:black; font-weight: bold;  text-align: center; border-radius: 1rem;"> You are the highest bidder! </p>
-                  {% endif %}
+                    {% elif bid.bidamount >= max_bid.max_offer %}
+                        <img src="/static/images/crown.png" class="img-fluid" alt="" width="50">
+                        <p style="padding: 0.5rem; margin:0 auto; margin-bottom:1rem; color:black; font-weight: bold;  text-align: center; border-radius: 1rem;"> You are the highest bidder! </p>
+                    {% endif %}
                 {% endif %}
-              {% endfor %}
-              <form action="/items/{{ bid.item.id }}">
+                {% endfor %}
+                <form action="/items/{{ bid.item.id }}">
                     <input type="submit" class="bid-again-button" value="Bid Again" />
-            </form>
-              </div>
-          {% endif %}
-{#          <a class="bid-again-button" href="/items/{{ bid.item.id }}">#}
-{#              <button class="btn btn-primary" style="background-color: indianred; border: none; font-size: xx-large">Bid Again</button>#}
-{#          </a>#}
-{#          {% else %}#}
-{#              <a class="bid-again-button" href="/items/test">#}
-{#              <button class="btn btn-primary" style="background-color: indianred; border: none; font-size: xx-large">Bid Again</button>#}
-{#          </a>#}
-{#          {% endif %}#}
+                </form>
+            </div>
+        {% endif %}
 </div>

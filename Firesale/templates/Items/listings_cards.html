@@ -1,54 +1,43 @@
 <form class="form form-horizontal" method="post">
-            {% csrf_token %}
-            {{ form.as_p }}
-        </form>
+    {% csrf_token %}
+    {{ form.as_p }}
+</form>
+
 <div class = "single-item_listings" href="/items/{{ item.id }}" style="width: 70rem; height: 15rem">
     <a class = "single-item_listings_image" href="/items/{{ item.id }}" style="width: 15rem; height: 15rem">
         {% with item.itemimages_set.all|first as img %}
-      <img class="item-preview-image" src="{{ img.image.url }}" width="120" height="300" alt="Product image">
+            <img class="item-preview-image" src="{{ img.image.url }}" width="120" height="300" alt="Product image">
         {% endwith %}
     </a>
-<div class="position-absolute bottom-0 start-0">
-<form action="{% url 'edit-listing' id=item.id %}">
-                    <input type="submit" class="bid-again-button" value="Edit listing" />
-            </form>
 
-{#    <a type="button" class="edit-button" href="{% url 'edit-listing' id=item.id %}" style="padding: 0.5rem;color: black;margin-bottom: 25px; margin-left: 10px;">Edit listing</a>#}
-</div>
-      <a class="card-body" href="/items/{{ item.id }}">
+    <div class="position-absolute bottom-0 start-0">
+    <form action="{% url 'edit-listing' id=item.id %}">
+            <input type="submit" class="bid-again-button" value="Edit listing" />
+    </form>
+    </div>
+    <a class="card-body" href="/items/{{ item.id }}">
         <h5 class="card-title">{{ item.name }}</h5>
-      <br>
-      {% if item.max_offer %}
-          {% if item.sold == False %}
-          <div>
-          <p class="card-text">Highest current offer:</p>
-          <h3>$ {{ item.max_offer }}</h3>
-          </div>
-          {% else %}
-          <div>
-          <p class="card-text">Sold for:</p>
-          <h3>$ {{ item.max_offer }}</h3>
-          </div>
-          {% endif %}
-      {% else %}
-        <p class="card-text">No offers have been placed yet</p>
-      {% endif %}
-      <br>
-        <p class="card-text" style="color:grey;">Listed {{ item.listdate | timesince }} ago</p>
-      </a>
-{#    {% if item.max_offer %}#}
-{#        {% for bid in item.bids_set.all %} {# item.bids_set.all finnur öll bid fyrir tiltekið item #}
-{#              {% if bid.bidamount == item.max_offer and bid.is_accepted == False %}#}
-{#    <a class="accept-button" href="{% url 'accept-bid' %}?bid_id={{ bid.id }}">#}
-{#        <button class="btn btn-primary" href="{% url 'accept-bid' %}?bid_id={{ bid.id }}" style="background-color: #3eb058; border: none; font-size: xx-large"><b>ACCEPT BID</b></button> {# SETJA FUNCTIONALITY #}
-{#              {% endif %}#}
-{#        </a>#}
-{#          {% endfor %}#}
-{#    {% else %}#}
-{#    <a class="accept-button" style="background-color: firebrick">#}
-{#        <button class="btn btn-primary" disabled style="background-color: firebrick; border: none; font-size: xx-large"><b>NO BIDS</b></button>#}
-{#    {% endif %}#}
-{#    </a>#}
+            <br>
+        {% if item.max_offer %}
+
+            {% if item.sold == False %}
+                <div>
+                    <p class="card-text">Highest current offer:</p>
+                    <h3>$ {{ item.max_offer }}</h3>
+                </div>
+            {% else %}
+                <div>
+                <p class="card-text">Sold for:</p>
+                <h3>$ {{ item.max_offer }}</h3>
+                </div>
+            {% endif %}
+
+        {% else %}
+            <p class="card-text">No offers have been placed yet</p>
+        {% endif %}
+            <br>
+            <p class="card-text" style="color:grey;">Listed {{ item.listdate | timesince }} ago</p>
+    </a>
         {% if item.max_offer and item.has_accepted_bid == False %}
             {{ bid.id }}
             <div class="bid-button-container">
@@ -58,7 +47,7 @@
                         <a class="checkout-button" href="{% url 'accept-bid' %}?bid_id={{ bid.id }}">Accept</a>
                     {% endif %}
                 {% endfor %}
-              </div>
+            </div>
         {% elif item.max_offer and item.has_accepted_bid != False and item.sold == False%}
                 <div class="bid-button-container">
                 <img src="/static/images/Green-Check.png" class="img-fluid" alt="" width="50">
@@ -70,29 +59,11 @@
                     <img src="/static/images/sold.png" class="img-fluid" alt="" width="250">
               </div>
         {% else %}
-
              <div class="bid-button-container">
 
                     <h4 style="">No bids yet</h4>
               </div>
         {% endif %}
-
 </div>
-
-
-
-{#<button class="btn btn-primary" href="#" style="background: var(--bs-green)"><b>ACCEPT BID</b></button> {# SETJA FUNCTIONALITY #}
-{#<a class = "single-item" href="/items/{{ item.id }}">#}
-{#    <div class="card" style="width: 70rem; height: 28rem">#}
-{#      <img class="item-preview-image" src="{{ item.image.url }}" width="120" height="200" alt="Product image">#}
-{#      <div class="card-body">#}
-{#        <h5 class="card-title">{{ item.name }}</h5>#}
-{#        <p class="card-text">Highest current offer ${{ item.max_offer }}</p>#}
-{#        <p class="card-text">Listed {{ item.listdate | timesince }} ago</p>#}
-{#          <p class="card-text"> Sold by: {{ item.seller }} ({{ item.seller.rating }}★)</p>#}
-{#      </div>#}
-{#    </div>#}
-{#</a>#}
-
 
 
