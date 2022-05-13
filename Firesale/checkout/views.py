@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
 from django.template.context_processors import request
 from formtools.wizard.views import SessionWizardView
@@ -26,10 +27,8 @@ TEMPLATES = {"shipping": "checkout/shipping.html",
 
 class CheckoutWizard(SessionWizardView):
 
-
     def get_template_names(self):
         return [TEMPLATES[self.steps.current]]
-
 
     def get_context_data(self, form, **kwargs):
         context = super(CheckoutWizard, self).get_context_data(form, **kwargs)
@@ -40,7 +39,6 @@ class CheckoutWizard(SessionWizardView):
         context.update({'shipping_info': CheckoutWizard.get_cleaned_data_for_step(self, 'shipping')})
         context.update({'payment_info': CheckoutWizard.get_cleaned_data_for_step(self, 'payment')})
         context.update({'rating_info': CheckoutWizard.get_cleaned_data_for_step(self, 'rating')})
-
         return context
 
     def done(self, form_list, **kwargs):

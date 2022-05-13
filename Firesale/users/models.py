@@ -5,6 +5,7 @@ from decimal import Decimal
 
 # Create your models here.
 
+
 class Profiles(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
     bio = models.CharField(max_length=255, blank=True, null=True)
@@ -15,6 +16,7 @@ class Profiles(models.Model):
     def __str__(self):
         return self.user.username
 
+
 class Ratings(models.Model):
     rated_user = models.ForeignKey(User, related_name='rated_user', on_delete=models.CASCADE)
     rated_by = models.ForeignKey(User, related_name='rated_by', on_delete=models.CASCADE)
@@ -24,6 +26,6 @@ class Ratings(models.Model):
         validators=[MinValueValidator(Decimal('0.0')), MaxValueValidator(Decimal('5.0'))],
         null=True
     )
-class UverifiedEmails(models.Model):
+class UnverifiedEmails(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
     email = models.EmailField(null=True)

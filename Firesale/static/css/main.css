@@ -19,6 +19,13 @@ a{
 
 }
 
+.edit_email-btn {
+    width: 20px;
+    height: auto;
+    position: relative;
+    left: 13rem;
+    bottom: 4rem;
+}
 
 /*ITEMS CSS --------------------------------------------------------------*/
 

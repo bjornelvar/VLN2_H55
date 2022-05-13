@@ -19,10 +19,22 @@
         <div class="col-sm-2">
             <b>Email:</b>
         </div>
-        <div class="col-sm-2">
-            <p>{{ user.email }} <a class="link-primary" href="#" style="width: auto; font-size: 13px;">Change Email</a></p>
+        <div class="col">
+            <form method="post">
+                {% csrf_token %}
+                <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="{{ user.email }}" style="width: 13rem;">
+                <input type="submit" disabled class="btn btn-primary btn-sm" id="change_email" value="Update Email" style="margin-top: 5px">
+            </form>
+            <input class="edit_email-btn" id="unlock_typing" type="image" src="/static/images/edit-logo.png">
+            {% with user.uverifiedemails_set.all|first as email %}
+                {% if email %}
+                    <p style="font-size: 12px">Your email has not been verified, <a class="link-primary" href="{% url 'email-change' %}">click here</a> to send verification email</p>
+                {% else %}
+                    <p style="font-size: 12px">Your email is verified{{ email.name }}</p>
+                {% endif %}
+            {% endwith %}
         </div>
-        <div class="mb-3 row">
+        <div class="mb-3 row" style="margin-top: 1rem">
             <div class="col-sm">
                 <div class="form-check form-switch">
                     <label for="notif-check">Get notifications via email</label>
@@ -52,7 +64,7 @@
             <b>Password:</b>
         </div>
         <div class="col-sm-2">
-            <p>•••••••••••••••• <br><a class="link-primary" href="#" style="width: auto; font-size: 13px;">Change Password</a></p>
+            <p>•••••••••••••••• <br><a class="link-primary" href="{% url 'password_change' %}" style="width: auto; font-size: 13px;">Change Password</a></p>
         </div>
     </div>
 
