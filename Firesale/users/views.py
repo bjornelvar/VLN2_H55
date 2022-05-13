@@ -1,7 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404, HttpResponse
-from django.contrib.auth.forms import UserCreationForm
-from users.models import Profiles, UnverifiedEmails
+from users.models import UnverifiedEmails
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib import messages
 from users.forms.profile_forms import *

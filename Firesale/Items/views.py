@@ -10,7 +10,6 @@ from items.models import Items, ItemImages
 from items.models import Categories
 from django.db.models import Max
 import Levenshtein
-from django.http import HttpResponse
 
 
 def index(request):

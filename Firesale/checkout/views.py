@@ -1,16 +1,10 @@
-from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, redirect, get_object_or_404
-from django.template.context_processors import request
+from django.shortcuts import redirect, get_object_or_404
 from formtools.wizard.views import SessionWizardView
-
 from checkout.forms.forms import OrderForm, ShippingForm, PaymentForm, RateSellerForm
-from checkout.models import ShippingInformation
-
 from items.models import Items
 from bids.models import Bids
 from users.models import Ratings, Profiles
 from checkout.models import Orders
-from django.db.models import Max
 from django.db.models import Avg
 
 
