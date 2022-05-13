@@ -92,6 +92,7 @@ def my_bids(request):
     bids1 = bids.filter(item__has_accepted_bid=False)
     bids2 = bids.filter(is_accepted=True)
     bids = bids1 | bids2
+    bids = bids.filter(item__sold=False)
     paginator = Paginator(bids,5)
     page_num = request.GET.get('page', 1)
     try:
