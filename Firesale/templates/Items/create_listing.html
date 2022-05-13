@@ -1,14 +1,19 @@
 
 {% extends "base.html" %}
 {% block content %}
-    {% if user.is_authenticated %}
-    <form class="form form-horizontal" enctype='multipart/form-data' action="{%  url 'create_listing' %}" method="post">
-        {%  csrf_token %}
-        {{ form }}
-        {{ form_images }}
-        <input type="submit" value="Create" class="btn btn-primary pull-right" style="clear:both; margin: 10px 0" />
-    </form>
-    {% else %}
-    <h1>You must be logged in to create a listing.</h1>
-    {% endif %}
+    <div class="row" style="background-color: #f4f5f7; padding-bottom: 1rem; padding-top: 1rem;">
+        <h3>Create a Listing</h3>
+        <div class="col">
+            {% if user.is_authenticated %}
+            <form class="form form-horizontal" enctype='multipart/form-data' action="{%  url 'create_listing' %}" method="post">
+                {%  csrf_token %}
+                {{ form }}
+                {{ form_images }}
+                <input type="submit" value="Create" class="btn btn-primary pull-right" style="clear:both; margin: 10px 0" />
+            </form>
+            {% else %}
+            <h1>You must be logged in to create a listing.</h1>
+            {% endif %}
+        </div>
+    </div>
 {% endblock %}

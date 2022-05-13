@@ -65,3 +65,4 @@ class AddListingPicturesForm(ModelForm):
         widgets = {
             'image': widgets.FileInput(attrs={'class': 'form-control', 'multiple': True})
         }
+
