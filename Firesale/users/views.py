@@ -52,15 +52,15 @@ def my_listings(request):
     if "sold" in request.GET:
         sold = request.GET["sold"]
         if sold == "false":
-            items = Items.objects.filter(seller_id=request.user.id).order_by('-has_accepted_bid') \
+            items = Items.objects.filter(seller_id=request.user.id).order_by('has_accepted_bid', 'bids__item_id') \
                 .annotate(max_offer=Max('bids__bidamount')).filter(sold=False)
             sold_filter = False
         else:
-            items = Items.objects.filter(seller_id=request.user.id).order_by('-has_accepted_bid') \
+            items = Items.objects.filter(seller_id=request.user.id).order_by('has_accepted_bid', 'bids__item_id') \
                 .annotate(max_offer=Max('bids__bidamount'))
             sold_filter = True
     else:
-        items = Items.objects.filter(seller_id=request.user.id).order_by('-has_accepted_bid') \
+        items = Items.objects.filter(seller_id=request.user.id).order_by('has_accepted_bid', 'bids__item_id') \
             .annotate(max_offer=Max('bids__bidamount'))
 
     paginator = Paginator(items,5)
