@@ -5,14 +5,17 @@
         {% endwith %}
     </div>
 
-    <div class="card-body" href="/items/{{ bid.item.id }}">
+    <div class="card-body">
         <h5 class="card-title"> {{ order.item.name }}</h5>
         <p class="card-text">{{ order.item.max_bid }}</p>
             <br>
-
+        <div>
+            {% for bid in order.item.bids_set.all %}
+              <p>Bought for:</p> <h3> $ {{bid.bidamount}}</h3>
+            {% endfor %}
+    </div>
     </div>
         <div class="bid-button-container">
-            <p> Bought from: {{ order.sender }}</p>
+            <p> Bought from: </p> <h4> {{ order.sender }}</h4>
         </div>
-
 </div>
