@@ -223,3 +223,6 @@ def toggle_notifications(request):
 
 def send_email_verify_email(request):
     pass
+
+def verify_email(request):
+    pass

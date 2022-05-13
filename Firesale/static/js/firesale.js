@@ -82,6 +82,15 @@ $(document).ready(function() {
         document.getElementById('scrollable_container').scrollLeft += 400;
     });
 
+
+    $('#unlock_typing').on('click', function (){
+        input = document.getElementById('staticEmail')
+        document.getElementById('unlock_typing').classList.replace('edit_email-btn', 'visually-hidden')
+        document.getElementById('change_email').removeAttribute('disabled')
+        input.classList.replace('form-control-plaintext', 'form-control')
+        input.removeAttribute('readonly')
+
+    })
 });
 
 

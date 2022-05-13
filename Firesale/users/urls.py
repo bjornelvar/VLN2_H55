@@ -54,5 +54,6 @@ urlpatterns = [
         template_name='users/password_change_done.html'),
         name='password_change_done'),
     path('profile/toggle_notifs/', views.toggle_notifications, name='toggle-notifs'),
-    path('email_change/', views.send_email_verify_email, name='email-change')
+    path('email_change/', views.send_email_verify_email, name='email-change'),
+    path('email_change/confirm', views.verify_email, name='email-change-confirm')
 ]
