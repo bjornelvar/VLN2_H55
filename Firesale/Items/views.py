@@ -74,7 +74,7 @@ def get_items_by_category(request, id):
         items = items.order_by(order_by_val)
 
     items = items.annotate(max_offer=Max('bids__bidamount'))
-    paginator = Paginator(items,1)
+    paginator = Paginator(items,9)
     page_num = request.GET.get('page', 1)
     try:
         page = paginator.get_page(page_num)

@@ -32,4 +32,6 @@
 
 * "Listed X days and XX hours ago" on each item card when browsing items.
 
+* When an order is completed it is stored in an Orders table and users can see their orders under "My Orders"
+
 
