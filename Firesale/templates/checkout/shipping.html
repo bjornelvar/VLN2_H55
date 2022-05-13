@@ -18,12 +18,12 @@
     {% endif %}
     </table>
 
-    <a class="btn btn-primary ms-auto" role="button" href="{% url 'my-bids' %}" style="border: none; margin: 11px;background: var(--bs-orange);">Cancel</a>
+    <a class="btn btn-primary" role="button" href="{% url 'my-bids' %}" style="border: none; margin: 6px;background: var(--bs-red);">Cancel</a>
 {% if wizard.steps.prev %}
 {#    <button name="wizard_goto_step" type="submit" value="{{ wizard.steps.first }}">First Step</button>#}
-    <button name="wizard_goto_step" type="submit" value="{{ wizard.steps.prev }}">Previous</button>
+    <button class="btn btn-primary" style="border: none; margin: 6px; background: white; color: blue" name="wizard_goto_step" type="submit" value="{{ wizard.steps.prev }}">Previous</button>
 {% elif wizard.steps.next %}
-    <button name="wizard_goto_step" type="submit" value="submit">Next</button>
+    <button class="btn btn-primary" style="border: none; margin: 6px; background: blue; color: white" name="wizard_goto_step" type="submit" value="submit">Next</button>
 {#    <input type="submit" value="Next Step" />#}
 {% endif %}
 

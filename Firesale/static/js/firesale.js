@@ -91,7 +91,21 @@ $(document).ready(function() {
         input.removeAttribute('readonly')
 
     })
+    $(".page-link").on( 'click', function (element) {
+    // $(element).attr('href', function() {
+        let href = $(this).attr('href')
+        let params = new URLSearchParams(window.location.search);
+        let order_by_string = params.get('order_by');
+        if (order_by_string != null) {
+            $(this).attr("href", href + "&order_by=" + order_by_string)
+        }
+
 });
+
+    //your code here
+
+ });
+
 
 
 

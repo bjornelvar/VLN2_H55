@@ -1,15 +1,16 @@
-<div class = "single-item_bids" href="/items/{{ bid.item.id }}" style="width: 70rem; height: 15rem">
+<div class = "single-item_bids"  style="width: 70rem; height: 15rem">
     <div class = "single-item_bids_image" href="/items/{{ bid.item.id }}" style="width: 15rem; height: 15rem">
-      {% with bid.item.itemimages_set.all|first as img %}
+        {% with order.item.itemimages_set.all|first as img %}
       <img class="item-preview-image" src="{{ img.image.url }}" width="120" height="300" alt="Product image">
-      {% endwith %}
+        {% endwith %}
     </div>
       <div class="card-body" href="/items/{{ bid.item.id }}">
-            <h5 class="card-title">{{ bid.item.name }}</h5>
+            <h5 class="card-title"> {{ order.item.name }}</h5>
+            <p class="card-text">{{ order.item.max_bid }}</p>
                 <br>
     </div>
               <div class="bid-button-container">
-                  blabla
+                <p> Bought from: {{ order.sender }}</p>
               </div>
 
 </div>

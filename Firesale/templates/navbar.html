@@ -6,47 +6,38 @@
         </a>
         <button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1"></button>
         <a class="btn btn-primary ms-auto" role="button" href="{% url 'items-index' %}" style="border: none; margin: 11px;background: var(--bs-orange);">All Items</a>
-{% if user.is_authenticated %}
-        <a class="btn btn-primary ms-auto" role="button" href="{% url 'create_listing' %}" style="border: none;margin: 11px;background: var(--bs-green);">Sell Items</a>
+        {% if user.is_authenticated %}
+            <a class="btn btn-primary ms-auto" role="button" href="{% url 'create_listing' %}" style="border: none;margin: 11px;background: var(--bs-green);">Sell Items</a>
 
-
-        <div class="search_bar_container">
-            <div class="d-flex" id="search_form">
-    {#            {% csrf_token %}#}
+            <div class="search_bar_container">
+                <div class="d-flex" id="search_form">
                     <select class="form-control m-auto" id="category-select" name="category-select" style="width: 30%" >
                         <option value="">All Categories</option>
-                        {% for category in categories %}
-                            <option value={{ category.id }}>{{ category.name }}</option>
-                        {% endfor %}
+                            {% for category in categories %}
+                                <option value={{ category.id }}>{{ category.name }}</option>
+                            {% endfor %}
                     </select>
-                <input class ="form-control me-2" type="search" id="search_term" placeholder="Search for an item..." name="search_term"
-                       style="border-style: solid;height: 38px;margin: 6px;width: 247px;">    {# SEARCH BAR #}
-                <a class="btn btn-primary" href="" id="search_button" style="margin-top: 6px;height: 38px;">Search</a>
+                    <input class ="form-control me-2" type="search" id="search_term" placeholder="Search for an item..."
+                           name="search_term" style="border-style: solid;height: 38px;margin: 6px;width: 247px;">    {# SEARCH BAR #}
+                    <a class="btn btn-primary" href="" id="search_button" style="margin-top: 6px;height: 38px;">Search</a>
+                </div>
             </div>
-        </div>
- {# SEARCH BUTTON #}
 
-
-
-    <div class="collapse navbar-collapse" id="navcol-1"></div>
-        <!--<a class="btn btn-primary ms-auto" role="button" href="#" style="margin: 11px;background: var(--bs-red);">My Bids</a>
-        <a class="btn btn-primary ms-auto" role="button" href="{% url 'my-listings' %}" style="margin: 11px;background: var(--bs-green);">My Listings</a>
-        <a class="btn btn-primary ms-auto" role="button" href="{% url 'profile' %}" style="margin: 11px;">Profile<img src="{{ user.profiles.image.url }}" style="max-width: 30px; max-height: 30px"></a>-->
-        <li class="nav-item dropdown" style="list-style-type: none;">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            <img src="{{ user.profiles.image.url }}" style="max-width: 43px; max-height: 43px; padding: 2px; background: dodgerblue; border-radius: 6px;">
-              {{ user.username }} ({{ user.profiles.rating }}★)
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-            <li><a class="dropdown-item" href="{% url 'profile' %}">Profile</a></li>
-            <li><a class="dropdown-item" href="{% url 'my-listings' %}">My Listings</a></li>
-            <li><a class="dropdown-item" href="{% url 'my-bids' %}">My Bids</a></li>
-            <li><a class="dropdown-item" href="{% url 'my-orders' %}">My Orders</a></li>
-            <li><a class="dropdown-item" href="{% url 'user-settings' %}">Settings</a></li>
-            <li><a class="dropdown-item" href="{% url 'logout' %}">Logout</a></li>
-          </ul>
-        </li>
-        <!--<a class="btn btn-primary ms-auto" role="button" href="{% url 'logout' %}" style="margin: 11px;">Logout</a>-->
+            <div class="collapse navbar-collapse" id="navcol-1"></div>
+            <li class="nav-item dropdown" style="list-style-type: none;">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <img src="{{ user.profiles.image.url }}" style="max-width: 43px; max-height: 43px; padding: 2px; background: dodgerblue; border-radius: 6px;">
+                    {{ user.username }} ({{ user.profiles.rating }}★)
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <li><a class="dropdown-item" href="{% url 'profile' %}">Profile</a></li>
+                    <li><a class="dropdown-item" href="{% url 'my-listings' %}">My Listings</a></li>
+                    <li><a class="dropdown-item" href="{% url 'my-bids' %}">My Bids</a></li>
+                    <li><a class="dropdown-item" href="{% url 'my-orders' %}">My Orders</a></li>
+                    <li><a class="dropdown-item" href="{% url 'user-settings' %}">Settings</a></li>
+                    <li><a class="dropdown-item" href="{% url 'logout' %}">Logout</a></li>
+                </ul>
+            </li>
     </div>
 
 {% else %}
@@ -68,25 +59,3 @@
         <a class="btn btn-primary ms-auto" role="button" href="{% url 'register' %}" style="margin: 11px;">Register</a>
     {% endif %}
 </nav>
-
-
-
-
-{#<nav class="navbar navbar-expand-lg navbar-light bg-light">#}
-{#  <div class="container-fluid">#}
-{#    <a class="navbar-brand" href="/">Fire Sale</a>#}
-{#    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">#}
-{#      <span class="navbar-toggler-icon"></span>#}
-{#    </button>#}
-{#    <div class="collapse navbar-collapse" id="navbarSupportedContent">#}
-{#      <ul class="navbar-nav me-auto mb-2 mb-lg-0">#}
-{#        <li class="nav-item">#}
-{#          <a class="nav-link active" aria-current="page" href="{% url 'items-index' %}">Items</a>#}
-{#        </li>#}
-{#        <li class="nav-item">#}
-{#          <a class="nav-link" href="">Link</a>#}
-{#        </li>#}
-{#      </ul>#}
-{#    </div>#}
-{#  </div>#}
-{#</nav>#}
