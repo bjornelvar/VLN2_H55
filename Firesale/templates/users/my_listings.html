@@ -52,13 +52,13 @@
             <li class="page-item">
                 <a class="page-link" href="{% url 'my-listings' %}?page={{ items.next_page_number }}">Next</a>
             </li>
-              {% else %}
-                  <li class="page-item disabled">
-                      <a class="page-link" href="#">Next</a>
-              {% endif %}
-          </ul>
+      {% else %}
+          <li class="page-item disabled">
+          <a class="page-link" href="#">Next</a>
+      {% endif %}
+  </ul>
 </nav>
-    </div>
+</div>
 
 
 

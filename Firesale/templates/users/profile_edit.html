@@ -1,44 +1,45 @@
 {% extends 'base.html' %}
 {% block content %}
-    <div>
-        <ul class="nav nav-tabs">
-          <li class="nav-item">
+<div>
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="{% url 'profile-edit' %}" style="background: #f4f5f7;">Profile</a>
-          </li>
-          <li class="nav-item">
+        </li>
+        <li class="nav-item">
             <a class="nav-link" href="{% url 'user-settings' %}">Security and Privacy</a>
-          </li>
-{#          <li class="nav-item">#}
-{#            <a class="nav-link">Notifications</a>#}
-{#          </li>#}
-        </ul>
-    </div>
-    <div class="row" style="background-color: #f4f5f7; padding-bottom: 1rem; padding-top: 1rem;">
+        </li>
+    </ul>
+</div>
+
+<div class="row" style="background-color: #f4f5f7; padding-bottom: 1rem; padding-top: 1rem;">
     <h3>Profile Picture</h3>
         <p>Current profile picture:</p>
         <img src="{{ user.profiles.image.url }}" style="max-width: 100px; height: auto">
-         <form method="post" enctype="multipart/form-data" style="margin-top: 1rem;">
-         {% csrf_token %}
-             <input type="hidden" name="name" value="image">
-         {{ imageform }}
-         <input type="submit" class="btn btn-upload" value="Upload" style="background: #007bff; color: white; margin-top: 10px;">
-         </form>
-    </div>
-    <div class="row" style="background-color: #f4f5f7; margin-top: 1rem; padding-top: 1rem;">
+        <form method="post" enctype="multipart/form-data" style="margin-top: 1rem;">
+            {% csrf_token %}
+            <input type="hidden" name="name" value="image">
+            {{ imageform }}
+            <input type="submit" class="btn btn-upload" value="Upload" style="background: #007bff; color: white; margin-top: 10px;">
+        </form>
+</div>
+
+<div class="row" style="background-color: #f4f5f7; margin-top: 1rem; padding-top: 1rem;">
     <h3>Profile Information</h3>
     <form class="form form-horizontal" method="post">
-    <style>
-     .helptext {
-         display: none;
-     }
-    </style>
+        <style>
+            .helptext {
+            display: none;
+                        }
+            </style>
 
-    {% csrf_token %}
-    {{ edituserform }}
-    {{ bioform }}
+        {% csrf_token %}
+        {{ edituserform }}
+        {{ bioform }}
 
-    <input type="submit" class="btn btn-bio" value="Update" style="background: #007bff; color: white; margin-top: 10px;">
-    {% include 'messages.html' %}
+        <input type="submit" class="btn btn-bio" value="Update" style="background: #007bff; color: white; margin-top: 10px;">
+
+        {% include 'messages.html' %}
     </form>
-    </div>
+</div>
+
 {% endblock %}
