@@ -5,10 +5,6 @@
 KRÖFUR
 -------
 
-
-
-
-
 * Klára Checkout [X]
 
 * Klára ratings [X]
@@ -39,7 +35,7 @@ KRÖFUR
 
 * Getur ennþá biddað á hlut þó svo að það sé búið að accepta bid [X] (löguðum við þetta ekki bjössi?)
 
-* Bid must be higher than start price þegar start price er 0 og það er bid á vörunni []
+* Bid must be higher than start price þegar start price er 0 og það er bid á vörunni [X] #Held að þetta sé leyst, getur ekki sett inn hluti fyrir 0 núna
 
 
 
