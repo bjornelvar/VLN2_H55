@@ -16,18 +16,6 @@ from django.contrib.auth import authenticate, login
 
 
 
-
-
-# def register(request):
-#     if request.method == 'POST':
-#         form = UserCreationForm(data=request.POST)
-#         if form.is_valid():
-#             form.save()
-#             return redirect('login')
-#     return render(request, 'users/register.html', {
-#         'form': UserCreationForm()
-#     })
-
 def register(request):
     if request.method == 'POST':
         form = CustomRegisterForm(request.POST) # Sækir í users>forms>profile_forms.py
@@ -141,6 +129,7 @@ def edit_profile(request):
         'edituserform': EditUserForm(instance=user),
     })
 
+@login_required
 def accept_bid(request):
     bid = get_object_or_404(Bids, pk=request.GET.get('bid_id'))
     print(bid)
@@ -153,6 +142,7 @@ def accept_bid(request):
 
     return redirect('my-listings')
 
+@login_required
 def show_profile(request, id=None):
     if id:
         return render(request, 'users/user_profile.html', {
@@ -183,7 +173,7 @@ def send_email_notification(bid):
                 send_mail("FireSale: Bid rejected!", f"Your bid of ${rejected_bid.bidamount} for {rejected_item_name} has been rejected! Go to the MY BIDS section on your FireSale dashboard to see the other bids.", settings.EMAIL_HOST_USER, [rejected_email], fail_silently=False)
                 print(" Rejected Email should be sent")
 
-
+@login_required
 def edit_listing(request, id):
     item = get_object_or_404(Items, pk=id)
 
@@ -207,19 +197,22 @@ def edit_listing(request, id):
         'item': item
     })
 
+@login_required
 def delete_item(request,id):
     item = get_object_or_404(Items, pk=id)
     item.delete()
     return redirect('my-listings')
 
+@login_required
 def user_settings(request):
     return render(request, 'users/user_settings.html')
 
+@login_required
 def toggle_notifications(request):
     profile = Profiles.objects.get(pk=request.POST['id'])
     profile.get_notifications = request.POST['get_notifications'] == 'true'
     profile.save()
     return HttpResponse(status=200)
-
+@login_required
 def send_email_verify_email(request):
     pass

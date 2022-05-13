@@ -1,5 +1,6 @@
 $(document).ready(function() {
 
+
     // NAVBAR SEARCH FUNCTION
     $("#search_term").on("input", function () {
         console.log("test")
@@ -10,6 +11,7 @@ $(document).ready(function() {
             $("#search_button").attr("href", "/items/search/?search_val=" + $("#search_term").val().replace(/ /g, "+") + "&category=" + $("#category-select").val())
         }
     });
+
 
     // HOME SEARCH BAR FUNCTION
     $("#search_term_home").on("input", function () {
@@ -22,6 +24,8 @@ $(document).ready(function() {
         }
     });
 
+
+    // ENTER TO SEARCH FUNCTIONS
     $("#search_term").keypress(function (e) {
         if (e.which == 13) {
             $("#search_button").get(0).click();
@@ -57,7 +61,7 @@ $(document).ready(function() {
         }
     });
 
-
+    // SOLD FILTER IN MY LISTINGS FUNCTIOn
     $("#sold-filter").on("click", function () {
     let pathname = String(window.location.pathname);
     let params = new URLSearchParams(window.location.search);
@@ -73,7 +77,6 @@ $(document).ready(function() {
     }
 
     });
-
 
     $('#slider-left').on('click', function (){
         document.getElementById('scrollable_container').scrollLeft -= 400;
@@ -91,33 +94,9 @@ $(document).ready(function() {
             $(this).attr("href", href + "&order_by=" + order_by_string)
         }
 
-});
+    });
 
-    //your code here
 
  });
 
-
-
-
-
-
-
-
-    // $("#order_val").on("mouseover", function () {
-    //     console.log("Hello", $("#order_val").attr("data-value"))
-    //     $("#order_val").attr("href", "?order_by=" + $("#order_val").attr("data-value"))
-    // });
-    // $("#order_val1").on("mouseover", function () {
-    //     console.log("Hello", $("#order_val1").attr("data-value"))
-    //     $("#order_val1").attr("href", "?order_by=" + $("#order_val1").attr("data-value"))
-    // });
-    // $("#order_val2").on("mouseover", function () {
-    //     console.log("Hello", $("#order_val2").attr("data-value"))
-    //     $("#order_val2").attr("href", "?order_by=" + $("#order_val2").attr("data-value"))
-    // });
-    // $("#order_val3").on("mouseover", function () {
-    //     console.log("Hello", $("#order_val3").attr("data-value"))
-    //     $("#order_val3").attr("href", "?order_by=" + $("#order_val3").attr("data-value"))
-    // });
 
