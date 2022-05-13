@@ -13,19 +13,13 @@ import Levenshtein
 from django.http import HttpResponse
 
 
-
-# @login_required(login_url="/%2Fuserslogin")
-
-
 def index(request):
     items = Items.objects.filter(has_accepted_bid=False, sold=False).order_by('name')
-
     if "order_by" in request.GET:
         order_by_val = request.GET["order_by"]
         items = items.order_by(order_by_val)
     else:
         order_by_val = ''
-
     items = items.annotate(max_offer = Max('bids__bidamount'))
     paginator = Paginator(items,9)
     page_num = request.GET.get('page', 1)
@@ -54,7 +48,6 @@ def search_items(request):
         order_by_val = request.GET["order_by"]
         items = items.order_by(order_by_val)
 
-
     items = items.annotate(max_offer=Max('bids__bidamount'))
     paginator = Paginator(items, 1)
     page_num = request.GET.get('page', 1)
@@ -64,16 +57,15 @@ def search_items(request):
     return render(request, 'items/search_items.html', context)
 
 
-
 def get_items_by_category(request, id):
-    items = Items.objects.filter(category_id=id, has_accepted_bid=False, sold=False).order_by('name').annotate(max_offer = Max('bids__bidamount'))
+    items = Items.objects.filter(category_id=id, has_accepted_bid=False, sold=False).order_by('name').annotate(max_offer=Max('bids__bidamount'))
 
     if "order_by" in request.GET:
         order_by_val = request.GET["order_by"]
         items = items.order_by(order_by_val)
 
     items = items.annotate(max_offer=Max('bids__bidamount'))
-    paginator = Paginator(items,9)
+    paginator = Paginator(items, 9)
     page_num = request.GET.get('page', 1)
     try:
         page = paginator.get_page(page_num)
@@ -81,6 +73,7 @@ def get_items_by_category(request, id):
         page = paginator.page(1)
     context = {'location': "category", 'items': page, 'categories': Categories.objects.all().order_by('name'), 'current_category': id }
     return render(request,   'items/index-by-category.html', context)
+
 
 @login_required
 def create_listing(request):
@@ -172,7 +165,6 @@ def get_string_distance(string1, string2):
     string2_clean = string2.replace(" ", "").replace("-", "")
     string1_lower = string1_clean.lower()
     string2_lower = string2_clean.lower()
-    # noinspection PyUnresolvedReferences
     return Levenshtein.distance(string1_lower, string2_lower)
 
 
