@@ -4,6 +4,7 @@ from django.forms import ModelForm
 from django_countries.fields import CountryField
 from checkout.fields import CreditCardField, ExpiryDateField, VerificationValueField
 from checkout.models import ShippingInformation
+from items.models import Items
 
 
 class ShippingForm(ModelForm):
@@ -44,3 +45,9 @@ class RateSellerForm(forms.Form):
 class ReviewForm(forms.Form):
     check = forms.BooleanField(required=False)
 
+
+class SoldForm(ModelForm):
+    class Meta:
+        model = Items
+        # fields = ['sold']
+        exclude = ('category', 'name', 'seller', 'description', 'price', 'condition', 'date_added', 'has_accepted_bid')

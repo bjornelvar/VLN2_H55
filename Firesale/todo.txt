@@ -5,7 +5,7 @@
 KRÖFUR
 -------
 
-* Breyta items view sækja ekki sold items
+* Breyta items view sækja ekki sold items []
 
 * Láta nýjan user fá default mynd og addast í profiles töfluna um leið og hann er registered. [X]
 

@@ -5,8 +5,11 @@ from formtools.wizard.views import SessionWizardView
 from checkout.forms.forms import ReviewForm, ShippingForm, PaymentForm
 from checkout.models import ShippingInformation
 #
+from items.models import Items
+
+
 def success_view(request):
-    return render(request, 'checkout/success.html', {'instance': CheckoutWizard.instance_dict})
+    return redirect('my-orders')
 
 def review_view(request):
     print(f'review {CheckoutWizard.instance_dict}')
@@ -37,7 +40,10 @@ class CheckoutWizard(SessionWizardView):
     template_name = 'checkout/checkout.html'
 
     def dispatch(self, request, id, *args, **kwargs):
+        print(f"REQUEST: {request}")
+        print(f"ID: {id}")
         self.instance = ShippingInformation()
+        self.sold = Items()
         self.instance.user_id = request.user.id
         print('dispatch')
         # print(**kwargs)
@@ -51,7 +57,10 @@ class CheckoutWizard(SessionWizardView):
         print('done')
         self.instance.save()
         print('form is saved', self.instance.first_name)
-        return render(self.request, "checkout/success.html", {'instance': self.instance})
+        self.sold.save()
+        print('sold form is saved', self.sold)
+
+        return redirect('my-orders')
 
 
 
