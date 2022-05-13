@@ -5,7 +5,21 @@
 KRÖFUR
 -------
 
-* Breyta items view sækja ekki sold items []
+
+
+
+
+* Klára Checkout og rating []
+
+* Finna út hvað checkout á að gera (búa til Orders töflu líklegast) [X]
+
+* Gera confirmation síðu í endann á checkout []
+
+* Laga order by í search
+
+
+
+* Breyta items view sækja ekki sold items [X]
 
 * Láta nýjan user fá default mynd og addast í profiles töfluna um leið og hann er registered. [X]
 
@@ -15,11 +29,7 @@ KRÖFUR
 
 * Notification kerfi sem alertar alla bidders þegar item er accepted [X]
 
-* Klára Checkout og rating []
 
-* Finna út hvað checkout á að gera (búa til Orders töflu líklegast) [X]
-
-* Gera confirmation síðu í endann á checkout []
 
 * Láta checkout takka birtast ef offer is accepted og userid = bidderid [X]
 
@@ -47,7 +57,7 @@ EXTRA
 
 * Auto login eftir register. []
 
-* CSS á item details og edit profile []
+* CSS á item details og edit profile [X]
 
 * Public profile síða fyrir users, þannig þú getur skoðað profile hjá öðrum []
 
