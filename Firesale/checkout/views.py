@@ -7,7 +7,9 @@ from checkout.models import ShippingInformation
 #
 from items.models import Items
 from bids.models import Bids
+from users.models import Ratings, Profiles
 from django.db.models import Max
+from django.db.models import Avg
 
 
 FORMS = [("shipping", ShippingForm),
@@ -70,13 +72,24 @@ class CheckoutWizard(SessionWizardView):
         context.update({'shipping_info': CheckoutWizard.get_cleaned_data_for_step(self, 'shipping')})
         context.update({'payment_info': CheckoutWizard.get_cleaned_data_for_step(self, 'payment')})
         context.update({'rating_info': CheckoutWizard.get_cleaned_data_for_step(self, 'rating')})
-        print(context)
+        # print(context)
+        # print(context["rating_info"]["rating"])
         return context
 
     def done(self, form_list, **kwargs):
         item = get_object_or_404(Items, pk=self.kwargs['id'])
         item.sold = True
         item.save()
+        rating = CheckoutWizard.get_cleaned_data_for_step(self, 'rating')
+        if rating is not None:
+            rating_final = rating["rating"]
+            review = Ratings.objects.create(rating=rating_final, rated_user_id = item.seller_id, rated_by_id = self.request.user.id)
+            review.save()
+            ratings_for_seller = Ratings.objects.filter(rated_user_id=item.seller_id).aggregate(Avg('rating'))
+            avg_rating = ratings_for_seller['rating__avg']
+            seller = get_object_or_404(Profiles, pk=item.seller_id)
+            seller.rating = avg_rating
+            seller.save()
         return redirect('my-orders')
 
 

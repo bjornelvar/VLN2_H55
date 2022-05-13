@@ -18,7 +18,7 @@ class Ratings(models.Model):
     rated_user = models.ForeignKey(User, related_name='rated_user', on_delete=models.CASCADE)
     rated_by = models.ForeignKey(User, related_name='rated_by', on_delete=models.CASCADE)
     rating = models.DecimalField(
-        max_digits=1,
+        max_digits=10,
         decimal_places=1,
         validators=[MinValueValidator(Decimal('0.0')), MaxValueValidator(Decimal('5.0'))],
         null=True
