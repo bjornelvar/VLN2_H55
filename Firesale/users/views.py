@@ -242,7 +242,6 @@ def send_email_verify_email(request):
 def verify_email(request, uidb64):
     uid = urlsafe_base64_decode(uidb64)
     uid = int(uid.decode('ascii'))
-
     if request.user.id == uid:
         unverifiedemail = get_object_or_404(UnverifiedEmails, pk=uid)
         unverifiedemail.delete()
