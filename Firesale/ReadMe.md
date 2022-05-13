@@ -38,5 +38,6 @@
 * When an order is completed it is stored in an Orders table and users can see their orders under "My Orders"
 
 * When a user updates their profile picture. The old profile picture is deleted from the media folder, conserving space.
+  This also happens when a user deletes a listing.
 
 *** NOTE: Email features work inconsistently with @ru.is mails, maybe due to some sort of filtering by the school's mail server. They work flawlessly with gmail for instance.
