@@ -4,8 +4,6 @@ from django.db import models
 from users.models import Profiles
 
 
-# Create your models here.
-
 class Categories(models.Model):
     name = models.CharField(max_length=50)
 
@@ -38,6 +36,7 @@ class Items(models.Model):
 
     def __str__(self):
         return self.name
+
 
 class ItemImages(models.Model):
     item = models.ForeignKey(Items, on_delete=models.CASCADE)

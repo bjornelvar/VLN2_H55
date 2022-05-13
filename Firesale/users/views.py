@@ -18,13 +18,11 @@ from django.template.loader import render_to_string
 
 
 
-
 def register(request):
     if request.method == 'POST':
         form = CustomRegisterForm(request.POST) # Sækir í users>forms>profile_forms.py
         if form.is_valid():
             new_user = form.save()
-            # messages.success(request, 'Your account has been created! You will now be logged in.')
             new_user = authenticate(username=form.cleaned_data['username'],
                                     password=form.cleaned_data['password1'],
                                     )
@@ -36,6 +34,7 @@ def register(request):
     context = {'form': form}
 
     return render(request, 'users/register.html', context)
+
 
 @login_required
 def my_listings(request):
@@ -54,20 +53,20 @@ def my_listings(request):
         items = Items.objects.filter(seller_id=request.user.id).order_by('has_accepted_bid', '-listdate') \
             .annotate(max_offer=Max('bids__bidamount'))
 
-    paginator = Paginator(items,5)
+    paginator = Paginator(items, 5)
     page_num = request.GET.get('page', 1)
     try:
         page = paginator.get_page(page_num)
     except EmptyPage or PageNotAnInteger:
         page = paginator.page(1)
-    context = {'bids':Bids.objects.all(), 'items': page, 'sold_filter': sold_filter} # Reverse order líka?
-    return render(request,   'users/my_listings.html', context)
+    context = {'bids': Bids.objects.all(), 'items': page, 'sold_filter': sold_filter} # Reverse order líka?
+    return render(request, 'users/my_listings.html', context)
+
 
 @login_required
 def my_orders(request):
-
     orders = Orders.objects.filter(receiver_id=request.user.id)
-    paginator = Paginator(orders,5)
+    paginator = Paginator(orders, 5)
     page_num = request.GET.get('page', 1)
     try:
         page = paginator.get_page(page_num)
@@ -77,6 +76,7 @@ def my_orders(request):
     context = {'orders': page}
     return render(request,   'users/my_orders.html', context)
 
+
 @login_required
 def my_bids(request):
     bids = Bids.objects.filter(bidder_id=request.user.id).order_by('biddate')
@@ -84,16 +84,16 @@ def my_bids(request):
     bids2 = bids.filter(is_accepted=True)
     bids = bids1 | bids2
     bids = bids.filter(item__sold=False)
-    paginator = Paginator(bids,5)
+    paginator = Paginator(bids, 5)
     page_num = request.GET.get('page', 1)
     try:
         page = paginator.get_page(page_num)
     except EmptyPage or PageNotAnInteger:
         page = paginator.page(1)
 
-    # user_bids = Bids.objects.filter(bidder_id=request.user.id).order_by('biddate')
-    context = {'bids': page, 'max_bids': Items.objects.all().annotate(max_offer = Max('bids__bidamount'))} # Reverse order líka?
+    context = {'bids': page, 'max_bids': Items.objects.all().annotate(max_offer = Max('bids__bidamount'))}
     return render(request,   'users/my_bids.html', context)
+
 
 @login_required
 def edit_profile(request):
@@ -132,6 +132,7 @@ def edit_profile(request):
         'edituserform': EditUserForm(instance=user),
     })
 
+
 @login_required
 def accept_bid(request):
     bid = get_object_or_404(Bids, pk=request.GET.get('bid_id'))
@@ -145,6 +146,7 @@ def accept_bid(request):
 
     return redirect('my-listings')
 
+
 @login_required
 def show_profile(request, id=None):
     if id:
@@ -152,6 +154,7 @@ def show_profile(request, id=None):
             'some_user': get_object_or_404(User, pk=id)
         })
     return render(request, 'users/profile.html')
+
 
 def send_email_notification(bid):
     # Works badly on @ru.is mails. Probably due to some type of filtering on RU's mail server
@@ -175,6 +178,7 @@ def send_email_notification(bid):
                 print("rejected email:", rejected_email)
                 send_mail("FireSale: Bid rejected!", f"Your bid of ${rejected_bid.bidamount} for {rejected_item_name} has been rejected! Go to the MY BIDS section on your FireSale dashboard to see the other bids.", settings.EMAIL_HOST_USER, [rejected_email], fail_silently=False)
                 print(" Rejected Email should be sent")
+
 
 @login_required
 def edit_listing(request, id):
@@ -200,15 +204,18 @@ def edit_listing(request, id):
         'item': item
     })
 
+
 @login_required
-def delete_item(request,id):
+def delete_item(request, id):
     item = get_object_or_404(Items, pk=id)
     item.delete()
     return redirect('my-listings')
 
+
 @login_required
 def user_settings(request):
     return render(request, 'users/user_settings.html')
+
 
 @login_required
 def toggle_notifications(request):
@@ -216,6 +223,8 @@ def toggle_notifications(request):
     profile.get_notifications = request.POST['get_notifications'] == 'true'
     profile.save()
     return HttpResponse(status=200)
+
+
 @login_required
 def send_email_verify_email(request):
     id_bytes = str(request.user.id).encode('ascii')
@@ -228,6 +237,7 @@ def send_email_verify_email(request):
     user_email = request.user.email
     send_mail('FireSale verify email', html_message, settings.EMAIL_HOST_USER, [user_email], fail_silently=False)
     return redirect('user-settings')
+
 
 def verify_email(request, uidb64):
     uid = urlsafe_base64_decode(uidb64)

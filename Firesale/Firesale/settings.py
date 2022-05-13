@@ -48,7 +48,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    # 'pynotify.apps.PyNotifyConfig'
     'items.apps.ItemsConfig',
     'home.apps.HomeConfig',
     'users.apps.UsersConfig',
