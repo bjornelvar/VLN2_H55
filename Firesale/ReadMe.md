@@ -9,7 +9,9 @@
 * A working email notification system which sends emails to 
   both the winning bidder and rejected bidders of an item.
 
-* Password reset at login.
+* Ability to toggle email notifications on/off.
+
+* Password reset feature at login that works with email.
 
 * Settings menu where you can change your password and email.
 
