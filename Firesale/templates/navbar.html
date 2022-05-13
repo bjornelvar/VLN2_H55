@@ -7,7 +7,7 @@
         <button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1"></button>
         <a class="btn btn-primary ms-auto" role="button" href="{% url 'items-index' %}" style="border: none; margin: 11px;background: var(--bs-orange);">All Items</a>
         {% if user.is_authenticated %}
-            <a class="btn btn-primary ms-auto" role="button" href="{% url 'create_listing' %}" style="border: none;margin: 11px;background: var(--bs-green);">Sell Items</a>
+            <a class="btn btn-primary ms-auto" role="button" href="{% url 'create_listing' %}" style="border: none;margin: 11px;background: forestgreen;">Sell Items</a>
 
             <div class="search_bar_container">
                 <div class="d-flex" id="search_form">
