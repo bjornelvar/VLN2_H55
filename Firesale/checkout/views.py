@@ -1,25 +1,41 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.template.context_processors import request
 from formtools.wizard.views import SessionWizardView
 
-from checkout.forms.forms import ReviewForm, ShippingForm, PaymentForm
+from checkout.forms.forms import OrderForm, ShippingForm, PaymentForm, RateSellerForm
 from checkout.models import ShippingInformation
 #
 from items.models import Items
+from bids.models import Bids
+from django.db.models import Max
 
 
-def success_view(request):
-    return redirect('my-orders')
+FORMS = [("shipping", ShippingForm),
+         ("payment", PaymentForm),
+         ("rating", RateSellerForm),
+         ("confirmation", OrderForm)]
 
-def review_view(request):
-    print(f'review {CheckoutWizard.instance_dict}')
-    if request.method == 'POST':
-        form = ReviewForm(request.POST)
-        print(CheckoutWizard.instance)
-        if form.is_valid():
-            form.save()
-            CheckoutWizard.instance.save()
-            return render(request, 'checkout/success.html', {'instance': CheckoutWizard.instance})
+TEMPLATES = {"shipping": "checkout/shipping.html",
+             "payment": "checkout/payment.html",
+             "rating": "checkout/rating.html",
+             "confirmation": "checkout/confirmation.html"}
+
+
+
+
+
+# def success_view(request):
+#     return redirect('my-orders')
+#
+# def review_view(request):
+#     print(f'review {CheckoutWizard.instance_dict}')
+#     if request.method == 'POST':
+#         form = ReviewForm(request.POST)
+#         print(CheckoutWizard.instance)
+#         if form.is_valid():
+#             form.save()
+#             CheckoutWizard.instance.save()
+#             return render(request, 'checkout/success.html', {'instance': CheckoutWizard.instance})
 
 
 
@@ -37,30 +53,70 @@ def review_view(request):
 
 
 class CheckoutWizard(SessionWizardView):
-    template_name = 'checkout/checkout.html'
 
-    def dispatch(self, request, id, *args, **kwargs):
-        print(f"REQUEST: {request}")
-        print(f"ID: {id}")
-        self.instance = ShippingInformation()
-        self.sold = Items()
-        self.instance.user_id = request.user.id
-        print('dispatch')
-        # print(**kwargs)
-        return super(CheckoutWizard, self).dispatch(request, id, *args, **kwargs)
 
-    def get_form_instance(self, step):
-        print('get')
-        return self.instance
+    def get_template_names(self):
+        return [TEMPLATES[self.steps.current]]
+
+
+    def get_context_data(self, form, **kwargs):
+        context = super(CheckoutWizard, self).get_context_data(form, **kwargs)
+        item = get_object_or_404(Items, id=self.kwargs['id'])
+        max_bid = Bids.objects.filter(item_id=item.id).latest('bidamount')
+
+        # item = get_object_or_404(Items, pk=self.kwargs['id'])
+        context.update({'item': item})
+        context.update({'max_bid': max_bid.bidamount})
+        context.update({'shipping_info': CheckoutWizard.get_cleaned_data_for_step(self, 'shipping')})
+        context.update({'payment_info': CheckoutWizard.get_cleaned_data_for_step(self, 'payment')})
+        context.update({'rating_info': CheckoutWizard.get_cleaned_data_for_step(self, 'rating')})
+        print(context)
+        return context
 
     def done(self, form_list, **kwargs):
-        print('done')
-        self.instance.save()
-        print('form is saved', self.instance.first_name)
-        self.sold.save()
-        print('sold form is saved', self.sold)
-
+        item = get_object_or_404(Items, pk=self.kwargs['id'])
+        item.sold = True
+        item.save()
         return redirect('my-orders')
+
+
+
+
+
+
+
+
+
+
+
+
+# class CheckoutWizard(SessionWizardView):
+#     template_name = 'checkout/checkout.html'
+#
+#
+#     def dispatch(self, request, id, *args, **kwargs):
+#         print(f"REQUEST: {request}")
+#         print(f"ID: {id}")
+#         self.instance = ShippingInformation()
+#         self.sold = Items()
+#         self.instance.user_id = request.user.id
+#         print('dispatch')
+#         # print(**kwargs)
+#         return super(CheckoutWizard, self).dispatch(request, id, *args, **kwargs)
+#
+#     def get_form_instance(self, step):
+#         print('get')
+#         return self.instance
+#
+#     def done(self, form_list, **kwargs):
+#         WizardView.get_all_cleared_data(self)
+#         print('done')
+#         self.instance.save()
+#         print('form is saved', self.instance.first_name)
+#         self.sold.save()
+#         print('sold form is saved', self.sold)
+#
+#         return redirect('my-orders')
 
 
 

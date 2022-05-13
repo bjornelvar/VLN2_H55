@@ -3,7 +3,6 @@
             {{ form.as_p }}
         </form>
 <div class = "single-item_listings" href="/items/{{ item.id }}" style="width: 70rem; height: 15rem">
-
     <a class = "single-item_listings_image" href="/items/{{ item.id }}" style="width: 15rem; height: 15rem">
         {% with item.itemimages_set.all|first as img %}
       <img class="item-preview-image" src="{{ img.image.url }}" width="120" height="300" alt="Product image">

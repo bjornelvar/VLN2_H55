@@ -454,6 +454,28 @@ background: linear-gradient(to right bottom, rgba(246, 211, 101, 1), rgba(253, 1
     color: #0ba6ff;
 }
 
+
+/*CHECKOUT CSS --------------------------------------------------------------*!*!*!*!*/
+
+.confirmation-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    margin: 0 0rem;
+    padding: 0rem;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+    border-radius: 0.5rem;
+    background: #fff;
+
+}
+
+.confirm-button{
+    align-items: center;
+    background-color: #3eb058;
+    color:white;
+}
+
+
 /*@media (min-width:360px) and (max-width:640px) {*/
 /*    .pro-box-section .pro-box img {*/
 /*        height: auto;*/

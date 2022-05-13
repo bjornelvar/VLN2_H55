@@ -42,8 +42,8 @@ class RateSellerForm(forms.Form):
     rating = forms.DecimalField(required=False, validators=[MinValueValidator(0.1), MaxValueValidator(5)])
 
 
-class ReviewForm(forms.Form):
-    check = forms.BooleanField(required=False)
+# class ReviewForm(forms.Form):
+#     check = forms.BooleanField(required=False)
 
 
 class SoldForm(ModelForm):
@@ -51,3 +51,8 @@ class SoldForm(ModelForm):
         model = Items
         # fields = ['sold']
         exclude = ('category', 'name', 'seller', 'description', 'price', 'condition', 'date_added', 'has_accepted_bid')
+
+
+class OrderForm(forms.Form):
+    pass
+    # check = forms.BooleanField(required=False)
