@@ -14,6 +14,8 @@ from checkout.models import Orders
 from django.contrib.auth import authenticate, login
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.template.loader import render_to_string
+from .token import email_verification_token
+import time
 import os
 
 
@@ -233,20 +235,26 @@ def toggle_notifications(request):
 def send_email_verify_email(request):
     id_bytes = str(request.user.id).encode('ascii')
     uidb64 = urlsafe_base64_encode(id_bytes)
-    print(uidb64)
+    token = email_verification_token.make_token(request.user)
     html_message = render_to_string('users/verify_email_email.html', {
         'uidb64': uidb64,
+        'token': token,
         'user': request.user
     })
     user_email = request.user.email
     send_mail('FireSale verify email', html_message, settings.EMAIL_HOST_USER, [user_email], fail_silently=False)
     return redirect('user-settings')
 
-
-def verify_email(request, uidb64):
+@login_required
+def verify_email(request, uidb64, token):
     uid = urlsafe_base64_decode(uidb64)
     uid = int(uid.decode('ascii'))
-    if request.user.id == uid:
+    try:
+        user = get_object_or_404(User ,pk=uid)
+    except User.DoesNotExist:
+        user = None
+
+    if user != None and email_verification_token.check_token(user, token):
         unverifiedemail = get_object_or_404(UnverifiedEmails, pk=uid)
         unverifiedemail.delete()
         validlink = True
